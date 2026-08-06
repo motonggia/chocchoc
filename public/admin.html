@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Quản trị nội dung Chốc Chốc Cooking Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C08A3E;
+    --gold-dark: #a87534;
+    --black: #1A1A1A;
+    --cream: #F7F4EF;
+    --gray: #6B6B6B;
+    --border: #E5E0D8;
+    --white: #FFFFFF;
+    --danger: #b23b3b;
+    --ok: #2f7a4f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #EFEAE2;
+    color: var(--black);
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--black);
+    color: var(--white);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topbar h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+  }
+  .topbar h1 span { color: var(--gold); }
+  .topbar .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  button, .file-btn {
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .btn-gold { background: var(--gold); color: #fff; }
+  .btn-gold:hover { background: var(--gold-dark); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.35); }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-outline-dark { background: #fff; color: var(--black); border-color: var(--border); }
+  .btn-outline-dark:hover { background: var(--cream); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    height: calc(100vh - 55px);
+  }
+  .panel {
+    overflow-y: auto;
+    padding: 18px 20px 80px;
+    background: #fff;
+    border-right: 1px solid var(--border);
+  }
+  .preview-wrap {
+    background: #d9d3c7;
+    padding: 18px;
+    overflow-y: auto;
+  }
+  .preview-frame-holder {
+    max-width: 1300px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  iframe#preview {
+    width: 100%;
+    height: 2600px;
+    border: none;
+    display: block;
+  }
+
+  .notice {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .notice strong { color: var(--black); }
+
+  details.group {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  details.group[open] summary { border-bottom: 1px solid var(--border); }
+  summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 13px 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "＋";
+    color: var(--gold);
+    font-weight: 700;
+  }
+  details[open] summary::after { content: "－"; }
+
+  .group-body { padding: 14px 16px 18px; }
+
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray);
+    margin-bottom: 5px;
+  }
+  .field input[type="text"],
+  .field textarea {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--black);
+    background: #fff;
+  }
+  .field textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(192,138,62,0.15);
+  }
+
+  .subhead {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 18px 0 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+  }
+  .subhead:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+  .img-field {
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    background: #FCFAF7;
+    margin-bottom: 14px;
+  }
+  .dim-note {
+    font-size: 11.5px;
+    color: var(--gold-dark);
+    background: #FBF1E2;
+    border-radius: 4px;
+    padding: 6px 8px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .img-row { display: flex; gap: 10px; align-items: flex-start; }
+  .img-preview {
+    width: 60px; height: 60px;
+    border-radius: 5px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    flex-shrink: 0;
+  }
+  .img-inputs { flex: 1; min-width: 0; }
+  .img-inputs input[type="text"] { margin-bottom: 6px; }
+  .file-btn {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--black);
+    font-size: 11.5px;
+    padding: 6px 10px;
+  }
+  .file-btn:hover { background: var(--cream); }
+  input[type="file"] { display: none; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .toast {
+    position: fixed;
+    bottom: 22px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--black);
+    color: #fff;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .25s ease;
+    z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: 1fr; height: auto; }
+    .preview-wrap { height: 70vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Chốc <span>Chốc</span> — Admin nội dung website</h1>
+  <div class="actions">
+    <label class="file-btn btn-outline-dark" style="background:#fff;">
+      Nhập dữ liệu (.json)
+      <input type="file" id="importJson" accept="application/json">
+    </label>
+    <button class="btn-ghost" id="exportJson">Lưu dữ liệu (.json)</button>
+    <button class="btn-ghost" id="resetBtn">Khôi phục mặc định</button>
+    <button class="btn-gold" id="exportHtml">⬇ Tải file website (.html)</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="panel">
+    <div class="notice">
+      <strong>Cách dùng:</strong> Sửa nội dung bên trái → xem kết quả ngay bên phải. Khi xong, bấm
+      <strong>“Tải file website”</strong> để lấy file HTML mới, thay vào file site cũ.
+      Vì công cụ này không tự lưu, hãy bấm <strong>“Lưu dữ liệu (.json)”</strong> để giữ lại bản nháp,
+      lần sau mở admin thì <strong>“Nhập dữ liệu”</strong> lại để tiếp tục chỉnh sửa.
+      <br><br>
+      <strong>Ảnh:</strong> mỗi mục ảnh có ghi chú kích thước chuẩn theo khung thiết kế của site — nên thiết kế/crop đúng tỉ lệ đó trước khi tải lên để ảnh không bị vỡ nét hay cắt sai bố cục. Bạn có thể dán link ảnh có sẵn hoặc bấm "Chọn ảnh từ máy" để đính kèm trực tiếp (ảnh sẽ được nhúng thẳng vào file, không cần host ở đâu khác — nhưng nếu dùng nhiều ảnh máy, file HTML xuất ra sẽ nặng hơn).
+    </div>
+
+    <!-- MENU -->
+    <details class="group" open>
+      <summary>Menu điều hướng</summary>
+      <div class="group-body">
+        <div class="field"><label>Nút CTA trên menu</label><input type="text" data-key="NAV_CTA_TEXT"></div>
+        <div class="subhead">6 mục menu (Trang chủ | Khoá học | Về chúng tôi | Tin tức | Hỏi đáp | Liên hệ)</div>
+        <div class="row2">
+          <div class="field"><label>Mục 1</label><input type="text" data-key="NAV_LABEL_1"></div>
+          <div class="field"><label>Mục 2</label><input type="text" data-key="NAV_LABEL_2"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Mục 3</label><input type="text" data-key="NAV_LABEL_3"></div>
+          <div class="field"><label>Mục 4</label><input type="text" data-key="NAV_LABEL_4"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Mục 5</label><input type="text" data-key="NAV_LABEL_5"></div>
+          <div class="field"><label>Mục 6</label><input type="text" data-key="NAV_LABEL_6"></div>
+        </div>
+        <div class="field"><label>Link mục "Tin tức" (để trống dùng #)</label><input type="text" data-key="NAV_HREF_TINTUC" placeholder="#"></div>
+        <div class="field"><label>Link mục "Hỏi đáp" (để trống dùng #)</label><input type="text" data-key="NAV_HREF_HOIDAP" placeholder="#"></div>
+      </div>
+    </details>
+
+    <!-- HERO -->
+    <details class="group">
+      <summary>Banner đầu trang (Hero)</summary>
+      <div class="group-body">
+        <div class="field"><label>Dòng script nhỏ (eyebrow)</label><input type="text" data-key="HERO_EYEBROW"></div>
+        <div class="field"><label>Tiêu đề H1</label><textarea data-key="HERO_H1"></textarea></div>
+        <div class="field"><label>Câu tagline</label><input type="text" data-key="HERO_TAGLINE"></div>
+        <div class="field"><label>Đoạn giới thiệu</label><textarea data-key="HERO_LEAD"></textarea></div>
+        <div class="row2">
+          <div class="field"><label>Nút 1</label><input type="text" data-key="HERO_BTN1_TEXT"></div>
+          <div class="field"><label>Nút 2</label><input type="text" data-key="HERO_BTN2_TEXT"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Dòng nhãn ảnh (dòng 1)</label><input type="text" data-key="HERO_BADGE_L1"></div>
+          <div class="field"><label>Dòng nhãn ảnh (dòng 2)</label><input type="text" data-key="HERO_BADGE_L2"></div>
+        </div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh Hero — khuyến nghị <strong>1000 × 1250px</strong> (dọc, tỉ lệ 4:5), JPG/WEBP, dưới 400KB. Nên chọn ảnh bếp/món ăn làm điểm nhấn chính.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="HERO_IMG_SRC" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="HERO_IMG_SRC" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="HERO_IMG_SRC"></label>
+            </div>
+          </div>
+          <div class="field" style="margin-top:8px;"><label>Mô tả ảnh (alt)</label><input type="text" data-key="HERO_IMG_ALT"></div>
+        </div>
+      </div>
+    </details>
+
+    <!-- WHY -->
+    <details class="group">
+      <summary>Vì sao chọn Chốc Chốc</summary>
+      <div class="group-body">
+        <div class="field"><label>Eyebrow</label><input type="text" data-key="WHY_EYEBROW"></div>
+        <div class="field"><label>Tiêu đề</label><input type="text" data-key="WHY_TITLE"></div>
+        <div class="field"><label>Mô tả ngắn</label><textarea data-key="WHY_DESC"></textarea></div>
+        <div class="subhead">Ô 1</div>
+        <div class="field"><label>Tiêu đề</label><input type="text" data-key="WHY1_TITLE"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="WHY1_DESC"></textarea></div>
+        <div class="subhead">Ô 2</div>
+        <div class="field"><label>Tiêu đề</label><input type="text" data-key="WHY2_TITLE"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="WHY2_DESC"></textarea></div>
+        <div class="subhead">Ô 3</div>
+        <div class="field"><label>Tiêu đề</label><input type="text" data-key="WHY3_TITLE"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="WHY3_DESC"></textarea></div>
+      </div>
+    </details>
+
+    <!-- COURSES -->
+    <details class="group">
+      <summary>Danh mục khóa học (6 khoá)</summary>
+      <div class="group-body">
+        <div class="field"><label>Eyebrow</label><input type="text" data-key="COURSE_EYEBROW"></div>
+        <div class="field"><label>Tiêu đề</label><input type="text" data-key="COURSE_TITLE"></div>
+        <div class="field"><label>Mô tả ngắn</label><textarea data-key="COURSE_DESC"></textarea></div>
+        <div class="field"><label>Nhãn nút "Xem chi tiết" (dùng chung)</label><input type="text" data-key="COURSE_LINK_TEXT"></div>
+
+        <div class="subhead">Khoá học 1 (có badge nổi bật)</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh món — khuyến nghị <strong>800 × 800px</strong> (vuông 1:1), JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="COURSE1_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="COURSE1_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="COURSE1_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="COURSE1_ALT"></div>
+        <div class="field"><label>Nhãn badge</label><input type="text" data-key="COURSE1_BADGE"></div>
+        <div class="field"><label>Tên khoá học</label><input type="text" data-key="COURSE1_NAME"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="COURSE1_DESC"></textarea></div>
+        <div class="field"><label>Nhãn nhỏ (tag)</label><input type="text" data-key="COURSE1_TAG"></div>
+
+        <div class="subhead">Khoá học 2</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh món — khuyến nghị <strong>800 × 800px</strong> (vuông 1:1), JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="COURSE2_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="COURSE2_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="COURSE2_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="COURSE2_ALT"></div>
+        <div class="field"><label>Tên khoá học</label><input type="text" data-key="COURSE2_NAME"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="COURSE2_DESC"></textarea></div>
+        <div class="field"><label>Nhãn nhỏ (tag)</label><input type="text" data-key="COURSE2_TAG"></div>
+
+        <div class="subhead">Khoá học 3</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh món — khuyến nghị <strong>800 × 800px</strong> (vuông 1:1), JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="COURSE3_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="COURSE3_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="COURSE3_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="COURSE3_ALT"></div>
+        <div class="field"><label>Tên khoá học</label><input type="text" data-key="COURSE3_NAME"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="COURSE3_DESC"></textarea></div>
+        <div class="field"><label>Nhãn nhỏ (tag)</label><input type="text" data-key="COURSE3_TAG"></div>
+
+        <div class="subhead">Khoá học 4</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh món — khuyến nghị <strong>800 × 800px</strong> (vuông 1:1), JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="COURSE4_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="COURSE4_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="COURSE4_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="COURSE4_ALT"></div>
+        <div class="field"><label>Tên khoá học</label><input type="text" data-key="COURSE4_NAME"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="COURSE4_DESC"></textarea></div>
+        <div class="field"><label>Nhãn nhỏ (tag)</label><input type="text" data-key="COURSE4_TAG"></div>
+
+        <div class="subhead">Khoá học 5</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh món — khuyến nghị <strong>800 × 800px</strong> (vuông 1:1), JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="COURSE5_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="COURSE5_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="COURSE5_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="COURSE5_ALT"></div>
+        <div class="field"><label>Tên khoá học</label><input type="text" data-key="COURSE5_NAME"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="COURSE5_DESC"></textarea></div>
+        <div class="field"><label>Nhãn nhỏ (tag)</label><input type="text" data-key="COURSE5_TAG"></div>
+
+        <div class="subhead">Khoá học 6</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh món — khuyến nghị <strong>800 × 800px</strong> (vuông 1:1), JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="COURSE6_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="COURSE6_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="COURSE6_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="COURSE6_ALT"></div>
+        <div class="field"><label>Tên khoá học</label><input type="text" data-key="COURSE6_NAME"></div>
+        <div class="field"><label>Mô tả</label><textarea data-key="COURSE6_DESC"></textarea></div>
+        <div class="field"><label>Nhãn nhỏ (tag)</label><input type="text" data-key="COURSE6_TAG"></div>
+      </div>
+    </details>
+
+    <!-- FACULTY -->
+    <details class="group">
+      <summary>Đội ngũ giảng viên (3 người)</summary>
+      <div class="group-body">
+        <div class="field"><label>Eyebrow</label><input type="text" data-key="FACULTY_EYEBROW"></div>
+        <div class="field"><label>Tiêu đề</label><input type="text" data-key="FACULTY_TITLE"></div>
+        <div class="field"><label>Mô tả ngắn</label><textarea data-key="FACULTY_DESC"></textarea></div>
+
+        <div class="subhead">Giảng viên 1</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh chân dung — khuyến nghị <strong>800 × 960px</strong> (dọc ~5:6), nền trơn, JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="FACULTY1_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="FACULTY1_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="FACULTY1_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="FACULTY1_ALT"></div>
+        <div class="field"><label>Họ tên</label><input type="text" data-key="FACULTY1_NAME"></div>
+        <div class="field"><label>Chức danh</label><input type="text" data-key="FACULTY1_ROLE"></div>
+
+        <div class="subhead">Giảng viên 2</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh chân dung — khuyến nghị <strong>800 × 960px</strong> (dọc ~5:6), nền trơn, JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="FACULTY2_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="FACULTY2_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="FACULTY2_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="FACULTY2_ALT"></div>
+        <div class="field"><label>Họ tên</label><input type="text" data-key="FACULTY2_NAME"></div>
+        <div class="field"><label>Chức danh</label><input type="text" data-key="FACULTY2_ROLE"></div>
+
+        <div class="subhead">Giảng viên 3</div>
+        <div class="img-field">
+          <div class="dim-note">📐 Ảnh chân dung — khuyến nghị <strong>800 × 960px</strong> (dọc ~5:6), nền trơn, JPG/WEBP, dưới 250KB.</div>
+          <div class="img-row">
+            <img class="img-preview" data-preview="FACULTY3_IMG" src="">
+            <div class="img-inputs">
+              <input type="text" data-key="FACULTY3_IMG" placeholder="Dán link ảnh (https://...)">
+              <label class="file-btn">Chọn ảnh từ máy<input type="file" accept="image/*" data-upload="FACULTY3_IMG"></label>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Mô tả ảnh (alt)</label><input type="text" data-key="FACULTY3_ALT"></div>
+        <div class="field"><label>Họ tên</label><input type="text" data-key="FACULTY3_NAME"></div>
+        <div class="field"><label>Chức danh</label><input type="text" data-key="FACULTY3_ROLE"></div>
+      </div>
+    </details>
+
+    <!-- TESTIMONIALS -->
+    <details class="group">
+      <summary>Câu chuyện học viên (3 học viên)</summary>
+      <div class="group-body">
+        <div class="field"><label>Eyebrow</label><input type="text" data-key="TESTI_EYEBROW"></div>
+        <div class="field"><label>Tiêu đề</label><input type="text" data-key="TESTI_TITLE"></div>
+        <div class="field"><label>Mô tả ngắn</label><textarea data-key="TESTI_DESC"></textarea></div>
+
+        <div class="subhead">Học viên 1</div>
+        <div class="field"><label>Nội dung chia sẻ</label><textarea data-key="TESTI1_TEXT"></textarea></div>
+        <div class="row2">
+          <div class="field"><label>Chữ cái đại diện (avatar)</label><input type="text" data-key="TESTI1_AVATAR" maxlength="2"></div>
+          <div class="field"><label>Tên</label><input type="text" data-key="TESTI1_NAME"></div>
+        </div>
+        <div class="field"><label>Tên quán/cơ sở</label><input type="text" data-key="TESTI1_BIZ"></div>
+
+        <div class="subhead">Học viên 2</div>
+        <div class="field"><label>Nội dung chia sẻ</label><textarea data-key="TESTI2_TEXT"></textarea></div>
+        <div class="row2">
+          <div class="field"><label>Chữ cái đại diện (avatar)</label><input type="text" data-key="TESTI2_AVATAR" maxlength="2"></div>
+          <div class="field"><label>Tên</label><input type="text" data-key="TESTI2_NAME"></div>
+        </div>
+        <div class="field"><label>Tên quán/cơ sở</label><input type="text" data-key="TESTI2_BIZ"></div>
+
+        <div class="subhead">Học viên 3</div>
+        <div class="field"><label>Nội dung chia sẻ</label><textarea data-key="TESTI3_TEXT"></textarea></div>
+        <div class="row2">
+          <div class="field"><label>Chữ cái đại diện (avatar)</label><input type="text" data-key="TESTI3_AVATAR" maxlength="2"></div>
+          <div class="field"><label>Tên</label><input type="text" data-key="TESTI3_NAME"></div>
+        </div>
+        <div class="field"><label>Tên quán/cơ sở</label><input type="text" data-key="TESTI3_BIZ"></div>
+      </div>
+    </details>
+
+    <!-- FOOTER -->
+    <details class="group">
+      <summary>Chân trang & liên hệ</summary>
+      <div class="group-body">
+        <div class="field"><label>Eyebrow (CTA)</label><input type="text" data-key="FOOTER_EYEBROW"></div>
+        <div class="field"><label>Tiêu đề CTA</label><input type="text" data-key="FOOTER_TITLE"></div>
+        <div class="field"><label>Số điện thoại (hiện ở nút gọi &amp; hotline)</label><input type="text" data-key="FOOTER_PHONE"></div>
+        <div class="field"><label>Giới thiệu ngắn dưới logo</label><textarea data-key="FOOTER_ABOUT"></textarea></div>
+        <div class="field"><label>Địa chỉ</label><input type="text" data-key="FOOTER_ADDRESS"></div>
+        <div class="field"><label>Email</label><input type="text" data-key="FOOTER_EMAIL"></div>
+        <div class="subhead">Liên kết nhanh (4 mục)</div>
+        <div class="row2">
+          <div class="field"><label>Liên kết 1</label><input type="text" data-key="FOOTER_LINK1"></div>
+          <div class="field"><label>Liên kết 2</label><input type="text" data-key="FOOTER_LINK2"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Liên kết 3</label><input type="text" data-key="FOOTER_LINK3"></div>
+          <div class="field"><label>Liên kết 4</label><input type="text" data-key="FOOTER_LINK4"></div>
+        </div>
+        <div class="field"><label>Dòng bản quyền cuối trang</label><input type="text" data-key="FOOTER_COPYRIGHT"></div>
+      </div>
+    </details>
+
+  </div>
+
+  <div class="preview-wrap">
+    <div class="preview-frame-holder">
+      <iframe id="preview" title="Xem trước website"></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============== SITE TEMPLATE (raw, chưa parse HTML) ============== -->
+<script type="text/plain" id="siteTemplate"><!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chốc Chốc Cooking Center — Học làm chủ, không học làm thuê</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C08A3E;
+    --gold-light: #D4A24C;
+    --black: #1A1A1A;
+    --cream: #F7F4EF;
+    --gray: #6B6B6B;
+    --border: #E5E0D8;
+    --white: #FFFFFF;
+
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-script: 'Great Vibes', cursive;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+
+    --section-padding: 100px 0;
+    --container-max: 1200px;
+
+    --shadow: 0 4px 16px rgba(0,0,0,0.05);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--black);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3 { font-family: var(--font-heading); color: var(--black); line-height: 1.2; }
+
+  .eyebrow {
+    font-family: var(--font-script);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .btn {
+    display: inline-block;
+    border-radius: var(--radius-sm);
+    padding: 14px 32px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-sans);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--white);
+  }
+  .btn-primary:hover { background: #a87534; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--black);
+    border: 1.5px solid var(--black);
+  }
+  .btn-outline:hover { background: var(--black); color: var(--white); }
+
+  .btn-outline.on-dark {
+    color: var(--white);
+    border-color: var(--white);
+  }
+  .btn-outline.on-dark:hover { background: var(--white); color: var(--black); }
+
+  /* ---------- NAV ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--black);
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .nav-links > li > a {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    color: var(--black);
+    position: relative;
+    padding-bottom: 6px;
+  }
+  .nav-links > li > a:hover,
+  .nav-links > li.active > a {
+    color: var(--gold);
+  }
+  .nav-links > li.active > a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: var(--gold);
+  }
+  .nav-links li.sep {
+    color: var(--border);
+    font-size: 13px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .nav-cta { display: flex; align-items: center; gap: 18px; }
+  .nav-cta .btn { padding: 11px 24px; }
+
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--black);
+    padding: 4px;
+  }
+
+  /* ---------- MOBILE DRAWER ---------- */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,26,0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 199;
+  }
+  .drawer-overlay.is-open { opacity: 1; visibility: visible; }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100%;
+    width: min(320px, 84vw);
+    background: var(--white);
+    z-index: 200;
+    padding: 26px 28px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 30px rgba(0,0,0,0.12);
+  }
+  .mobile-drawer.is-open { transform: translateX(0); }
+
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 34px;
+  }
+  .drawer-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--black);
+  }
+
+  .drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .drawer-links li a {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    color: var(--black);
+  }
+  .drawer-links li a:hover { color: var(--gold); }
+  .drawer-links li.sep {
+    border-top: 1px solid var(--border);
+    margin: 2px 0;
+  }
+
+  .drawer-cta { margin-top: auto; text-align: center; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+    padding: 90px 0 100px;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin-bottom: 22px;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--black);
+    border-left: 3px solid var(--gold);
+    padding-left: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero p.lead {
+    font-size: 15.5px;
+    line-height: 1.85;
+    color: var(--gray);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--black);
+    box-shadow: var(--shadow);
+  }
+  .hero-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.92; }
+  .hero-visual::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(26,26,26,0) 40%, rgba(26,26,26,0.55) 100%);
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 24px; left: 24px;
+    z-index: 2;
+    color: var(--white);
+    font-family: var(--font-serif);
+    font-size: 15px;
+  }
+  .hero-badge span { display: block; font-family: var(--font-sans); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); margin-top: 4px; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section { padding: var(--section-padding); }
+  .section-cream { background: var(--cream); }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+  .section-head h2 { font-size: 34px; font-weight: 500; }
+  .section-head p { color: var(--gray); font-size: 15px; margin-top: 14px; line-height: 1.8; }
+
+  /* ---------- WHY CHOOSE US (icon feature) ---------- */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .feature-box { text-align: center; padding: 0 12px; }
+  .feature-icon {
+    width: 64px; height: 64px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--gold);
+  }
+  .feature-icon svg { width: 26px; height: 26px; }
+  .feature-box h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .feature-box p { font-size: 13px; color: var(--gray); line-height: 1.75; }
+
+  /* ---------- COURSE CATALOG ---------- */
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .course-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .course-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+  .course-media {
+    aspect-ratio: 1/1;
+    position: relative;
+    background: var(--cream);
+  }
+  .course-media img { width: 100%; height: 100%; object-fit: cover; }
+  .course-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: var(--radius-sm);
+  }
+  .course-body { padding: 22px; }
+  .course-body h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .course-body p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 14px; min-height: 66px; }
+  .course-foot { display: flex; align-items: center; justify-content: space-between; }
+  .course-tag { font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.6px; }
+  .course-link { font-size: 12px; font-weight: 500; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+
+  /* ---------- FACULTY ---------- */
+  .faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .faculty-card { text-align: center; }
+  .faculty-photo {
+    aspect-ratio: 3/3.6;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 22px;
+    background: var(--black);
+  }
+  .faculty-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .faculty-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 6px; }
+  .faculty-role { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .testi-card {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 32px 26px 26px;
+  }
+  .testi-quote {
+    position: absolute;
+    top: 18px; right: 24px;
+    font-family: var(--font-serif);
+    font-size: 56px;
+    color: var(--gold-light);
+    opacity: 0.35;
+    line-height: 1;
+  }
+  .testi-stars { color: var(--gold-light); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
+  .testi-text { font-size: 13.5px; color: var(--gray); line-height: 1.85; margin-bottom: 22px; }
+  .testi-person { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif); font-weight: 700; color: var(--gold);
+    font-size: 16px;
+  }
+  .testi-person .name { font-size: 14px; font-weight: 600; }
+  .testi-person .biz { font-size: 12px; color: var(--gray); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--black);
+    color: #cfcfcf;
+    padding-top: 90px;
+  }
+  .footer-cta {
+    text-align: center;
+    padding-bottom: 70px;
+    border-bottom: 1px solid #333;
+  }
+  .footer-cta span.eyebrow { color: var(--gold-light); }
+  .footer-cta h2 { color: var(--white); font-size: 32px; font-weight: 500; margin-bottom: 28px; }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 50px;
+    padding: 60px 0 40px;
+  }
+  .footer-col h4 {
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .footer-col p, .footer-col li { font-size: 13.5px; line-height: 2.1; color: #b3b3b3; }
+  .footer-logo { font-family: var(--font-serif); color: var(--white); font-size: 22px; margin-bottom: 16px; }
+  .footer-logo span { color: var(--gold); }
+  .footer-bottom {
+    text-align: center;
+    padding: 24px 0;
+    border-top: 1px solid #333;
+    font-size: 12px;
+    color: #7a7a7a;
+    letter-spacing: 0.4px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px) {
+    .nav-links, .nav-cta .btn-outline { display: none; }
+    .burger { display: block; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; aspect-ratio: 16/10; }
+    .feature-grid, .course-grid, .faculty-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  }
+  @media (max-width: 620px) {
+    .hero h1 { font-size: 34px; }
+    .feature-grid, .course-grid, .faculty-grid, .testi-grid { grid-template-columns: 1fr; }
+    .navbar { padding: 16px 20px; }
+    .section { padding: 70px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="#" class="logo">CHỐC <span>CHỐC</span></a>
+    <ul class="nav-links">
+      <li class="active"><a href="#">{{NAV_LABEL_1}}</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="#khoa-hoc">{{NAV_LABEL_2}}</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="#gioi-thieu">{{NAV_LABEL_3}}</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="{{NAV_HREF_TINTUC}}">{{NAV_LABEL_4}}</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="{{NAV_HREF_HOIDAP}}">{{NAV_LABEL_5}}</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="#lien-he">{{NAV_LABEL_6}}</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#lien-he" class="btn btn-primary">{{NAV_CTA_TEXT}}</a>
+      <button class="burger" id="burgerBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileDrawer">☰</button>
+    </div>
+  </nav>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="logo">CHỐC <span>CHỐC</span></span>
+    <button class="drawer-close" id="drawerCloseBtn" aria-label="Đóng menu">✕</button>
+  </div>
+  <ul class="drawer-links">
+    <li><a href="#">{{NAV_LABEL_1}}</a></li>
+    <li class="sep"></li>
+    <li><a href="#khoa-hoc">{{NAV_LABEL_2}}</a></li>
+    <li class="sep"></li>
+    <li><a href="#gioi-thieu">{{NAV_LABEL_3}}</a></li>
+    <li class="sep"></li>
+    <li><a href="{{NAV_HREF_TINTUC}}">{{NAV_LABEL_4}}</a></li>
+    <li class="sep"></li>
+    <li><a href="{{NAV_HREF_HOIDAP}}">{{NAV_LABEL_5}}</a></li>
+    <li class="sep"></li>
+    <li><a href="#lien-he">{{NAV_LABEL_6}}</a></li>
+  </ul>
+  <a href="#lien-he" class="btn btn-primary drawer-cta">{{NAV_CTA_TEXT}}</a>
+</nav>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow">{{HERO_EYEBROW}}</span>
+      <h1>{{HERO_H1}}</h1>
+      <p class="hero-tagline">{{HERO_TAGLINE}}</p>
+      <p class="lead">{{HERO_LEAD}}</p>
+      <div class="hero-actions">
+        <a href="#khoa-hoc" class="btn btn-primary">{{HERO_BTN1_TEXT}}</a>
+        <a href="#lien-he" class="btn btn-outline">{{HERO_BTN2_TEXT}}</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="{{HERO_IMG_SRC}}" alt="{{HERO_IMG_ALT}}">
+      <div class="hero-badge">{{HERO_BADGE_L1}}<span>{{HERO_BADGE_L2}}</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gioi-thieu">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{WHY_EYEBROW}}</span>
+      <h2>{{WHY_TITLE}}</h2>
+      <p>{{WHY_DESC}}</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <h3>{{WHY1_TITLE}}</h3>
+        <p>{{WHY1_DESC}}</p>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        </div>
+        <h3>{{WHY2_TITLE}}</h3>
+        <p>{{WHY2_DESC}}</p>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3>{{WHY3_TITLE}}</h3>
+        <p>{{WHY3_DESC}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-cream" id="khoa-hoc">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{COURSE_EYEBROW}}</span>
+      <h2>{{COURSE_TITLE}}</h2>
+      <p>{{COURSE_DESC}}</p>
+    </div>
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-media">
+          <img src="{{COURSE1_IMG}}" alt="{{COURSE1_ALT}}">
+          <span class="course-badge">{{COURSE1_BADGE}}</span>
+        </div>
+        <div class="course-body">
+          <h3>{{COURSE1_NAME}}</h3>
+          <p>{{COURSE1_DESC}}</p>
+          <div class="course-foot"><span class="course-tag">{{COURSE1_TAG}}</span><a href="#" class="course-link">{{COURSE_LINK_TEXT}}</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="{{COURSE2_IMG}}" alt="{{COURSE2_ALT}}">
+        </div>
+        <div class="course-body">
+          <h3>{{COURSE2_NAME}}</h3>
+          <p>{{COURSE2_DESC}}</p>
+          <div class="course-foot"><span class="course-tag">{{COURSE2_TAG}}</span><a href="#" class="course-link">{{COURSE_LINK_TEXT}}</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="{{COURSE3_IMG}}" alt="{{COURSE3_ALT}}">
+        </div>
+        <div class="course-body">
+          <h3>{{COURSE3_NAME}}</h3>
+          <p>{{COURSE3_DESC}}</p>
+          <div class="course-foot"><span class="course-tag">{{COURSE3_TAG}}</span><a href="#" class="course-link">{{COURSE_LINK_TEXT}}</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="{{COURSE4_IMG}}" alt="{{COURSE4_ALT}}">
+        </div>
+        <div class="course-body">
+          <h3>{{COURSE4_NAME}}</h3>
+          <p>{{COURSE4_DESC}}</p>
+          <div class="course-foot"><span class="course-tag">{{COURSE4_TAG}}</span><a href="#" class="course-link">{{COURSE_LINK_TEXT}}</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="{{COURSE5_IMG}}" alt="{{COURSE5_ALT}}">
+        </div>
+        <div class="course-body">
+          <h3>{{COURSE5_NAME}}</h3>
+          <p>{{COURSE5_DESC}}</p>
+          <div class="course-foot"><span class="course-tag">{{COURSE5_TAG}}</span><a href="#" class="course-link">{{COURSE_LINK_TEXT}}</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="{{COURSE6_IMG}}" alt="{{COURSE6_ALT}}">
+        </div>
+        <div class="course-body">
+          <h3>{{COURSE6_NAME}}</h3>
+          <p>{{COURSE6_DESC}}</p>
+          <div class="course-foot"><span class="course-tag">{{COURSE6_TAG}}</span><a href="#" class="course-link">{{COURSE_LINK_TEXT}}</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="giang-vien">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{FACULTY_EYEBROW}}</span>
+      <h2>{{FACULTY_TITLE}}</h2>
+      <p>{{FACULTY_DESC}}</p>
+    </div>
+    <div class="faculty-grid">
+      <div class="faculty-card">
+        <div class="faculty-photo"><img src="{{FACULTY1_IMG}}" alt="{{FACULTY1_ALT}}"></div>
+        <h3>{{FACULTY1_NAME}}</h3>
+        <p class="faculty-role">{{FACULTY1_ROLE}}</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-photo"><img src="{{FACULTY2_IMG}}" alt="{{FACULTY2_ALT}}"></div>
+        <h3>{{FACULTY2_NAME}}</h3>
+        <p class="faculty-role">{{FACULTY2_ROLE}}</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-photo"><img src="{{FACULTY3_IMG}}" alt="{{FACULTY3_ALT}}"></div>
+        <h3>{{FACULTY3_NAME}}</h3>
+        <p class="faculty-role">{{FACULTY3_ROLE}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-cream" id="hoc-vien">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{TESTI_EYEBROW}}</span>
+      <h2>{{TESTI_TITLE}}</h2>
+      <p>{{TESTI_DESC}}</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="testi-quote">"</span>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">{{TESTI1_TEXT}}</p>
+        <div class="testi-person">
+          <div class="testi-avatar">{{TESTI1_AVATAR}}</div>
+          <div><div class="name">{{TESTI1_NAME}}</div><div class="biz">{{TESTI1_BIZ}}</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-quote">"</span>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">{{TESTI2_TEXT}}</p>
+        <div class="testi-person">
+          <div class="testi-avatar">{{TESTI2_AVATAR}}</div>
+          <div><div class="name">{{TESTI2_NAME}}</div><div class="biz">{{TESTI2_BIZ}}</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-quote">"</span>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">{{TESTI3_TEXT}}</p>
+        <div class="testi-person">
+          <div class="testi-avatar">{{TESTI3_AVATAR}}</div>
+          <div><div class="name">{{TESTI3_NAME}}</div><div class="biz">{{TESTI3_BIZ}}</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="lien-he">
+  <div class="container footer-cta">
+    <span class="eyebrow">{{FOOTER_EYEBROW}}</span>
+    <h2>{{FOOTER_TITLE}}</h2>
+    <a href="tel:{{FOOTER_PHONE_TEL}}" class="btn btn-primary">Gọi ngay: {{FOOTER_PHONE}}</a>
+  </div>
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">CHỐC <span>CHỐC</span></div>
+      <p>{{FOOTER_ABOUT}}</p>
+    </div>
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+      <ul>
+        <li>{{FOOTER_ADDRESS}}</li>
+        <li>Hotline: {{FOOTER_PHONE}}</li>
+        <li>Email: {{FOOTER_EMAIL}}</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Liên kết</h4>
+      <ul>
+        <li><a href="#gioi-thieu">{{FOOTER_LINK1}}</a></li>
+        <li><a href="#khoa-hoc">{{FOOTER_LINK2}}</a></li>
+        <li><a href="#giang-vien">{{FOOTER_LINK3}}</a></li>
+        <li><a href="#hoc-vien">{{FOOTER_LINK4}}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">{{FOOTER_COPYRIGHT}}</div>
+</footer>
+
+<script>
+  const burgerBtn = document.getElementById('burgerBtn');
+  const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+
+  function openDrawer() {
+    drawer.classList.add('is-open');
+    overlay.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    burgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  burgerBtn.addEventListener('click', openDrawer);
+  drawerCloseBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a').forEach(link => link.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+</script>
+
+</body>
+</html></script>
+
+<script>
+(function () {
+  const defaultData = {
+    NAV_CTA_TEXT: "Đăng ký tư vấn",
+    NAV_LABEL_1: "Trang chủ",
+    NAV_LABEL_2: "Khoá học",
+    NAV_LABEL_3: "Về chúng tôi",
+    NAV_LABEL_4: "Tin tức",
+    NAV_LABEL_5: "Hỏi đáp",
+    NAV_LABEL_6: "Liên hệ",
+    NAV_HREF_TINTUC: "#",
+    NAV_HREF_HOIDAP: "#",
+
+    HERO_EYEBROW: "Welcome to Chốc Chốc Cooking Center",
+    HERO_H1: "NƠI KHỞI NGUỒN THÀNH CÔNG TRONG KINH DOANH ẨM THỰC CỦA BẠN",
+    HERO_TAGLINE: "\"Học làm chủ — Không học làm thuê\"",
+    HERO_LEAD: "Chúng tôi không chỉ dạy nấu ăn ngon mà còn đồng hành cùng bạn trên hành trình trở thành người làm chủ trong lĩnh vực ẩm thực — từ công thức, kỹ thuật bếp đến vận hành và kinh doanh thực chiến.",
+    HERO_BTN1_TEXT: "Khám phá khóa học",
+    HERO_BTN2_TEXT: "Nhận tư vấn miễn phí",
+    HERO_IMG_SRC: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&q=80",
+    HERO_IMG_ALT: "Đầu bếp đang chế biến món ăn tại Chốc Chốc Cooking Center",
+    HERO_BADGE_L1: "15+ năm kinh nghiệm thực chiến",
+    HERO_BADGE_L2: "Đội ngũ giảng viên",
+
+    WHY_EYEBROW: "Why Choose Us",
+    WHY_TITLE: "Giá trị cốt lõi & sứ mệnh",
+    WHY_DESC: "Chốc Chốc — nơi khởi nguồn sự nghiệp của bạn. Chúng tôi hỗ trợ các nhà khởi nghiệp thành công trong lĩnh vực ẩm thực Việt Nam bằng chương trình đào tạo thực chiến và sự đồng hành lâu dài.",
+    WHY1_TITLE: "Đào tạo thực chiến",
+    WHY1_DESC: "Chương trình phù hợp mọi mục tiêu, từ bán tại nhà đến vận hành nhà hàng chuyên nghiệp.",
+    WHY2_TITLE: "Giảng viên giàu kinh nghiệm",
+    WHY2_DESC: "Đội ngũ giảng viên với hơn 15 năm thực chiến trong ngành ẩm thực và vận hành F&B.",
+    WHY3_TITLE: "Đồng hành trọn đời",
+    WHY3_DESC: "Hỗ trợ setup, vận hành và cải tiến menu thực tế cùng học viên sau khi tốt nghiệp.",
+
+    COURSE_EYEBROW: "Course Catalog",
+    COURSE_TITLE: "Danh mục khóa học",
+    COURSE_DESC: "Mỗi chuyên đề được xây dựng từ công thức gốc, định lượng chuẩn và bí quyết thực chiến của đội ngũ Chốc Chốc.",
+    COURSE_LINK_TEXT: "Xem chi tiết",
+
+    COURSE1_IMG: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=600&q=80",
+    COURSE1_ALT: "Bánh mỳ Việt Nam",
+    COURSE1_BADGE: "Chef's Pick",
+    COURSE1_NAME: "Bánh Mỳ Việt Nam",
+    COURSE1_DESC: "Chuyên sâu từ bánh mỳ kẹp truyền thống đến bánh mỳ hiện đại — kỹ thuật vỏ bánh giòn và pha chế sốt đặc trưng.",
+    COURSE1_TAG: "Khai giảng liên tục",
+
+    COURSE2_IMG: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80",
+    COURSE2_ALT: "Đồ ăn vặt và mỳ cay",
+    COURSE2_NAME: "Đồ Ăn Vặt & Mỳ Cay",
+    COURSE2_DESC: "Tổng hợp các món hot trend cùng bí quyết nấu nước dùng đậm đà, chuẩn khẩu vị giới trẻ.",
+    COURSE2_TAG: "Hot Trend",
+
+    COURSE3_IMG: "https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80",
+    COURSE3_ALT: "Nem nướng Nha Trang",
+    COURSE3_NAME: "Nem Nướng Nha Trang",
+    COURSE3_DESC: "Kỹ thuật quết nem chuẩn vị và bí quyết pha nước chấm đặc trưng của xứ biển Nha Trang.",
+    COURSE3_TAG: "Đặc sản vùng miền",
+
+    COURSE4_IMG: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80",
+    COURSE4_ALT: "Lẩu và đồ nướng",
+    COURSE4_NAME: "Lẩu & Đồ Nướng",
+    COURSE4_DESC: "Định lượng nguyên liệu chuẩn xác và công thức nước lẩu đa dạng cho mô hình kinh doanh riêng.",
+    COURSE4_TAG: "Kinh doanh mô hình lớn",
+
+    COURSE5_IMG: "https://images.unsplash.com/photo-1626202373911-3ee2e0dab7ca?w=600&q=80",
+    COURSE5_ALT: "Cơm tấm",
+    COURSE5_NAME: "Cơm Tấm",
+    COURSE5_DESC: "Bí quyết cơm tơi mềm đúng chuẩn cùng kỹ thuật ướp sườn thấm vị, thơm ngon đặc trưng.",
+    COURSE5_TAG: "Món truyền thống",
+
+    COURSE6_IMG: "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80",
+    COURSE6_ALT: "Tư vấn mô hình kinh doanh",
+    COURSE6_NAME: "Tư Vấn Theo Mô Hình",
+    COURSE6_DESC: "Chuyên đề tự chọn, thiết kế nội dung linh hoạt theo vốn và mặt bằng thực tế của học viên.",
+    COURSE6_TAG: "Cá nhân hóa",
+
+    FACULTY_EYEBROW: "Faculty",
+    FACULTY_TITLE: "Đội ngũ giảng viên",
+    FACULTY_DESC: "Những gương mặt chủ chốt trực tiếp đồng hành cùng học viên trong suốt hành trình khởi nghiệp ẩm thực.",
+    FACULTY1_IMG: "https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=500&q=80",
+    FACULTY1_ALT: "Thầy Đàm Văn Long",
+    FACULTY1_NAME: "Thầy Đàm Văn Long",
+    FACULTY1_ROLE: "Giảng viên nấu ăn · Cố vấn đào tạo & chiến lược vận hành",
+    FACULTY2_IMG: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=500&q=80",
+    FACULTY2_ALT: "Thầy Bùi Thanh Luân",
+    FACULTY2_NAME: "Thầy Bùi Thanh Luân",
+    FACULTY2_ROLE: "Giảng viên nấu ăn · Giám đốc điều hành, Sáng lập Chốc Chốc",
+    FACULTY3_IMG: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80",
+    FACULTY3_ALT: "Cô Dương Thái Hà",
+    FACULTY3_NAME: "Cô Dương Thái Hà",
+    FACULTY3_ROLE: "Cố vấn chiến lược kinh doanh & tài chính",
+
+    TESTI_EYEBROW: "Testimonials",
+    TESTI_TITLE: "Câu chuyện học viên",
+    TESTI_DESC: "Những học viên đã biến kiến thức tại Chốc Chốc thành mô hình kinh doanh ẩm thực của riêng mình.",
+    TESTI1_TEXT: "Nhờ khóa học Lẩu & Đồ Nướng tại Chốc Chốc, tôi tự tin xây dựng công thức nước lẩu riêng và mở quán thành công ngay sau khi tốt nghiệp.",
+    TESTI1_AVATAR: "P",
+    TESTI1_NAME: "Nguyễn Đức Phát",
+    TESTI1_BIZ: "Lẩu Nhà Mình",
+    TESTI2_TEXT: "Đội ngũ giảng viên tận tâm, chỉ dạy từng chi tiết nhỏ trong công thức nước dùng — điều mà tôi không tìm thấy ở bất kỳ đâu khác.",
+    TESTI2_AVATAR: "L",
+    TESTI2_NAME: "Nguyễn Thị Lan",
+    TESTI2_BIZ: "Bún Bò Cô Lan",
+    TESTI3_TEXT: "Không chỉ dạy nấu ăn, Chốc Chốc còn tư vấn setup và vận hành giúp tôi rút ngắn rất nhiều thời gian mở bếp thực tế.",
+    TESTI3_AVATAR: "T",
+    TESTI3_NAME: "Nguyễn Thị Trâm",
+    TESTI3_BIZ: "Nhung's Kitchen",
+
+    FOOTER_EYEBROW: "Get Started",
+    FOOTER_TITLE: "Nhận tư vấn lộ trình kinh doanh ngay hôm nay",
+    FOOTER_PHONE: "0944 080 015",
+    FOOTER_ABOUT: "Chốc Chốc Cooking Center — nơi khởi nguồn sự nghiệp của bạn trong lĩnh vực ẩm thực Việt Nam.",
+    FOOTER_ADDRESS: "Tầng 3, KĐT Geleximco, Hà Đông",
+    FOOTER_EMAIL: "chocchoccookingcenter@gmail.com",
+    FOOTER_LINK1: "Giới thiệu",
+    FOOTER_LINK2: "Khóa học nấu ăn",
+    FOOTER_LINK3: "Giảng viên",
+    FOOTER_LINK4: "Câu chuyện học viên",
+    FOOTER_COPYRIGHT: "© 2026 Chốc Chốc Cooking Center. All rights reserved."
+  };
+
+  let data = JSON.parse(JSON.stringify(defaultData));
+  const template = document.getElementById('siteTemplate').textContent;
+  const preview = document.getElementById('preview');
+  const toastEl = document.getElementById('toast');
+  let toastTimer = null;
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function buildHtml() {
+    let out = template;
+    const fullData = Object.assign({}, data, {
+      FOOTER_PHONE_TEL: (data.FOOTER_PHONE || '').replace(/[^0-9+]/g, '')
+    });
+    Object.keys(fullData).forEach(key => {
+      const re = new RegExp('{{' + key + '}}', 'g');
+      out = out.replace(re, escapeHtml(fullData[key]));
+    });
+    return out;
+  }
+
+  function renderPreview() {
+    preview.srcdoc = buildHtml();
+  }
+
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+  }
+
+  function fillForm() {
+    document.querySelectorAll('[data-key]').forEach(el => {
+      el.value = data[el.dataset.key] !== undefined ? data[el.dataset.key] : '';
+    });
+    document.querySelectorAll('[data-preview]').forEach(img => {
+      const val = data[img.dataset.preview];
+      img.src = val || '';
+      img.style.visibility = val ? 'visible' : 'hidden';
+    });
+  }
+
+  document.addEventListener('input', (e) => {
+    const key = e.target.dataset.key;
+    if (!key) return;
+    data[key] = e.target.value;
+    if (e.target.hasAttribute('data-key') && document.querySelector('[data-preview="' + key + '"]')) {
+      const img = document.querySelector('[data-preview="' + key + '"]');
+      img.src = e.target.value;
+      img.style.visibility = e.target.value ? 'visible' : 'hidden';
+    }
+    renderPreview();
+  });
+
+  document.querySelectorAll('input[type="file"][data-upload]').forEach(fileInput => {
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const key = fileInput.dataset.upload;
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        data[key] = ev.target.result;
+        const textInput = document.querySelector('input[data-key="' + key + '"]');
+        if (textInput) textInput.value = ev.target.result;
+        const img = document.querySelector('[data-preview="' + key + '"]');
+        if (img) { img.src = ev.target.result; img.style.visibility = 'visible'; }
+        renderPreview();
+        showToast('Đã đính kèm ảnh: ' + file.name);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  document.getElementById('exportHtml').addEventListener('click', () => {
+    const blob = new Blob([buildHtml()], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'chocchoc-website.html';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    showToast('Đã tải file website mới!');
+  });
+
+  document.getElementById('exportJson').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'chocchoc-content.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    showToast('Đã lưu dữ liệu ra file JSON!');
+  });
+
+  document.getElementById('importJson').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (ev) {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        data = Object.assign({}, defaultData, parsed);
+        fillForm();
+        renderPreview();
+        showToast('Đã nhập dữ liệu thành công!');
+      } catch (err) {
+        showToast('File JSON không hợp lệ.');
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (!confirm('Khôi phục toàn bộ nội dung về mặc định ban đầu?')) return;
+    data = JSON.parse(JSON.stringify(defaultData));
+    fillForm();
+    renderPreview();
+    showToast('Đã khôi phục mặc định.');
+  });
+
+  fillForm();
+  renderPreview();
+})();
+</script>
+
+</body>
+</html>
