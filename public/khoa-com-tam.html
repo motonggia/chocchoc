@@ -360,6 +360,29 @@
   .course-link:hover { color: var(--gold); }
   .course-link:hover::after { max-width: 20px; opacity: 1; margin-left: 6px; }
 
+  /* ---------- KHÓA HỌC LIÊN QUAN (thu gọn, 1 cột) ---------- */
+  #khoa-hoc-lien-quan { padding: 60px 0; }
+  #khoa-hoc-lien-quan .section-head { margin-bottom: 30px; }
+  #khoa-hoc-lien-quan .course-grid { grid-template-columns: 1fr; gap: 12px; max-width: 620px; margin: 0 auto; }
+  #khoa-hoc-lien-quan .course-card { flex-direction: row; align-items: center; }
+  #khoa-hoc-lien-quan .course-card:hover { transform: translateY(-2px); }
+  #khoa-hoc-lien-quan .course-media { width: 92px; height: 92px; aspect-ratio: 1/1; flex-shrink: 0; border-width: 4px; }
+  #khoa-hoc-lien-quan .course-media::before { display: none; }
+  #khoa-hoc-lien-quan .course-badge { display: none; }
+  #khoa-hoc-lien-quan .course-body { padding: 8px 16px; }
+  #khoa-hoc-lien-quan .course-body h3 { font-size: 14.5px; text-align: left; margin-bottom: 2px; }
+  #khoa-hoc-lien-quan .course-body p { font-size: 12px; line-height: 1.5; -webkit-line-clamp: 2; margin-bottom: 4px; }
+  #khoa-hoc-lien-quan .course-foot { flex-direction: row; align-items: center; justify-content: space-between; margin-top: 2px; gap: 10px; }
+  #khoa-hoc-lien-quan .course-foot .course-link { align-self: center; }
+  #khoa-hoc-lien-quan .course-tag { font-size: 10.5px; }
+  #khoa-hoc-lien-quan .course-link { font-size: 10.5px; }
+  @media (max-width: 640px) {
+    #khoa-hoc-lien-quan .course-card { flex-direction: row; }
+    #khoa-hoc-lien-quan .course-media { width: 72px; height: 72px; }
+    #khoa-hoc-lien-quan .course-body h3 { font-size: 13px; }
+    #khoa-hoc-lien-quan .course-body p { display: none; }
+  }
+
   /* ---------- FAQ (dùng lại) ---------- */
   .faq-columns { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
   .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); overflow: hidden; transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
