@@ -685,6 +685,122 @@
   }
   .gallery-item:hover::before { transform: translateX(130%); }
 
+  /* Watermark logo đen trên ảnh mosaic nhỏ */
+  .gallery-watermark {
+    position: absolute;
+    z-index: 4;
+    right: 8px;
+    bottom: 8px;
+    width: 30px;
+    height: 30px;
+    background: transparent url("Hoc-Nau-An-den.svg") center/contain no-repeat;
+    pointer-events: none;
+    opacity: 0.92;
+  }
+  .gallery-mosaic .gallery-item:nth-child(1) .gallery-watermark { width: 46px; height: 46px; right: 12px; bottom: 12px; }
+
+  /* Lightbox phóng to ảnh khi click */
+  .gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(20,17,12,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .gallery-lightbox.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .gallery-lightbox-img {
+    max-width: 63vw;
+    max-height: 61.6vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.6);
+    object-fit: contain;
+    transform: scale(0.94);
+    transition: transform 0.35s ease, opacity 0.25s ease;
+    filter: saturate(78%) sepia(12%) brightness(1.02) contrast(1.03);
+    display: block;
+  }
+  .gallery-lightbox-media {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+  }
+  .gallery-lightbox-watermark {
+    position: absolute;
+    z-index: 2;
+    right: 18px;
+    bottom: 18px;
+    width: 70px;
+    height: 70px;
+    background: transparent url("Hoc-Nau-An-den.svg") center/contain no-repeat;
+    pointer-events: none;
+    opacity: 0.92;
+  }
+  .gallery-lightbox.is-open .gallery-lightbox-img { transform: scale(1); }
+  .gallery-lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .gallery-lightbox-close:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: rotate(90deg);
+  }
+  .gallery-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  .gallery-lightbox-nav:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: translateY(-50%) scale(1.08);
+  }
+  .gallery-lightbox-prev { left: 24px; }
+  .gallery-lightbox-next { right: 24px; }
+  @media (max-width: 768px) {
+    .gallery-lightbox-img { max-width: 80vw; max-height: 55vh; }
+    .gallery-lightbox-watermark { width: 44px; height: 44px; right: 10px; bottom: 10px; }
+    .gallery-lightbox-nav { width: 42px; height: 42px; font-size: 24px; }
+    .gallery-lightbox-prev { left: 10px; }
+    .gallery-lightbox-next { right: 10px; }
+  }
+
   /* Slideshow độc lập trong từng ô mosaic */
   .gallery-slides { position: absolute; inset: 0; }
   .gallery-slide {
@@ -1318,6 +1434,16 @@
   </div>
 </section>
 
+<div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+  <button class="gallery-lightbox-close" id="galleryLightboxClose" aria-label="Đóng ảnh phóng to">&times;</button>
+  <button class="gallery-lightbox-nav gallery-lightbox-prev" id="galleryLightboxPrev" aria-label="Ảnh trước">&#8249;</button>
+  <div class="gallery-lightbox-media">
+    <img class="gallery-lightbox-img" id="galleryLightboxImg" src="" alt="Hình ảnh trung tâm www.hocnauan.online phóng to">
+    <div class="gallery-lightbox-watermark"></div>
+  </div>
+  <button class="gallery-lightbox-nav gallery-lightbox-next" id="galleryLightboxNext" aria-label="Ảnh tiếp theo">&#8250;</button>
+</div>
+
 <section class="section" id="hoc-vien">
   <div class="container">
     <div class="section-head">
@@ -1743,7 +1869,7 @@
       const slides = bucket.map((filename, i) =>
         `<img class="gallery-slide${i === 0 ? ' is-active' : ''}" src="${GALLERY_FOLDER}${filename}" alt="Hình ảnh trung tâm www.hocnauan.online">`
       ).join('');
-      return `<div class="gallery-item"><div class="gallery-slides">${slides}</div></div>`;
+      return `<div class="gallery-item"><div class="gallery-slides">${slides}</div><div class="gallery-watermark"></div></div>`;
     }).join('');
   }
 
@@ -1780,11 +1906,78 @@
     items.forEach(item => revealObserver.observe(item));
   }
 
+  function initGalleryLightbox() {
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('galleryLightboxImg');
+    const closeBtn = document.getElementById('galleryLightboxClose');
+    const prevBtn = document.getElementById('galleryLightboxPrev');
+    const nextBtn = document.getElementById('galleryLightboxNext');
+    const mosaic = document.getElementById('galleryMosaic');
+    if (!lightbox || !lightboxImg || !closeBtn || !prevBtn || !nextBtn || !mosaic) return;
+
+    let lightboxPhotos = [];
+    let lightboxIndex = 0;
+
+    function buildLightboxPhotos() {
+      const slides = mosaic.querySelectorAll('.gallery-slide');
+      lightboxPhotos = Array.from(slides).map(img => img.src);
+    }
+
+    function showIndex(index) {
+      if (!lightboxPhotos.length) return;
+      lightboxIndex = (index + lightboxPhotos.length) % lightboxPhotos.length;
+      lightboxImg.style.opacity = '0';
+      setTimeout(() => {
+        lightboxImg.src = lightboxPhotos[lightboxIndex];
+        lightboxImg.alt = 'Hình ảnh trung tâm www.hocnauan.online phóng to';
+        lightboxImg.style.opacity = '1';
+      }, 120);
+    }
+
+    function openLightbox(src) {
+      buildLightboxPhotos();
+      const startIndex = lightboxPhotos.indexOf(src);
+      lightboxIndex = startIndex >= 0 ? startIndex : 0;
+      lightboxImg.src = lightboxPhotos[lightboxIndex] || src;
+      lightboxImg.alt = 'Hình ảnh trung tâm www.hocnauan.online phóng to';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    mosaic.addEventListener('click', (e) => {
+      const item = e.target.closest('.gallery-item');
+      if (!item) return;
+      const activeSlide = item.querySelector('.gallery-slide.is-active') || item.querySelector('.gallery-slide, img');
+      if (!activeSlide) return;
+      openLightbox(activeSlide.src);
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showIndex(lightboxIndex - 1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showIndex(lightboxIndex + 1); });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showIndex(lightboxIndex - 1);
+      if (e.key === 'ArrowRight') showIndex(lightboxIndex + 1);
+    });
+  }
+
   async function initGallery() {
     const availablePhotos = await getAvailablePhotos();
     renderGalleryMosaic(availablePhotos);
     initGallerySlideshow();
     initGalleryReveal();
+    initGalleryLightbox();
   }
   initGallery();
 
