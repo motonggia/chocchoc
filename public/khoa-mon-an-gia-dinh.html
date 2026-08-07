@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Món Ăn Gia Đình — Chốc Chốc Cooking Center</title>
+<meta name="description" content="Khóa học Món ăn gia đình tại Chốc Chốc Cooking Center: hệ thống hóa kiến thức nấu ăn từ cảm hứng sang bài bản, chú trọng dinh dưỡng và thẩm mỹ, cùng kinh nghiệm thực tế từ giảng viên.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C08A3E;
+    --gold-light: #D4A24C;
+    --black: #1A1A1A;
+    --cream: #F7F4EF;
+    --gray: #6B6B6B;
+    --border: #E5E0D8;
+    --white: #FFFFFF;
+
+    --font-serif: 'Montserrat', sans-serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-script: 'Montserrat', sans-serif;
+
+    --radius-sm: 2px;
+    --radius-md: 3px;
+    --radius-lg: 4px;
+
+    --section-padding: 100px 0;
+    --container-max: 1200px;
+
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--black);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3 { font-family: var(--font-heading); color: var(--black); line-height: 1.2; }
+
+  .eyebrow {
+    font-family: var(--font-script);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .btn {
+    display: inline-block;
+    border-radius: var(--radius-sm);
+    padding: 14px 32px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-sans);
+    border: none;
+    cursor: pointer;
+    transition: all 0.45s ease;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--white);
+    border: 1px solid var(--gold);
+  }
+  .btn-primary:hover {
+    background: var(--black);
+    border-color: var(--black);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--black);
+    border: 1.5px solid var(--black);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .btn-outline::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--black) 0%, #3a3a3a 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+    z-index: -1;
+  }
+  .btn-outline:hover { color: var(--white); }
+  .btn-outline:hover::before { transform: scaleX(1); }
+
+  .btn-outline.on-dark {
+    color: var(--white);
+    border-color: var(--white);
+  }
+  .btn-outline.on-dark::before { background: linear-gradient(135deg, var(--white) 0%, #ececec 100%); }
+  .btn-outline.on-dark:hover { color: var(--black); }
+
+  /* ---------- NAV ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--black);
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .nav-links > li > a {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--black);
+    position: relative;
+    padding-bottom: 6px;
+    transition: color 0.25s ease;
+  }
+  .nav-links > li > a:hover,
+  .nav-links > li.active > a {
+    color: var(--gold);
+  }
+  .nav-links > li > a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+  .nav-links > li > a:hover::after,
+  .nav-links > li.active > a::after {
+    transform: scaleX(1);
+  }
+  .nav-links li.sep {
+    color: var(--border);
+    font-size: 13px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .nav-cta { display: flex; align-items: center; gap: 18px; }
+  .nav-cta .btn { padding: 11px 24px; }
+
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--black);
+    padding: 4px;
+  }
+
+  /* ---------- MOBILE DRAWER ---------- */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,26,0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 199;
+  }
+  .drawer-overlay.is-open { opacity: 1; visibility: visible; }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100%;
+    width: min(320px, 84vw);
+    background: var(--white);
+    z-index: 200;
+    padding: 26px 28px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 30px rgba(0,0,0,0.12);
+  }
+  .mobile-drawer.is-open { transform: translateX(0); }
+
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 34px;
+  }
+  .drawer-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--black);
+  }
+
+  .drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .drawer-links li a {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--black);
+  }
+  .drawer-links li a:hover { color: var(--gold); }
+  .drawer-links li.sep {
+    border-top: 1px solid var(--border);
+    margin: 2px 0;
+  }
+
+  .drawer-cta { margin-top: auto; text-align: center; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section {
+    padding: var(--section-padding);
+    background-color: var(--white);
+    background-image: radial-gradient(circle, rgba(26,26,26,0.1) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
+  }
+  .section-cream {
+    background-color: var(--cream);
+    background-image: radial-gradient(circle, rgba(26,26,26,0.1) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
+  }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+  .section-head h2 { font-size: 34px; font-weight: 500; }
+  .section-head p { color: var(--gray); font-size: 15px; margin-top: 14px; line-height: 1.8; }
+
+  /* ---------- COURSE CARD (dùng lại cho "Khóa học liên quan") ---------- */
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .course-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .course-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .course-media {
+    aspect-ratio: 1/1;
+    position: relative;
+    background: var(--cream);
+    flex-shrink: 0;
+    border: 6px solid var(--white);
+    box-shadow: inset 0 0 0 1px rgba(192,138,62,0.45);
+  }
+  .course-media img,
+  .course-media svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .course-media img { filter: saturate(78%) sepia(12%) brightness(1.02) contrast(1.03); }
+  .course-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(160deg, rgba(192,138,62,0.22) 0%, rgba(26,26,26,0.06) 55%, rgba(192,138,62,0.14) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .course-media::before {
+    content: "chocchoc.vn";
+    position: absolute;
+    z-index: 3;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(26,26,26,0.55);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+  }
+  .course-badge {
+    position: absolute;
+    z-index: 2;
+    top: 14px; left: 14px;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+    border-radius: var(--radius-sm);
+  }
+  .course-body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+  .course-body h3 { font-family: var(--font-serif); font-size: 17px; font-weight: 500; font-style: italic; margin-bottom: 1.5px; text-align: center; }
+  .course-body p { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .course-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; margin-top: 10px; }
+  .course-foot .course-link { align-self: flex-end; }
+  .course-tag { font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.4; }
+  .course-link { font-size: 11.5px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--black); display: inline-flex; align-items: center; transition: color 0.35s ease; }
+  .course-link::after { content: "→"; margin-left: 0; max-width: 0; overflow: hidden; display: inline-block; opacity: 0; transition: max-width 0.35s ease, opacity 0.35s ease, margin-left 0.35s ease; }
+  .course-link:hover { color: var(--gold); }
+  .course-link:hover::after { max-width: 20px; opacity: 1; margin-left: 6px; }
+
+  /* ---------- FAQ (dùng lại) ---------- */
+  .faq-columns { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); overflow: hidden; transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .faq-item:hover { transform: translateY(-3px); border-color: var(--gold-light); box-shadow: 0 4px 12px rgba(192,138,62,0.10); }
+  .faq-item.open { border-color: var(--gold-light); box-shadow: var(--shadow); }
+  .faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: none; border: none; cursor: pointer; text-align: left; padding: 20px 24px; font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--black); }
+  .faq-question:hover { color: var(--gold); }
+  .faq-item.open .faq-question { color: var(--gold); }
+  .faq-icon { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 400; color: var(--gold); transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.5s ease; }
+  .faq-question:hover .faq-icon { border-color: var(--gold); transform: rotate(90deg); }
+  .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--gold); }
+  .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+  .faq-answer-inner { overflow: hidden; min-height: 0; }
+  .faq-answer-inner p { padding: 0 24px 20px; font-size: 13.5px; line-height: 1.85; color: var(--gray); opacity: 0; transform: translateY(-8px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .faq-item.open .faq-answer { grid-template-rows: 1fr; }
+  .faq-item.open .faq-answer-inner p { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background-color: var(--black);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.1) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
+    color: #cfcfcf;
+    padding-top: 90px;
+  }
+  .footer-cta { text-align: center; padding-bottom: 70px; border-bottom: 1px solid #333; }
+  .footer-cta span.eyebrow { color: var(--gold-light); }
+  .footer-cta h2 { color: var(--white); font-size: 32px; font-weight: 500; margin-bottom: 28px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 50px; padding: 60px 0 40px; }
+  .footer-col h4 { color: var(--white); font-family: var(--font-sans); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 600; }
+  .footer-col p, .footer-col li { font-size: 13.5px; line-height: 2.1; color: #b3b3b3; }
+  .footer-logo { font-family: var(--font-serif); color: var(--white); font-size: 22px; margin-bottom: 16px; }
+  .footer-logo span { color: var(--gold); }
+  .footer-bottom { text-align: center; padding: 24px 0; border-top: 1px solid #333; font-size: 12px; color: #7a7a7a; letter-spacing: 0.4px; }
+
+  /* =====================================================
+     TRANG CHI TIẾT KHÓA HỌC — style riêng
+  ===================================================== */
+
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb {
+    padding: 18px 0;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: var(--gray);
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .breadcrumb a { color: var(--gray); transition: color 0.25s ease; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb span.sep { margin: 0 8px; color: var(--border); }
+  .breadcrumb span.current { color: var(--black); font-weight: 500; }
+
+  /* ---------- COURSE HERO ---------- */
+  .course-hero {
+    background-color: var(--cream);
+    background-image: radial-gradient(circle, rgba(26,26,26,0.1) 0.6px, transparent 0.6px), linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+    background-size: 7px 7px, auto;
+    padding: 70px 0 90px;
+  }
+  .course-hero-inner { display: grid; grid-template-columns: 1fr 0.85fr; gap: 60px; align-items: center; }
+  .course-hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 18px;
+  }
+  .course-hero h1 { font-size: 44px; font-weight: 500; letter-spacing: -0.5px; margin-bottom: 18px; }
+  .course-hero .lead { font-size: 15.5px; line-height: 1.85; color: var(--gray); max-width: 480px; margin-bottom: 32px; }
+  .course-hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+
+  .quick-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 32px; max-width: 480px; }
+  .quick-fact { border-top: 1px solid var(--border); padding-top: 12px; }
+  .quick-fact .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); font-weight: 600; margin-bottom: 6px; }
+  .quick-fact .value { font-size: 14.5px; font-weight: 500; line-height: 1.5; }
+
+  .course-hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--cream);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .course-hero-visual svg { width: 100%; height: 100%; display: block; }
+  .course-hero-visual::before {
+    content: "chocchoc.vn";
+    position: absolute; z-index: 3; right: 14px; bottom: 14px;
+    background: rgba(26,26,26,0.55); color: var(--white);
+    font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 10px; border-radius: var(--radius-sm);
+  }
+
+  /* ---------- CURRICULUM ---------- */
+  .curriculum-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; }
+  .curriculum-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 22px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .curriculum-item:first-child { padding-top: 0; }
+  .curriculum-item:last-child { border-bottom: none; }
+  .curriculum-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .curriculum-body h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .curriculum-body p { font-size: 13.5px; color: var(--gray); line-height: 1.8; }
+
+  /* ---------- OUTCOMES ---------- */
+  .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 32px; max-width: 900px; margin: 0 auto; }
+  .outcome-item { display: flex; align-items: flex-start; gap: 14px; }
+  .outcome-check {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+  .outcome-item p { font-size: 14px; line-height: 1.7; color: var(--black); }
+
+  /* ---------- INSTRUCTOR STRIP ---------- */
+  .instructor-strip {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .instructor-info .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); font-weight: 600; margin-bottom: 6px; }
+  .instructor-info h3 { font-size: 19px; font-weight: 600; margin-bottom: 4px; }
+  .instructor-info p { font-size: 13px; color: var(--gray); }
+
+  /* ---------- MID CTA BAND ---------- */
+  .mid-cta {
+    background-color: var(--black);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.1) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
+    padding: 60px 0;
+    text-align: center;
+  }
+  .mid-cta .eyebrow { color: var(--gold-light); }
+  .mid-cta h2 { color: var(--white); font-size: 28px; font-weight: 500; margin-bottom: 12px; }
+  .mid-cta p { color: #cfcfcf; font-size: 14px; margin-bottom: 28px; }
+  .mid-cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px) {
+    .nav-links, .nav-cta .btn-outline { display: none; }
+    .burger { display: block; }
+    .course-hero-inner { grid-template-columns: 1fr; }
+    .course-hero-visual { order: -1; aspect-ratio: 16/10; }
+    .course-grid { grid-template-columns: 1fr 1fr; }
+    .curriculum-item { grid-template-columns: 44px 1fr; }
+  }
+  @media (max-width: 620px) {
+    .course-hero h1 { font-size: 32px; }
+    .course-grid, .outcomes-grid, .quick-facts { grid-template-columns: 1fr; }
+    .navbar { padding: 16px 20px; }
+    .section { padding: 60px 0; }
+    .instructor-strip { flex-direction: column; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo">CHỐC <span>CHỐC</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#trang-chu">Trang chủ</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li class="active"><a href="index.html#khoa-hoc">Khoá học</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="index.html#hoi-dap">Hỏi đáp</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="index.html#lien-he">Liên hệ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="index.html#lien-he" class="btn btn-primary">Đăng ký tư vấn</a>
+      <button class="burger" id="burgerBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileDrawer">☰</button>
+    </div>
+  </nav>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="logo">CHỐC <span>CHỐC</span></span>
+    <button class="drawer-close" id="drawerCloseBtn" aria-label="Đóng menu">✕</button>
+  </div>
+  <ul class="drawer-links">
+    <li><a href="index.html#trang-chu">Trang chủ</a></li>
+    <li class="sep"></li>
+    <li><a href="index.html#khoa-hoc">Khoá học</a></li>
+    <li class="sep"></li>
+    <li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
+    <li class="sep"></li>
+    <li><a href="index.html#hoi-dap">Hỏi đáp</a></li>
+    <li class="sep"></li>
+    <li><a href="index.html#lien-he">Liên hệ</a></li>
+  </ul>
+  <a href="index.html#lien-he" class="btn btn-primary drawer-cta">Đăng ký tư vấn</a>
+</nav>
+
+<div class="breadcrumb">
+  <div class="container">
+    <a href="index.html">Trang chủ</a>
+    <span class="sep">/</span>
+    <a href="index.html#khoa-hoc">Khoá học</a>
+    <span class="sep">/</span>
+    <span class="current">Món Ăn Gia Đình</span>
+  </div>
+</div>
+
+<section class="course-hero">
+  <div class="container course-hero-inner">
+    <div>
+      <span class="course-hero-badge">Bài bản &amp; Chuyên nghiệp</span>
+      <h1>Món Ăn Gia Đình</h1>
+      <p class="lead">Khóa học Món ăn gia đình giúp học viên nâng cao kỹ năng nấu nướng hàng ngày một cách bài bản và chuyên nghiệp — từ hệ thống hóa kiến thức, đảm bảo dinh dưỡng và thẩm mỹ, đến những bí quyết thực tế từ giảng viên.</p>
+      <div class="course-hero-actions">
+        <a href="index.html#lien-he" class="btn btn-primary">Đăng ký tư vấn</a>
+        <a href="tel:0944080015" class="btn btn-outline">Gọi ngay: 0944 080 015</a>
+      </div>
+      <div class="quick-facts">
+        <div class="quick-fact"><div class="label">Tính chất</div><div class="value">Hệ thống hóa, bài bản, dễ áp dụng hàng ngày</div></div>
+        <div class="quick-fact"><div class="label">Nội dung</div><div class="value">Bữa ăn gia đình đủ dinh dưỡng, trình bày đẹp mắt</div></div>
+        <div class="quick-fact"><div class="label">Ứng dụng</div><div class="value">Chăm sóc gia đình hoặc mở "bếp gia đình" kinh doanh nhỏ</div></div>
+        <div class="quick-fact"><div class="label">Chuyên đề</div><div class="value">Kết hợp Cơm tấm và các chuyên đề khác</div></div>
+      </div>
+    </div>
+    <div class="course-hero-visual">
+      <svg viewBox="0 0 400 400" role="img" aria-label="Minh họa mâm cơm gia đình">
+        <rect width="400" height="400" fill="var(--cream)"/>
+        <circle cx="200" cy="200" r="172" fill="var(--white)" stroke="var(--gold)" stroke-width="3"/>
+        <circle cx="200" cy="200" r="152" fill="none" stroke="var(--border)" stroke-width="1"/>
+        <!-- Đĩa lớn ở giữa (cơm) -->
+        <ellipse cx="200" cy="215" rx="98" ry="34" fill="var(--white)" stroke="var(--black)" stroke-width="3.5"/>
+        <ellipse cx="200" cy="209" rx="82" ry="26" fill="var(--cream)"/>
+        <ellipse cx="200" cy="204" rx="46" ry="17" fill="var(--white)" stroke="var(--black)" stroke-width="2"/>
+        <!-- Đũa -->
+        <g stroke="var(--black)" stroke-width="3" stroke-linecap="round">
+          <line x1="128" y1="150" x2="108" y2="118"/>
+          <line x1="136" y1="156" x2="118" y2="122"/>
+        </g>
+        <!-- Chén canh nhỏ bên trái -->
+        <ellipse cx="112" cy="180" rx="34" ry="13" fill="var(--white)" stroke="var(--black)" stroke-width="2.5"/>
+        <ellipse cx="112" cy="176" rx="26" ry="9" fill="var(--gold)" opacity="0.3"/>
+        <!-- Đĩa món mặn bên phải -->
+        <ellipse cx="290" cy="176" rx="36" ry="14" fill="var(--white)" stroke="var(--black)" stroke-width="2.5"/>
+        <ellipse cx="290" cy="172" rx="27" ry="9" fill="var(--gold)" opacity="0.32"/>
+        <!-- Đĩa rau phía trên -->
+        <ellipse cx="200" cy="140" rx="30" ry="11" fill="var(--white)" stroke="var(--black)" stroke-width="2.5"/>
+        <ellipse cx="200" cy="137" rx="22" ry="7" fill="var(--gold)" opacity="0.25"/>
+        <!-- Hơi nóng -->
+        <g stroke="var(--black)" stroke-width="2" fill="none" opacity="0.5">
+          <path d="M180 190 q6 -8 0 -16"/>
+          <path d="M200 186 q6 -8 0 -16"/>
+          <path d="M220 190 q6 -8 0 -16"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="noi-dung">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Curriculum</span>
+      <h2>Nội dung đào tạo chính</h2>
+      <p>Khóa học Món ăn gia đình được thiết kế để học viên nâng cao kỹ năng nấu nướng hàng ngày một cách bài bản và chuyên nghiệp.</p>
+    </div>
+    <div class="curriculum-list">
+      <div class="curriculum-item">
+        <div class="curriculum-num">01</div>
+        <div class="curriculum-body">
+          <h3>Hệ thống hóa kiến thức</h3>
+          <p>Giúp học viên thay đổi cách nấu ăn từ cảm hứng sang quy trình khoa học, bài bản.</p>
+        </div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curriculum-num">02</div>
+        <div class="curriculum-body">
+          <h3>Dinh dưỡng và thẩm mỹ</h3>
+          <p>Tập trung vào việc chuẩn bị các bữa ăn đảm bảo đầy đủ dinh dưỡng và cách trình bày đẹp mắt.</p>
+        </div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curriculum-num">03</div>
+        <div class="curriculum-body">
+          <h3>Kinh nghiệm thực tế</h3>
+          <p>Giảng viên chia sẻ những bí quyết quý báu không có trong sách vở, giúp món ăn có hương vị đặc sắc hơn.</p>
+        </div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curriculum-num">04</div>
+        <div class="curriculum-body">
+          <h3>Tính ứng dụng</h3>
+          <p>Phù hợp cho những người nội trợ muốn chăm sóc gia đình tốt hơn, hoặc những người muốn mở mô hình kinh doanh nhỏ tại nhà (như "bếp gia đình") để có thêm thu nhập ổn định.</p>
+        </div>
+      </div>
+      <div class="curriculum-item">
+        <div class="curriculum-num">05</div>
+        <div class="curriculum-body">
+          <h3>Kết hợp chuyên đề khác</h3>
+          <p>Ngoài lớp chuyên biệt, các chuyên đề như Cơm tấm cũng được thiết kế để học viên có thể nấu cơm gia đình chuẩn vị và áp dụng dễ dàng hàng ngày.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-cream" id="dau-ra">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Program Highlights</span>
+      <h2>Đặc điểm chương trình</h2>
+      <p>Lựa chọn lý tưởng cho những ai đam mê ẩm thực nhưng chưa có kỹ thuật bài bản, muốn biến đam mê thành kỹ năng thực tế để phục vụ gia đình hoặc khởi nghiệp quy mô nhỏ.</p>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome-item"><span class="outcome-check">✓</span><p>Nấu ăn theo quy trình khoa học, bài bản thay vì chỉ dựa vào cảm hứng.</p></div>
+      <div class="outcome-item"><span class="outcome-check">✓</span><p>Chuẩn bị bữa ăn đảm bảo đầy đủ dinh dưỡng và trình bày đẹp mắt.</p></div>
+      <div class="outcome-item"><span class="outcome-check">✓</span><p>Nắm được những bí quyết thực tế từ giảng viên, giúp món ăn đậm đà, đặc sắc hơn.</p></div>
+      <div class="outcome-item"><span class="outcome-check">✓</span><p>Sẵn sàng chăm sóc bữa ăn gia đình tốt hơn hoặc mở mô hình "bếp gia đình" kinh doanh nhỏ.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cau-chuyen-hoc-vien">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Who It's For</span>
+      <h2>Khóa học phù hợp với ai?</h2>
+      <p>Món ăn gia đình được thiết kế cho hai nhóm học viên chính, đều hướng tới việc biến đam mê ẩm thực thành kỹ năng thực tế.</p>
+    </div>
+    <div class="instructor-strip" style="margin-bottom: 20px;">
+      <div class="instructor-info">
+        <div class="label">Nhóm học viên</div>
+        <h3>Người nội trợ muốn chăm sóc gia đình tốt hơn</h3>
+        <p>Học cách hệ thống hóa kiến thức nấu ăn, đảm bảo bữa cơm gia đình vừa đủ dinh dưỡng vừa đẹp mắt mỗi ngày.</p>
+      </div>
+    </div>
+    <div class="instructor-strip">
+      <div class="instructor-info">
+        <div class="label">Nhóm học viên</div>
+        <h3>Người muốn khởi nghiệp mô hình "bếp gia đình"</h3>
+        <p>Trang bị kỹ năng nấu nướng bài bản để mở mô hình kinh doanh nhỏ tại nhà, có thêm thu nhập ổn định.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mid-cta">
+
+  <div class="container">
+    <span class="eyebrow">Get Started</span>
+    <h2>Sẵn sàng bắt đầu với Món Ăn Gia Đình?</h2>
+    <p>Để lại thông tin hoặc gọi hotline, đội ngũ Chốc Chốc sẽ tư vấn lịch học và lộ trình phù hợp với bạn.</p>
+    <div class="mid-cta-actions">
+      <a href="index.html#lien-he" class="btn btn-primary">Đăng ký tư vấn</a>
+      <a href="tel:0944080015" class="btn btn-outline on-dark">Gọi ngay: 0944 080 015</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-cream" id="hoi-dap-khoa-hoc">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Câu hỏi thường gặp về khóa học</h2>
+    </div>
+    <div class="faq-columns">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Khóa học Món ăn gia đình phù hợp với ai?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Phù hợp cho những người nội trợ muốn chăm sóc gia đình tốt hơn, hoặc những người muốn mở mô hình kinh doanh nhỏ tại nhà (như "bếp gia đình") để có thêm thu nhập ổn định.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Khóa học giúp thay đổi cách nấu ăn như thế nào?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Khóa học giúp học viên hệ thống hóa kiến thức, thay đổi cách nấu ăn từ cảm hứng sang quy trình khoa học, bài bản — đồng thời chú trọng dinh dưỡng và tính thẩm mỹ khi trình bày món ăn.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Khóa học có bao gồm chuyên đề nào khác không?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Có. Ngoài lớp chuyên biệt, các chuyên đề như Cơm tấm cũng được thiết kế để học viên có thể nấu cơm gia đình chuẩn vị và áp dụng dễ dàng hàng ngày.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Học phí khóa học là bao nhiêu?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Học phí sẽ được tư vấn chi tiết theo lịch khai giảng. Vui lòng liên hệ hotline 0944 080 015 để nhận báo giá phù hợp với mục tiêu của bạn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="khoa-hoc-lien-quan">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Related Courses</span>
+      <h2>Khóa học liên quan</h2>
+    </div>
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/nem_nuong_luxury_editorial.webp" alt="Minh họa Nem nướng Nha Trang" loading="lazy">
+          <span class="course-badge">Hot Trend</span>
+        </div>
+        <div class="course-body">
+          <h3>Nem Nướng<br>Nha Trang</h3>
+          <p>Kỹ thuật quết, tạo hình, nướng nem chuẩn vị cùng bí quyết pha nước chấm đặc trưng.</p>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-nem-nuong-nha-trang.html" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/lau_do_nuong_luxury_editorial.webp" alt="Minh họa Lẩu và Đồ nướng" loading="lazy">
+          <span class="course-badge">Hot Trend</span>
+        </div>
+        <div class="course-body">
+          <h3>Lẩu &amp; Đồ<br>Nướng</h3>
+          <p>Công thức nước lẩu đa dạng, quản lý định lượng và kỹ thuật chế biến đồ nướng.</p>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-lau-do-nuong.html" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/bun_bo_luxury_editorial.webp" alt="Minh họa Món ăn sáng — Bún bò" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Món Ăn Sáng<br>— Bún Bò</h3>
+          <p>Bún bò chuẩn vị miền Trung cùng kỹ thuật nấu quy mô lớn, phục vụ mục đích kinh doanh thực chiến.</p>
+          <div class="course-foot"><span class="course-tag">Thực chiến</span><a href="khoa-mon-an-sang.html" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="lien-he">
+  <div class="container footer-cta">
+    <span class="eyebrow">Get Started</span>
+    <h2>Nhận tư vấn lộ trình kinh doanh ngay hôm nay</h2>
+    <a href="tel:0944080015" class="btn btn-primary">Gọi ngay: 0944 080 015</a>
+  </div>
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">CHỐC <span>CHỐC</span></div>
+      <p>Chốc Chốc Cooking Center — nơi khởi nguồn sự nghiệp của bạn trong lĩnh vực ẩm thực Việt Nam.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+      <ul>
+        <li>Tầng 3, KĐT Geleximco, Hà Đông</li>
+        <li>Hotline: 0944 080 015</li>
+        <li>Email: chocchoccookingcenter@gmail.com</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Liên kết</h4>
+      <ul>
+        <li><a href="index.html#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="index.html#khoa-hoc">Khóa học nấu ăn</a></li>
+        <li><a href="index.html#giang-vien">Giảng viên</a></li>
+        <li><a href="index.html#hoc-vien">Câu chuyện học viên</a></li>
+        <li><a href="index.html#hoi-dap">Hỏi đáp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Chốc Chốc Cooking Center. All rights reserved.</div>
+</footer>
+
+<script>
+  const burgerBtn = document.getElementById('burgerBtn');
+  const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+
+  function openDrawer() {
+    drawer.classList.add('is-open');
+    overlay.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    burgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  burgerBtn.addEventListener('click', openDrawer);
+  drawerCloseBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a').forEach(link => link.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+
+  /* ---------- FAQ ACCORDION ---------- */
+  const allFaqItems = document.querySelectorAll('.faq-item');
+  allFaqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      allFaqItems.forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        question.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

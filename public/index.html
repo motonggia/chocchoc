@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chốc Chốc Cooking Center — Học làm chủ, không học làm thuê</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C08A3E;
@@ -16,19 +16,19 @@
     --border: #E5E0D8;
     --white: #FFFFFF;
 
-    --font-serif: 'Playfair Display', serif;
+    --font-serif: 'Montserrat', sans-serif;
     --font-sans: 'Montserrat', sans-serif;
     --font-heading: 'Montserrat', sans-serif;
-    --font-script: 'Great Vibes', cursive;
+    --font-script: 'Montserrat', sans-serif;
 
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 10px;
+    --radius-sm: 2px;
+    --radius-md: 3px;
+    --radius-lg: 4px;
 
     --section-padding: 100px 0;
     --container-max: 1200px;
 
-    --shadow: 0 4px 16px rgba(0,0,0,0.05);
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,27 +79,46 @@
     font-family: var(--font-sans);
     border: none;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.45s ease;
   }
 
   .btn-primary {
     background: var(--gold);
     color: var(--white);
+    border: 1px solid var(--gold);
   }
-  .btn-primary:hover { background: #a87534; }
+  .btn-primary:hover {
+    background: var(--black);
+    border-color: var(--black);
+  }
 
   .btn-outline {
     background: transparent;
     color: var(--black);
     border: 1.5px solid var(--black);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
   }
-  .btn-outline:hover { background: var(--black); color: var(--white); }
+  .btn-outline::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--black) 0%, #3a3a3a 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+    z-index: -1;
+  }
+  .btn-outline:hover { color: var(--white); }
+  .btn-outline:hover::before { transform: scaleX(1); }
 
   .btn-outline.on-dark {
     color: var(--white);
     border-color: var(--white);
   }
-  .btn-outline.on-dark:hover { background: var(--white); color: var(--black); }
+  .btn-outline.on-dark::before { background: linear-gradient(135deg, var(--white) 0%, #ececec 100%); }
+  .btn-outline.on-dark:hover { color: var(--black); }
 
   /* ---------- NAV ---------- */
   header {
@@ -139,21 +158,29 @@
     font-size: 12px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.3px;
+    letter-spacing: 1.5px;
     color: var(--black);
     position: relative;
     padding-bottom: 6px;
+    transition: color 0.25s ease;
   }
   .nav-links > li > a:hover,
   .nav-links > li.active > a {
     color: var(--gold);
   }
-  .nav-links > li.active > a::after {
+  .nav-links > li > a::after {
     content: "";
     position: absolute;
     left: 0; right: 0; bottom: 0;
     height: 2px;
     background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+  .nav-links > li > a:hover::after,
+  .nav-links > li.active > a::after {
+    transform: scaleX(1);
   }
   .nav-links li.sep {
     color: var(--border);
@@ -227,7 +254,7 @@
     font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.3px;
+    letter-spacing: 1.5px;
     color: var(--black);
   }
   .drawer-links li a:hover { color: var(--gold); }
@@ -241,7 +268,9 @@
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
-    background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+    background-color: var(--cream);
+    background-image: radial-gradient(circle, rgba(26,26,26,0.1) 0.6px, transparent 0.6px), linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+    background-size: 7px 7px, auto;
     padding: 90px 0 100px;
     overflow: hidden;
   }
@@ -254,9 +283,9 @@
   }
 
   .hero h1 {
-    font-size: 48px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+    font-size: 60px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
     margin-bottom: 22px;
   }
 
@@ -288,11 +317,18 @@
     background: var(--black);
     box-shadow: var(--shadow);
   }
-  .hero-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.92; }
+  .hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.92;
+    filter: saturate(78%) sepia(12%) brightness(1.02) contrast(1.03);
+  }
   .hero-visual::after {
     content: "";
     position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(26,26,26,0) 40%, rgba(26,26,26,0.55) 100%);
+    background: linear-gradient(180deg, rgba(192,138,62,0.10) 0%, rgba(26,26,26,0) 40%, rgba(26,26,26,0.6) 100%);
+    mix-blend-mode: multiply;
   }
   .hero-badge {
     position: absolute;
@@ -305,8 +341,17 @@
   .hero-badge span { display: block; font-family: var(--font-sans); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); margin-top: 4px; }
 
   /* ---------- SECTION HEADERS ---------- */
-  .section { padding: var(--section-padding); }
-  .section-cream { background: var(--cream); }
+  .section {
+    padding: var(--section-padding);
+    background-color: var(--white);
+    background-image: radial-gradient(circle, rgba(26,26,26,0.1) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
+  }
+  .section-cream {
+    background-color: var(--cream);
+    background-image: radial-gradient(circle, rgba(26,26,26,0.1) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
+  }
   .section-head { text-align: center; max-width: 640px; margin: 0 auto 60px; }
   .section-head h2 { font-size: 34px; font-weight: 500; }
   .section-head p { color: var(--gray); font-size: 15px; margin-top: 14px; line-height: 1.8; }
@@ -327,16 +372,19 @@
     color: var(--gold);
   }
   .feature-icon svg { width: 26px; height: 26px; }
-  .feature-box h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .feature-box h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
   .feature-box p { font-size: 13px; color: var(--gray); line-height: 1.75; }
 
   /* ---------- COURSE CATALOG ---------- */
   .course-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
   }
   .course-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -344,30 +392,132 @@
     box-shadow: var(--shadow);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .course-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+  .course-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
   .course-media {
     aspect-ratio: 1/1;
     position: relative;
     background: var(--cream);
+    flex-shrink: 0;
+    border: 6px solid var(--white);
+    box-shadow: inset 0 0 0 1px rgba(192,138,62,0.45);
   }
-  .course-media img { width: 100%; height: 100%; object-fit: cover; }
+  .course-media img,
+  .course-media svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .course-media img {
+    filter: saturate(78%) sepia(12%) brightness(1.02) contrast(1.03);
+  }
+  /* Lớp phủ tông vàng gold để đồng bộ màu sắc ảnh với bảng màu thương hiệu */
+  .course-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(160deg, rgba(192,138,62,0.22) 0%, rgba(26,26,26,0.06) 55%, rgba(192,138,62,0.14) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  /* Watermark tự động hiển thị trên mọi ảnh khoá học, kể cả khi đổi ảnh sau này */
+  .course-media::before {
+    content: "chocchoc.vn";
+    position: absolute;
+    z-index: 3;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(26,26,26,0.55);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+  }
   .course-badge {
     position: absolute;
+    z-index: 2;
     top: 14px; left: 14px;
     background: var(--gold);
     color: var(--white);
     font-size: 10.5px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     padding: 5px 12px;
     border-radius: var(--radius-sm);
   }
-  .course-body { padding: 22px; }
-  .course-body h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .course-body p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 14px; min-height: 66px; }
-  .course-foot { display: flex; align-items: center; justify-content: space-between; }
-  .course-tag { font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.6px; }
-  .course-link { font-size: 12px; font-weight: 500; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+  .course-body {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .course-body h3 {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 1.5px;
+    min-height: 42px;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .course-body p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 0px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .course-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; margin-top: 10px; }
+  .course-foot .course-link { align-self: flex-end; }
+  .course-tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.4;
+    min-height: 34px;
+    display: flex;
+    align-items: flex-end;
+  }
+  .course-link {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--black);
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.35s ease;
+  }
+  .course-link::after {
+    content: "→";
+    margin-left: 0;
+    max-width: 0;
+    overflow: hidden;
+    display: inline-block;
+    opacity: 0;
+    transition: max-width 0.35s ease, opacity 0.35s ease, margin-left 0.35s ease;
+  }
+  .course-link:hover { color: var(--gold); }
+  .course-link:hover::after {
+    max-width: 20px;
+    opacity: 1;
+    margin-left: 6px;
+  }
 
   /* ---------- FACULTY ---------- */
   .faculty-grid {
@@ -382,10 +532,45 @@
     overflow: hidden;
     margin-bottom: 22px;
     background: var(--black);
+    position: relative;
+    border: 6px solid var(--white);
+    box-shadow: inset 0 0 0 1px rgba(192,138,62,0.45);
   }
-  .faculty-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .faculty-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(78%) sepia(12%) brightness(1.02) contrast(1.03);
+  }
+  /* Lớp phủ tông vàng gold để đồng bộ màu sắc ảnh với bảng màu thương hiệu */
+  .faculty-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(160deg, rgba(192,138,62,0.22) 0%, rgba(26,26,26,0.06) 55%, rgba(192,138,62,0.14) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .faculty-photo::before {
+    content: "chocchoc.vn";
+    position: absolute;
+    z-index: 3;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(26,26,26,0.55);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+  }
   .faculty-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 6px; }
-  .faculty-role { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  .faculty-role { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
 
   /* ---------- TESTIMONIALS ---------- */
   .testi-grid {
@@ -399,6 +584,13 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
     padding: 32px 26px 26px;
+    border: 1px solid transparent;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  .testi-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 16px rgba(192,138,62,0.12);
+    border-color: var(--gold-light);
   }
   .testi-quote {
     position: absolute;
@@ -408,8 +600,21 @@
     color: var(--gold-light);
     opacity: 0.35;
     line-height: 1;
+    transition: transform 0.4s ease, opacity 0.4s ease;
   }
-  .testi-stars { color: var(--gold-light); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
+  .testi-card:hover .testi-quote {
+    transform: scale(1.15) rotate(-4deg);
+    opacity: 0.55;
+  }
+  .testi-stars {
+    color: var(--gold-light);
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    display: inline-block;
+    transition: letter-spacing 0.4s ease;
+  }
+  .testi-card:hover .testi-stars { letter-spacing: 4px; }
   .testi-text { font-size: 13.5px; color: var(--gray); line-height: 1.85; margin-bottom: 22px; }
   .testi-person { display: flex; align-items: center; gap: 12px; }
   .testi-avatar {
@@ -419,13 +624,112 @@
     display: flex; align-items: center; justify-content: center;
     font-family: var(--font-serif); font-weight: 700; color: var(--gold);
     font-size: 16px;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  .testi-avatar::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
+  }
+  .testi-card:hover .testi-avatar { transform: scale(1.08); }
+  .testi-card:hover .testi-avatar::before { opacity: 1; }
   .testi-person .name { font-size: 14px; font-weight: 600; }
   .testi-person .biz { font-size: 12px; color: var(--gray); }
 
+  /* ---------- FAQ ---------- */
+  .faq-columns {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .faq-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    overflow: hidden;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold-light);
+    box-shadow: 0 4px 12px rgba(192,138,62,0.10);
+  }
+  .faq-item.open { border-color: var(--gold-light); box-shadow: var(--shadow); }
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 20px 24px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .faq-question:hover { color: var(--gold); }
+  .faq-item.open .faq-question { color: var(--gold); }
+  .faq-icon {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--gold);
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.5s ease;
+  }
+  .faq-question:hover .faq-icon {
+    border-color: var(--gold);
+    transform: rotate(90deg);
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--gold); }
+  .faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-answer-inner { overflow: hidden; min-height: 0; }
+  .faq-answer-inner p {
+    padding: 0 24px 20px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--gray);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .faq-item.open .faq-answer { grid-template-rows: 1fr; }
+  .faq-item.open .faq-answer-inner p {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s;
+  }
+
   /* ---------- FOOTER ---------- */
   footer {
-    background: var(--black);
+    background-color: var(--black);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.1) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
     color: #cfcfcf;
     padding-top: 90px;
   }
@@ -447,7 +751,7 @@
     color: var(--white);
     font-family: var(--font-sans);
     font-size: 13px;
-    letter-spacing: 1.3px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 20px;
     font-weight: 600;
@@ -465,16 +769,21 @@
   }
 
   /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1180px) {
+    .course-grid { grid-template-columns: repeat(3, 1fr); }
+  }
   @media (max-width: 980px) {
     .nav-links, .nav-cta .btn-outline { display: none; }
     .burger { display: block; }
     .hero-inner { grid-template-columns: 1fr; }
     .hero-visual { order: -1; aspect-ratio: 16/10; }
-    .feature-grid, .course-grid, .faculty-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+    .feature-grid, .faculty-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+    .course-grid { grid-template-columns: 1fr 1fr; }
+    .faq-columns { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 30px; }
   }
   @media (max-width: 620px) {
-    .hero h1 { font-size: 34px; }
+    .hero h1 { font-size: 38px; }
     .feature-grid, .course-grid, .faculty-grid, .testi-grid { grid-template-columns: 1fr; }
     .navbar { padding: 16px 20px; }
     .section { padding: 70px 0; }
@@ -491,15 +800,13 @@
   <nav class="navbar">
     <a href="#" class="logo">CHỐC <span>CHỐC</span></a>
     <ul class="nav-links">
-      <li class="active"><a href="#">Trang chủ</a></li>
+      <li class="active"><a href="#trang-chu">Trang chủ</a></li>
       <li class="sep" aria-hidden="true">|</li>
       <li><a href="#khoa-hoc">Khoá học</a></li>
       <li class="sep" aria-hidden="true">|</li>
       <li><a href="#gioi-thieu">Về chúng tôi</a></li>
       <li class="sep" aria-hidden="true">|</li>
-      <li><a href="#">Tin tức</a></li>
-      <li class="sep" aria-hidden="true">|</li>
-      <li><a href="#">Hỏi đáp</a></li>
+      <li><a href="#hoi-dap">Hỏi đáp</a></li>
       <li class="sep" aria-hidden="true">|</li>
       <li><a href="#lien-he">Liên hệ</a></li>
     </ul>
@@ -517,22 +824,20 @@
     <button class="drawer-close" id="drawerCloseBtn" aria-label="Đóng menu">✕</button>
   </div>
   <ul class="drawer-links">
-    <li><a href="#">Trang chủ</a></li>
+    <li><a href="#trang-chu">Trang chủ</a></li>
     <li class="sep"></li>
     <li><a href="#khoa-hoc">Khoá học</a></li>
     <li class="sep"></li>
     <li><a href="#gioi-thieu">Về chúng tôi</a></li>
     <li class="sep"></li>
-    <li><a href="#">Tin tức</a></li>
-    <li class="sep"></li>
-    <li><a href="#">Hỏi đáp</a></li>
+    <li><a href="#hoi-dap">Hỏi đáp</a></li>
     <li class="sep"></li>
     <li><a href="#lien-he">Liên hệ</a></li>
   </ul>
   <a href="#lien-he" class="btn btn-primary drawer-cta">Đăng ký tư vấn</a>
 </nav>
 
-<section class="hero">
+<section class="hero" id="trang-chu">
   <div class="container hero-inner">
     <div>
       <span class="eyebrow">Welcome to Chốc Chốc Cooking Center</span>
@@ -547,6 +852,139 @@
     <div class="hero-visual">
       <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&q=80" alt="Đầu bếp đang chế biến món ăn tại Chốc Chốc Cooking Center">
       <div class="hero-badge">15+ năm kinh nghiệm thực chiến<span>Đội ngũ giảng viên</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-cream" id="khoa-hoc">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Course Catalog</span>
+      <h2>Danh mục khóa học</h2>
+      <p>Mỗi chuyên đề được xây dựng từ công thức gốc, định lượng chuẩn và bí quyết thực chiến của đội ngũ Chốc Chốc.</p>
+    </div>
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/banh_mi_luxury_editorial.webp" alt="Minh họa Bánh mỳ kẹp Việt Nam" loading="lazy">
+          <span class="course-badge">Chef's Pick</span>
+        </div>
+        <div class="course-body">
+          <h3>Bánh Mỳ Kẹp<br>Việt Nam</h3>
+          <p>Học kỹ thuật làm vỏ bánh giòn xốp chuẩn vị, cách pha chế nhân và sốt đặc trưng của bánh mỳ truyền thống.</p>
+          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/banh_mi_modern_luxury_editorial.webp" alt="Minh họa Bánh mỳ hiện đại" loading="lazy">
+          <span class="course-badge">Hot Trend</span>
+        </div>
+        <div class="course-body">
+          <h3>Bánh Mỳ<br>Hiện Đại</h3>
+          <p>Sáng tạo các phiên bản bánh mỳ biến tấu theo xu hướng, phù hợp mô hình kinh doanh trẻ trung, hiện đại.</p>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <svg viewBox="0 0 400 400" role="img" aria-label="Minh họa Đồ ăn vặt tổng hợp">
+            <rect width="400" height="400" fill="var(--cream)"/>
+            <circle cx="200" cy="200" r="172" fill="var(--white)" stroke="var(--gold)" stroke-width="3"/>
+            <circle cx="200" cy="200" r="152" fill="none" stroke="var(--border)" stroke-width="1"/>
+            <g stroke="var(--black)" stroke-width="4" stroke-linecap="round">
+              <line x1="180" y1="300" x2="130" y2="150"/>
+              <line x1="200" y1="300" x2="200" y2="130"/>
+              <line x1="220" y1="300" x2="270" y2="150"/>
+            </g>
+            <g fill="var(--white)" stroke="var(--black)" stroke-width="3">
+              <rect x="118" y="170" width="26" height="26" rx="7" transform="rotate(-14 131 183)"/>
+              <rect x="126" y="200" width="26" height="26" rx="7" transform="rotate(-14 139 213)"/>
+              <rect x="187" y="155" width="26" height="26" rx="7"/>
+              <rect x="187" y="188" width="26" height="26" rx="7"/>
+              <rect x="230" y="170" width="26" height="26" rx="7" transform="rotate(14 243 183)"/>
+              <rect x="240" y="200" width="26" height="26" rx="7" transform="rotate(14 253 213)"/>
+            </g>
+            <circle cx="200" cy="255" r="26" fill="var(--white)" stroke="var(--black)" stroke-width="3.5"/>
+            <circle cx="200" cy="255" r="10" fill="var(--gold)"/>
+          </svg>
+        </div>
+        <div class="course-body">
+          <h3>Đồ Ăn Vặt<br>Tổng Hợp</h3>
+          <p>Tổng hợp món ăn vặt hot trend cùng bí quyết pha nước sốt, gia vị chuẩn khẩu vị giới trẻ.</p>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/custom_thematic_luxury_editorial.webp" alt="Minh họa Chuyên đề tự chọn" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Chuyên Đề<br>Tự Chọn</h3>
+          <p>Thiết kế món ăn riêng theo yêu cầu kinh doanh, tư vấn linh hoạt theo vốn và mặt bằng thực tế.</p>
+          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/nem_nuong_luxury_editorial.webp" alt="Minh họa Nem nướng Nha Trang" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Nem Nướng<br>Nha Trang</h3>
+          <p>Kỹ thuật quết nem chuẩn vị và bí quyết pha nước chấm đặc trưng của xứ biển Nha Trang.</p>
+          <div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/seafood_hotpot_luxury_editorial.webp" alt="Minh họa Lẩu và đồ nướng" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Lẩu &amp; Đồ Nướng</h3>
+          <p>Đa dạng công thức nước lẩu — lẩu cay, hải sản, truyền thống — cùng định lượng chuẩn xác cho mô hình kinh doanh.</p>
+          <div class="course-foot"><span class="course-tag">Kinh doanh chuỗi</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/com_tam_luxury_editorial.webp" alt="Minh họa Cơm tấm" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Cơm Tấm</h3>
+          <p>Bí quyết cơm tơi mềm đúng chuẩn cùng kỹ thuật ướp sườn thấm vị, thơm ngon đặc trưng.</p>
+          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/bun_bo_luxury_editorial.webp" alt="Minh họa Bún bò" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Bún Bò</h3>
+          <p>Bí quyết nấu nước dùng bún bò đậm đà chuẩn vị, thuộc chuyên đề Món Ăn Sáng, dễ triển khai kinh doanh.</p>
+          <div class="course-foot"><span class="course-tag">Món ăn sáng</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/family_meal_luxury_editorial.webp" alt="Minh họa Món ăn gia đình" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Món Ăn Gia Đình</h3>
+          <p>Công thức món ăn quen thuộc bữa cơm gia đình, định lượng chuẩn, dễ áp dụng cho mô hình cơm nhà, cơm văn phòng.</p>
+          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-media">
+          <img src="images/spicy_noodles_luxury_editorial.webp" alt="Minh họa Mỳ cay" loading="lazy">
+        </div>
+        <div class="course-body">
+          <h3>Mỳ Cay</h3>
+          <p>Bí quyết nấu nước dùng đậm đà, cay nồng đúng chuẩn và kỹ thuật cân chỉnh độ cay phù hợp.</p>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="#" class="course-link">Chi tiết</a></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -579,79 +1017,6 @@
         </div>
         <h3>Đồng hành trọn đời</h3>
         <p>Hỗ trợ setup, vận hành và cải tiến menu thực tế cùng học viên sau khi tốt nghiệp.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-cream" id="khoa-hoc">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Course Catalog</span>
-      <h2>Danh mục khóa học</h2>
-      <p>Mỗi chuyên đề được xây dựng từ công thức gốc, định lượng chuẩn và bí quyết thực chiến của đội ngũ Chốc Chốc.</p>
-    </div>
-    <div class="course-grid">
-      <div class="course-card">
-        <div class="course-media">
-          <img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=600&q=80" alt="Bánh mỳ Việt Nam">
-          <span class="course-badge">Chef's Pick</span>
-        </div>
-        <div class="course-body">
-          <h3>Bánh Mỳ Việt Nam</h3>
-          <p>Chuyên sâu từ bánh mỳ kẹp truyền thống đến bánh mỳ hiện đại — kỹ thuật vỏ bánh giòn và pha chế sốt đặc trưng.</p>
-          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><a href="#" class="course-link">Xem chi tiết</a></div>
-        </div>
-      </div>
-      <div class="course-card">
-        <div class="course-media">
-          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80" alt="Đồ ăn vặt và mỳ cay">
-        </div>
-        <div class="course-body">
-          <h3>Đồ Ăn Vặt &amp; Mỳ Cay</h3>
-          <p>Tổng hợp các món hot trend cùng bí quyết nấu nước dùng đậm đà, chuẩn khẩu vị giới trẻ.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="#" class="course-link">Xem chi tiết</a></div>
-        </div>
-      </div>
-      <div class="course-card">
-        <div class="course-media">
-          <img src="https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80" alt="Nem nướng Nha Trang">
-        </div>
-        <div class="course-body">
-          <h3>Nem Nướng Nha Trang</h3>
-          <p>Kỹ thuật quết nem chuẩn vị và bí quyết pha nước chấm đặc trưng của xứ biển Nha Trang.</p>
-          <div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><a href="#" class="course-link">Xem chi tiết</a></div>
-        </div>
-      </div>
-      <div class="course-card">
-        <div class="course-media">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Lẩu và đồ nướng">
-        </div>
-        <div class="course-body">
-          <h3>Lẩu &amp; Đồ Nướng</h3>
-          <p>Định lượng nguyên liệu chuẩn xác và công thức nước lẩu đa dạng cho mô hình kinh doanh riêng.</p>
-          <div class="course-foot"><span class="course-tag">Kinh doanh mô hình lớn</span><a href="#" class="course-link">Xem chi tiết</a></div>
-        </div>
-      </div>
-      <div class="course-card">
-        <div class="course-media">
-          <img src="https://images.unsplash.com/photo-1626202373911-3ee2e0dab7ca?w=600&q=80" alt="Cơm tấm">
-        </div>
-        <div class="course-body">
-          <h3>Cơm Tấm</h3>
-          <p>Bí quyết cơm tơi mềm đúng chuẩn cùng kỹ thuật ướp sườn thấm vị, thơm ngon đặc trưng.</p>
-          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="#" class="course-link">Xem chi tiết</a></div>
-        </div>
-      </div>
-      <div class="course-card">
-        <div class="course-media">
-          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80" alt="Tư vấn mô hình kinh doanh">
-        </div>
-        <div class="course-body">
-          <h3>Tư Vấn Theo Mô Hình</h3>
-          <p>Chuyên đề tự chọn, thiết kế nội dung linh hoạt theo vốn và mặt bằng thực tế của học viên.</p>
-          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><a href="#" class="course-link">Xem chi tiết</a></div>
-        </div>
       </div>
     </div>
   </div>
@@ -723,6 +1088,132 @@
   </div>
 </section>
 
+<section class="section section-cream" id="hoi-dap">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Câu hỏi thường gặp</h2>
+      <p>Giải đáp những thắc mắc phổ biến nhất trước khi bạn bắt đầu hành trình khởi nghiệp ẩm thực cùng Chốc Chốc.</p>
+    </div>
+    <div class="faq-columns">
+      <div class="faq-col">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Khóa học tại Chốc Chốc kéo dài bao lâu?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Thời gian học tùy theo từng chuyên đề, thường từ 5–15 buổi. Mỗi buổi học đều tập trung vào một kỹ thuật hoặc công thức cụ thể để học viên nắm chắc trước khi chuyển sang bài mới.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Tôi chưa có kinh nghiệm nấu ăn, có thể theo học được không?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Hoàn toàn được. Giáo trình được thiết kế từ cơ bản đến nâng cao, giảng viên hướng dẫn cầm tay chỉ việc từng bước nên phù hợp với cả người mới bắt đầu.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Học phí các khóa học dao động như thế nào?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Học phí thay đổi theo từng chuyên đề và thời lượng khóa học. Vui lòng liên hệ hotline 0944 080 015 để được tư vấn chi tiết và nhận báo giá phù hợp với mục tiêu của bạn.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Sau khi hoàn thành khóa học có được cấp chứng chỉ không?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Có. Học viên hoàn thành đầy đủ nội dung và bài kiểm tra thực hành sẽ được cấp chứng nhận hoàn thành khóa học của Chốc Chốc Cooking Center.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Chốc Chốc có hỗ trợ tư vấn mở quán sau khi học xong không?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Có. Đội ngũ cố vấn sẽ đồng hành cùng học viên trong việc setup bếp, xây dựng menu và tối ưu vận hành thực tế sau khi tốt nghiệp, hoàn toàn miễn phí trong thời gian đầu.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-col">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Lớp học có giới hạn số lượng học viên không?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Mỗi lớp được giới hạn số lượng nhỏ để giảng viên có thể theo sát và hướng dẫn trực tiếp từng học viên, đảm bảo chất lượng thực hành tốt nhất.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Học viên cần chuẩn bị gì trước khi tham gia khóa học?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Học viên không cần chuẩn bị dụng cụ hay nguyên liệu. Trung tâm cung cấp đầy đủ bếp, thiết bị và nguyên liệu thực hành trong suốt khóa học.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Có thể học thử trước khi đăng ký khóa học đầy đủ không?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Bạn có thể liên hệ hotline để đặt lịch tham quan cơ sở vật chất và trao đổi trực tiếp với giảng viên trước khi quyết định đăng ký khóa học chính thức.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Địa điểm học tại đâu, có tổ chức học online không?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Các khóa học được tổ chức trực tiếp tại cơ sở Tầng 3, KĐT Geleximco, Hà Đông để đảm bảo chất lượng thực hành. Hiện trung tâm chưa triển khai hình thức học online.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Làm sao để đăng ký khóa học?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Bạn có thể gọi trực tiếp hotline 0944 080 015 hoặc bấm nút "Đăng ký tư vấn" trên website để được nhân viên tư vấn hỗ trợ chọn khóa học và lịch học phù hợp.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer id="lien-he">
   <div class="container footer-cta">
     <span class="eyebrow">Get Started</span>
@@ -749,6 +1240,7 @@
         <li><a href="#khoa-hoc">Khóa học nấu ăn</a></li>
         <li><a href="#giang-vien">Giảng viên</a></li>
         <li><a href="#hoc-vien">Câu chuyện học viên</a></li>
+        <li><a href="#hoi-dap">Hỏi đáp</a></li>
       </ul>
     </div>
   </div>
@@ -782,6 +1274,54 @@
   overlay.addEventListener('click', closeDrawer);
   drawer.querySelectorAll('a').forEach(link => link.addEventListener('click', closeDrawer));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+
+  /* ---------- SCROLLSPY: tab menu tự đổi theo nội dung đang cuộn ---------- */
+  const spySections = document.querySelectorAll('section[id], footer[id]');
+  const allNavItems = document.querySelectorAll('.nav-links > li, .drawer-links > li');
+
+  function setActiveTab(id) {
+    const hasMatch = Array.from(allNavItems).some(li => {
+      const link = li.querySelector('a');
+      return link && link.getAttribute('href') === '#' + id;
+    });
+    if (!hasMatch) return; // đoạn này không có tab riêng (Giảng viên, Học viên) -> giữ nguyên tab đang active
+    allNavItems.forEach(li => {
+      const link = li.querySelector('a');
+      if (!link) return;
+      const isMatch = link.getAttribute('href') === '#' + id;
+      li.classList.toggle('active', isMatch);
+    });
+  }
+
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActiveTab(entry.target.id);
+      }
+    });
+  }, {
+    rootMargin: '-45% 0px -50% 0px', // coi phần giữa màn hình là "đang xem"
+    threshold: 0
+  });
+
+  spySections.forEach(section => spyObserver.observe(section));
+
+  /* ---------- FAQ ACCORDION (chỉ mở 1 câu tại 1 thời điểm, toàn bộ 2 cột) ---------- */
+  const allFaqItems = document.querySelectorAll('.faq-item');
+  allFaqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      allFaqItems.forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        question.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 </script>
 
 </body>
