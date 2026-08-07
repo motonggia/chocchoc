@@ -393,6 +393,7 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .course-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .course-card { text-decoration: none; color: inherit; cursor: pointer; }
   .course-media {
     aspect-ratio: 1/1;
     position: relative;
@@ -513,7 +514,7 @@
     transition: max-width 0.35s ease, opacity 0.35s ease, margin-left 0.35s ease;
   }
   .course-link:hover { color: var(--gold); }
-  .course-link:hover::after {
+  .course-card:hover .course-link::after {
     max-width: 20px;
     opacity: 1;
     margin-left: 6px;
@@ -943,7 +944,7 @@
       <p>Mỗi chuyên đề được xây dựng từ công thức gốc, định lượng chuẩn và bí quyết thực chiến của đội ngũ Chốc Chốc.</p>
     </div>
     <div class="course-grid">
-      <div class="course-card">
+      <a class="course-card" href="khoa-banh-mi-kep-viet-nam.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/banh_mi_luxury_editorial.webp" alt="Minh họa Bánh mỳ kẹp Việt Nam" loading="lazy">
           <span class="course-badge">Chef's Pick</span>
@@ -951,10 +952,10 @@
         <div class="course-body">
           <h3>Bánh Mỳ Kẹp<br>Việt Nam</h3>
           <p>Học kỹ thuật làm vỏ bánh giòn xốp chuẩn vị, cách pha chế nhân và sốt đặc trưng của bánh mỳ truyền thống.</p>
-          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><a href="khoa-banh-mi-kep-viet-nam.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="#">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/banh_mi_modern_luxury_editorial.webp" alt="Minh họa Bánh mỳ hiện đại" loading="lazy">
           <span class="course-badge">Hot Trend</span>
@@ -962,89 +963,89 @@
         <div class="course-body">
           <h3>Bánh Mỳ<br>Hiện Đại</h3>
           <p>Sáng tạo các phiên bản bánh mỳ biến tấu theo xu hướng, phù hợp mô hình kinh doanh trẻ trung, hiện đại.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-do-an-vat-tong-hop.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/snacks_luxury_editorial.webp" alt="Minh họa Đồ ăn vặt tổng hợp" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Đồ Ăn Vặt<br>Tổng Hợp</h3>
           <p>Tổng hợp món ăn vặt hot trend cùng bí quyết pha nước sốt, gia vị chuẩn khẩu vị giới trẻ.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-do-an-vat-tong-hop.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-chuyen-de-tu-chon.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/custom_thematic_luxury_editorial.webp" alt="Minh họa Chuyên đề tự chọn" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Chuyên Đề<br>Tự Chọn</h3>
           <p>Thiết kế món ăn riêng theo yêu cầu kinh doanh, tư vấn linh hoạt theo vốn và mặt bằng thực tế.</p>
-          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><a href="khoa-chuyen-de-tu-chon.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-nem-nuong-nha-trang.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/nem_nuong_luxury_editorial.webp" alt="Minh họa Nem nướng Nha Trang" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Nem Nướng<br>Nha Trang</h3>
           <p>Kỹ thuật quết nem chuẩn vị và bí quyết pha nước chấm đặc trưng của xứ biển Nha Trang.</p>
-          <div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><a href="khoa-nem-nuong-nha-trang.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-lau-do-nuong.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/seafood_hotpot_luxury_editorial.webp" alt="Minh họa Lẩu và đồ nướng" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Lẩu &amp; Đồ Nướng</h3>
           <p>Đa dạng công thức nước lẩu — lẩu cay, hải sản, truyền thống — cùng định lượng chuẩn xác cho mô hình kinh doanh.</p>
-          <div class="course-foot"><span class="course-tag">Kinh doanh chuỗi</span><a href="khoa-lau-do-nuong.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Kinh doanh chuỗi</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-com-tam.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/com_tam_luxury_editorial.webp" alt="Minh họa Cơm tấm" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Cơm Tấm</h3>
           <p>Bí quyết cơm tơi mềm đúng chuẩn cùng kỹ thuật ướp sườn thấm vị, thơm ngon đặc trưng.</p>
-          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="khoa-com-tam.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Món truyền thống</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-mon-an-sang.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/bun_bo_luxury_editorial.webp" alt="Minh họa Bún bò" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Bún Bò</h3>
           <p>Bí quyết nấu nước dùng bún bò đậm đà chuẩn vị, thuộc chuyên đề Món Ăn Sáng, dễ triển khai kinh doanh.</p>
-          <div class="course-foot"><span class="course-tag">Món ăn sáng</span><a href="khoa-mon-an-sang.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Món ăn sáng</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-mon-an-gia-dinh.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/family_meal_luxury_editorial.webp" alt="Minh họa Món ăn gia đình" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Món Ăn Gia Đình</h3>
           <p>Công thức món ăn quen thuộc bữa cơm gia đình, định lượng chuẩn, dễ áp dụng cho mô hình cơm nhà, cơm văn phòng.</p>
-          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="khoa-mon-an-gia-dinh.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Món truyền thống</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-my-cay.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/spicy_noodles_luxury_editorial.webp" alt="Minh họa Mỳ cay" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Mỳ Cay</h3>
           <p>Bí quyết nấu nước dùng đậm đà, cay nồng đúng chuẩn và kỹ thuật cân chỉnh độ cay phù hợp.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-my-cay.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>

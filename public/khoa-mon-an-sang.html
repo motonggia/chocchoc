@@ -300,6 +300,7 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .course-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .course-card { text-decoration: none; color: inherit; cursor: pointer; }
   .course-media {
     aspect-ratio: 1/1;
     position: relative;
@@ -357,8 +358,8 @@
   .course-tag { font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.4; }
   .course-link { font-size: 11.5px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--black); display: inline-flex; align-items: center; transition: color 0.35s ease; }
   .course-link::after { content: "→"; margin-left: 0; max-width: 0; overflow: hidden; display: inline-block; opacity: 0; transition: max-width 0.35s ease, opacity 0.35s ease, margin-left 0.35s ease; }
-  .course-link:hover { color: var(--gold); }
-  .course-link:hover::after { max-width: 20px; opacity: 1; margin-left: 6px; }
+  .course-card:hover .course-link { color: var(--gold); }
+  .course-card:hover .course-link::after { max-width: 20px; opacity: 1; margin-left: 6px; }
 
   /* ---------- KHÓA HỌC LIÊN QUAN (thu gọn, 4 cột 1 hàng) ---------- */
   #khoa-hoc-lien-quan { padding: 60px 0; }
@@ -790,7 +791,7 @@
       <h2>Khóa học liên quan</h2>
     </div>
     <div class="course-grid">
-      <div class="course-card">
+      <a class="course-card" href="khoa-nem-nuong-nha-trang.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/nem_nuong_luxury_editorial.webp" alt="Minh họa Nem nướng Nha Trang" loading="lazy">
           <span class="course-badge">Hot Trend</span>
@@ -798,10 +799,10 @@
         <div class="course-body">
           <h3>Nem Nướng<br>Nha Trang</h3>
           <p>Kỹ thuật quết, tạo hình, nướng nem chuẩn vị cùng bí quyết pha nước chấm đặc trưng.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-nem-nuong-nha-trang.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-lau-do-nuong.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/seafood_hotpot_luxury_editorial.webp" alt="Minh họa Lẩu và Đồ nướng" loading="lazy">
           <span class="course-badge">Hot Trend</span>
@@ -809,29 +810,29 @@
         <div class="course-body">
           <h3>Lẩu &amp; Đồ<br>Nướng</h3>
           <p>Công thức nước lẩu đa dạng, quản lý định lượng và kỹ thuật chế biến đồ nướng.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-lau-do-nuong.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-chuyen-de-tu-chon.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/custom_thematic_luxury_editorial.webp" alt="Minh họa Chuyên đề tự chọn" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Chuyên Đề<br>Tự Chọn</h3>
           <p>Thiết kế món ăn riêng theo yêu cầu kinh doanh, tư vấn linh hoạt theo vốn và mặt bằng thực tế.</p>
-          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><a href="khoa-chuyen-de-tu-chon.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-mon-an-gia-dinh.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/family_meal_luxury_editorial.webp" alt="Minh họa Món ăn gia đình" loading="lazy">
         </div>
         <div class="course-body">
           <h3>Món Ăn<br>Gia Đình</h3>
           <p>Hệ thống hóa kiến thức nấu ăn bài bản, đảm bảo dinh dưỡng và thẩm mỹ cho bữa cơm gia đình.</p>
-          <div class="course-foot"><span class="course-tag">Bài bản</span><a href="khoa-mon-an-gia-dinh.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Bài bản</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>

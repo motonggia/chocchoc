@@ -300,6 +300,7 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .course-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .course-card { text-decoration: none; color: inherit; cursor: pointer; }
   .course-media {
     aspect-ratio: 1/1;
     position: relative;
@@ -357,8 +358,8 @@
   .course-tag { font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.4; }
   .course-link { font-size: 11.5px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--black); display: inline-flex; align-items: center; transition: color 0.35s ease; }
   .course-link::after { content: "→"; margin-left: 0; max-width: 0; overflow: hidden; display: inline-block; opacity: 0; transition: max-width 0.35s ease, opacity 0.35s ease, margin-left 0.35s ease; }
-  .course-link:hover { color: var(--gold); }
-  .course-link:hover::after { max-width: 20px; opacity: 1; margin-left: 6px; }
+  .course-card:hover .course-link { color: var(--gold); }
+  .course-card:hover .course-link::after { max-width: 20px; opacity: 1; margin-left: 6px; }
 
   /* ---------- KHÓA HỌC LIÊN QUAN (thu gọn, 4 cột 1 hàng) ---------- */
   #khoa-hoc-lien-quan { padding: 60px 0; }
@@ -788,7 +789,7 @@
       <h2>Khóa học liên quan</h2>
     </div>
     <div class="course-grid">
-      <div class="course-card">
+      <a class="course-card" href="khoa-my-cay.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/spicy_noodles_luxury_editorial.webp" alt="Minh họa Mỳ cay" loading="lazy">
           <span class="course-badge">Hot Trend</span>
@@ -796,10 +797,10 @@
         <div class="course-body">
           <h3>Mỳ Cay</h3>
           <p>Bí quyết nấu nước dùng đậm đà, cay nồng đúng chuẩn và kỹ thuật cân chỉnh độ cay phù hợp.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-my-cay.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-banh-mi-kep-viet-nam.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/banh_mi_luxury_editorial.webp" alt="Minh họa Bánh mỳ kẹp Việt Nam" loading="lazy">
           <span class="course-badge">Chef's Pick</span>
@@ -807,10 +808,10 @@
         <div class="course-body">
           <h3>Bánh Mỳ Kẹp<br>Việt Nam</h3>
           <p>Công thức chuẩn vị để kinh doanh, kỹ thuật cân bằng Nhân – Sốt – Rau và kỹ thuật làm vỏ bánh.</p>
-          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><a href="khoa-banh-mi-kep-viet-nam.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-do-an-vat-tong-hop.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/snacks_luxury_editorial.webp" alt="Minh họa Đồ ăn vặt tổng hợp" loading="lazy">
           <span class="course-badge">Hot Trend</span>
@@ -818,10 +819,10 @@
         <div class="course-body">
           <h3>Đồ Ăn Vặt<br>Tổng Hợp</h3>
           <p>Món ăn vặt hot trend dễ làm, dễ bán và bí quyết nấu mỳ cay đậm đà, chuẩn vị.</p>
-          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><a href="khoa-do-an-vat-tong-hop.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
-      <div class="course-card">
+      </a>
+      <a class="course-card" href="khoa-com-tam.html">
         <div class="course-media">
           <img src="https://chocchoc.vercel.app/images/com_tam_luxury_editorial.webp" alt="Minh họa Cơm tấm" loading="lazy">
           <span class="course-badge">Chef's Pick</span>
@@ -829,9 +830,9 @@
         <div class="course-body">
           <h3>Cơm Tấm</h3>
           <p>Kỹ thuật nấu cơm tơi mềm, ướp sườn nướng đậm đà cùng bì, chả, trứng và nước mắm chuẩn vị.</p>
-          <div class="course-foot"><span class="course-tag">Chef's Pick</span><a href="khoa-com-tam.html" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Chef's Pick</span><span class="course-link">Chi tiết</span></div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
