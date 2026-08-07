@@ -519,6 +519,7 @@
     transition: max-width 0.35s ease, opacity 0.35s ease, margin-left 0.35s ease;
   }
   .course-link:hover { color: var(--gold); }
+  .course-card:hover .course-link { color: var(--gold); }
   .course-card:hover .course-link::after {
     max-width: 20px;
     opacity: 1;
@@ -570,8 +571,169 @@
     border-radius: var(--radius-sm);
     pointer-events: none;
   }
-  .faculty-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 6px; }
-  .faculty-role { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+  .faculty-card h3 {
+    font-family: var(--font-serif);
+    font-size: 21px;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.3px;
+    margin-bottom: 12px;
+  }
+  .faculty-divider {
+    display: block;
+    width: 34px;
+    height: 1px;
+    margin: 0 auto 14px;
+    background: var(--gold);
+  }
+  .faculty-role { font-size: 11.5px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 8px; }
+  .faculty-sub { font-size: 13px; color: var(--gray); font-style: italic; line-height: 1.7; max-width: 240px; margin: 0 auto; }
+  .faculty-sub a { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- GALLERY (HÌNH ẢNH TRUNG TÂM) ---------- */
+  .gallery-note {
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--gray);
+    font-style: italic;
+    margin: -34px 0 40px;
+  }
+  .gallery-frame {
+    padding: 14px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    box-shadow: inset 0 0 0 1px rgba(192,138,62,0.45), var(--shadow);
+  }
+  .gallery-mosaic {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 190px);
+    gap: 8px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .gallery-mosaic .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-mosaic .gallery-item:nth-child(2) { grid-column: span 2; grid-row: span 1; }
+  .gallery-mosaic .gallery-item:nth-child(3) { grid-column: span 2; grid-row: span 1; }
+  .gallery-mosaic .gallery-item:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+  .gallery-mosaic .gallery-item:nth-child(5) { grid-column: span 1; grid-row: span 1; }
+  .gallery-mosaic .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 1; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--cream);
+    border: 6px solid var(--white);
+    box-shadow: inset 0 0 0 1px rgba(192,138,62,0.45);
+  }
+  .gallery-mosaic .gallery-item {
+    aspect-ratio: auto;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(78%) sepia(12%) brightness(1.02) contrast(1.03);
+    transition: transform 0.6s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.07); }
+
+  /* Hiệu ứng xuất hiện dần khi cuộn tới, so le từng ô */
+  .gallery-mosaic .gallery-item {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    transition: opacity 0.75s ease, transform 0.75s ease, box-shadow 0.35s ease;
+    cursor: zoom-in;
+  }
+  .gallery-mosaic .gallery-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .gallery-mosaic .gallery-item:nth-child(1) { transition-delay: 0s; }
+  .gallery-mosaic .gallery-item:nth-child(2) { transition-delay: 0.08s; }
+  .gallery-mosaic .gallery-item:nth-child(3) { transition-delay: 0.16s; }
+  .gallery-mosaic .gallery-item:nth-child(4) { transition-delay: 0.24s; }
+  .gallery-mosaic .gallery-item:nth-child(5) { transition-delay: 0.32s; }
+  .gallery-mosaic .gallery-item:nth-child(6) { transition-delay: 0.4s; }
+  .gallery-mosaic .gallery-item:hover {
+    box-shadow: 0 16px 34px -12px rgba(26,26,26,0.4);
+    z-index: 3;
+  }
+
+  /* Ánh sáng lướt qua khi rê chuột */
+  .gallery-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.32) 46%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.32) 54%, transparent 75%);
+    transform: translateX(-130%);
+    pointer-events: none;
+    transition: transform 0.85s ease;
+  }
+  .gallery-item:hover::before { transform: translateX(130%); }
+
+  /* Slideshow độc lập trong từng ô mosaic */
+  .gallery-slides { position: absolute; inset: 0; }
+  .gallery-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    filter: saturate(78%) sepia(12%) brightness(1.02) contrast(1.03);
+    transition: opacity 1.4s ease, transform 0.6s ease;
+  }
+  .gallery-slide.is-active { opacity: 1; }
+  .gallery-item:hover .gallery-slide.is-active { transform: scale(1.07); }
+  .gallery-item .gallery-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(150deg, var(--cream) 0%, #EFE8DB 100%);
+  }
+  .gallery-item .gallery-placeholder svg {
+    width: 34%;
+    height: 34%;
+    stroke: var(--gold);
+    opacity: 0.55;
+  }
+  .gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(160deg, rgba(192,138,62,0.18) 0%, rgba(26,26,26,0.04) 55%, rgba(192,138,62,0.1) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .gallery-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    padding: 16px 18px;
+    background: linear-gradient(to top, rgba(26,26,26,0.72) 0%, rgba(26,26,26,0) 100%);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
 
   /* ---------- TESTIMONIALS ---------- */
   .testi-grid {
@@ -857,14 +1019,28 @@
     .burger { display: block; }
     .hero-inner { grid-template-columns: 1fr; }
     .hero-visual { order: -1; aspect-ratio: 1/1; }
-    .feature-grid, .faculty-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+    .feature-grid, .faculty-grid, .testi-grid, .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-mosaic { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 140px); }
+    .gallery-mosaic .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-mosaic .gallery-item:nth-child(2) { grid-column: span 2; grid-row: span 1; }
+    .gallery-mosaic .gallery-item:nth-child(3) { grid-column: span 2; grid-row: span 1; }
+    .gallery-mosaic .gallery-item:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+    .gallery-mosaic .gallery-item:nth-child(5) { grid-column: span 1; grid-row: span 1; }
+    .gallery-mosaic .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 1; }
     .course-grid { grid-template-columns: 1fr 1fr; }
     .faq-columns { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 30px; }
   }
   @media (max-width: 620px) {
     .hero h1 { font-size: 38px; }
-    .feature-grid, .course-grid, .faculty-grid, .testi-grid { grid-template-columns: 1fr; }
+    .feature-grid, .course-grid, .faculty-grid, .testi-grid, .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 140px); }
+    .gallery-mosaic .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-mosaic .gallery-item:nth-child(2),
+    .gallery-mosaic .gallery-item:nth-child(3),
+    .gallery-mosaic .gallery-item:nth-child(4),
+    .gallery-mosaic .gallery-item:nth-child(5),
+    .gallery-mosaic .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 1; }
     .navbar { padding: 16px 20px; }
     .section { padding: 70px 0; }
   }
@@ -885,6 +1061,8 @@
       <li><a href="#khoa-hoc">Khoá học</a></li>
       <li class="sep" aria-hidden="true">|</li>
       <li><a href="#gioi-thieu">Về chúng tôi</a></li>
+      <li class="sep" aria-hidden="true">|</li>
+      <li><a href="#hinh-anh-trung-tam">Hình ảnh</a></li>
       <li class="sep" aria-hidden="true">|</li>
       <li><a href="#hoi-dap">Hỏi đáp</a></li>
       <li class="sep" aria-hidden="true">|</li>
@@ -909,6 +1087,8 @@
     <li><a href="#khoa-hoc">Khoá học</a></li>
     <li class="sep"></li>
     <li><a href="#gioi-thieu">Về chúng tôi</a></li>
+    <li class="sep"></li>
+    <li><a href="#hinh-anh-trung-tam">Hình ảnh</a></li>
     <li class="sep"></li>
     <li><a href="#hoi-dap">Hỏi đáp</a></li>
     <li class="sep"></li>
@@ -1101,23 +1281,44 @@
       <div class="faculty-card">
         <div class="faculty-photo"><img src="https://chocchoc.vercel.app/images/chef_1_lineart.webp" alt="Thầy Đàm Văn Long"></div>
         <h3>Thầy Đàm Văn Long</h3>
-        <p class="faculty-role">Giảng viên nấu ăn · Cố vấn đào tạo &amp; chiến lược vận hành</p>
+        <span class="faculty-divider"></span>
+        <p class="faculty-role">Giảng viên nấu ăn</p>
+        <p class="faculty-sub">Cố vấn đào tạo &amp; chiến lược vận hành</p>
       </div>
       <div class="faculty-card">
         <div class="faculty-photo"><img src="https://chocchoc.vercel.app/images/chef_2_lineart.webp" alt="Thầy Bùi Thanh Luân"></div>
         <h3>Thầy Bùi Thanh Luân</h3>
-        <p class="faculty-role">Giảng viên nấu ăn · Giám đốc điều hành, Sáng lập <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a></p>
+        <span class="faculty-divider"></span>
+        <p class="faculty-role">Giảng viên nấu ăn</p>
+        <p class="faculty-sub">Giám đốc điều hành, Sáng lập <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;">www.hocnauan.online</a></p>
       </div>
       <div class="faculty-card">
         <div class="faculty-photo"><img src="https://chocchoc.vercel.app/images/manager_3_lineart.webp" alt="Cô Dương Thái Hà"></div>
         <h3>Cô Dương Thái Hà</h3>
-        <p class="faculty-role">Cố vấn chiến lược kinh doanh &amp; tài chính</p>
+        <span class="faculty-divider"></span>
+        <p class="faculty-role">Cố vấn chiến lược</p>
+        <p class="faculty-sub">Kinh doanh &amp; tài chính</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-cream" id="hoc-vien">
+<section class="section section-cream" id="hinh-anh-trung-tam">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Gallery</span>
+      <h2>Hình ảnh thật tại trung tâm</h2>
+      <p>Không gian học tập và thực hành thực tế tại <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> — nơi học viên trực tiếp đứng bếp cùng giảng viên.</p>
+    </div>
+    <div class="gallery-frame">
+    <div class="gallery-mosaic" id="galleryMosaic">
+      <!-- Các ô ảnh được JS tự sinh từ danh sách CENTER_PHOTOS bên dưới, mỗi ô chạy slideshow độc lập -->
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="hoc-vien">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Testimonials</span>
@@ -1307,6 +1508,7 @@
         <li><a href="#gioi-thieu">Giới thiệu</a></li>
         <li><a href="#khoa-hoc">Khóa học nấu ăn</a></li>
         <li><a href="#giang-vien">Giảng viên</a></li>
+        <li><a href="#hinh-anh-trung-tam">Hình ảnh trung tâm</a></li>
         <li><a href="#hoc-vien">Câu chuyện học viên</a></li>
         <li><a href="#hoi-dap">Hỏi đáp</a></li>
       </ul>
@@ -1388,6 +1590,203 @@
   });
 
   spySections.forEach(section => spyObserver.observe(section));
+
+  /* ---------- GALLERY MOSAIC: 1 album ảnh chung, tự chia đều vào các ô, mỗi ô tự chạy slideshow độc lập ---------- */
+
+  // Đặt tên ảnh trong thư mục images/Hinh-anh-trung-tam/ theo số thứ tự,
+  // bắt đầu từ 0001.jpg, 0002.jpg, 0003.jpg ... (đủ 4 chữ số).
+  // Mảng dưới đây đã để sẵn 100 slot (0001–0100) cho kế hoạch dài hạn,
+  // dù hiện tại mới có 30 ảnh thật. Code sẽ TỰ ĐỘNG kiểm tra ảnh nào
+  // tồn tại và chỉ hiển thị đúng những ảnh đã có — không cần sửa gì
+  // thêm khi bạn bổ sung dần ảnh 0031.jpg, 0032.jpg... về sau.
+  const CENTER_PHOTOS = [
+    "0001.jpg",
+    "0002.jpg",
+    "0003.jpg",
+    "0004.jpg",
+    "0005.jpg",
+    "0006.jpg",
+    "0007.jpg",
+    "0008.jpg",
+    "0009.jpg",
+    "0010.jpg",
+    "0011.jpg",
+    "0012.jpg",
+    "0013.jpg",
+    "0014.jpg",
+    "0015.jpg",
+    "0016.jpg",
+    "0017.jpg",
+    "0018.jpg",
+    "0019.jpg",
+    "0020.jpg",
+    "0021.jpg",
+    "0022.jpg",
+    "0023.jpg",
+    "0024.jpg",
+    "0025.jpg",
+    "0026.jpg",
+    "0027.jpg",
+    "0028.jpg",
+    "0029.jpg",
+    "0030.jpg",
+    "0031.jpg",
+    "0032.jpg",
+    "0033.jpg",
+    "0034.jpg",
+    "0035.jpg",
+    "0036.jpg",
+    "0037.jpg",
+    "0038.jpg",
+    "0039.jpg",
+    "0040.jpg",
+    "0041.jpg",
+    "0042.jpg",
+    "0043.jpg",
+    "0044.jpg",
+    "0045.jpg",
+    "0046.jpg",
+    "0047.jpg",
+    "0048.jpg",
+    "0049.jpg",
+    "0050.jpg",
+    "0051.jpg",
+    "0052.jpg",
+    "0053.jpg",
+    "0054.jpg",
+    "0055.jpg",
+    "0056.jpg",
+    "0057.jpg",
+    "0058.jpg",
+    "0059.jpg",
+    "0060.jpg",
+    "0061.jpg",
+    "0062.jpg",
+    "0063.jpg",
+    "0064.jpg",
+    "0065.jpg",
+    "0066.jpg",
+    "0067.jpg",
+    "0068.jpg",
+    "0069.jpg",
+    "0070.jpg",
+    "0071.jpg",
+    "0072.jpg",
+    "0073.jpg",
+    "0074.jpg",
+    "0075.jpg",
+    "0076.jpg",
+    "0077.jpg",
+    "0078.jpg",
+    "0079.jpg",
+    "0080.jpg",
+    "0081.jpg",
+    "0082.jpg",
+    "0083.jpg",
+    "0084.jpg",
+    "0085.jpg",
+    "0086.jpg",
+    "0087.jpg",
+    "0088.jpg",
+    "0089.jpg",
+    "0090.jpg",
+    "0091.jpg",
+    "0092.jpg",
+    "0093.jpg",
+    "0094.jpg",
+    "0095.jpg",
+    "0096.jpg",
+    "0097.jpg",
+    "0098.jpg",
+    "0099.jpg",
+    "0100.jpg"
+
+  ];
+
+  const GALLERY_FOLDER = "images/Hinh-anh-trung-tam/";
+  const GALLERY_CELL_COUNT = 6; // khớp với layout mosaic (1 ô lớn + 3 ô vừa + 2 ô nhỏ) đã định nghĩa trong CSS
+
+  function checkImageExists(src) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+  }
+
+  async function getAvailablePhotos() {
+    const checks = await Promise.all(
+      CENTER_PHOTOS.map(async (filename) => {
+        const exists = await checkImageExists(GALLERY_FOLDER + filename);
+        return exists ? filename : null;
+      })
+    );
+    return checks.filter(Boolean);
+  }
+
+  function renderGalleryMosaic(availablePhotos) {
+    const mosaic = document.getElementById('galleryMosaic');
+    if (!mosaic || !availablePhotos || availablePhotos.length === 0) return;
+
+    // Trộn ngẫu nhiên để mỗi lần tải trang, ảnh trong từng ô một khác nhau
+    const shuffled = [...availablePhotos].sort(() => Math.random() - 0.5);
+
+    // Chia đều ảnh vào từng ô theo kiểu round-robin (ô 1 nhận ảnh 0, 6, 12...; ô 2 nhận ảnh 1, 7, 13...)
+    const buckets = Array.from({ length: GALLERY_CELL_COUNT }, () => []);
+    shuffled.forEach((filename, i) => {
+      buckets[i % GALLERY_CELL_COUNT].push(filename);
+    });
+
+    mosaic.innerHTML = buckets.map(bucket => {
+      if (bucket.length === 0) return '';
+      const slides = bucket.map((filename, i) =>
+        `<img class="gallery-slide${i === 0 ? ' is-active' : ''}" src="${GALLERY_FOLDER}${filename}" alt="Hình ảnh trung tâm www.hocnauan.online">`
+      ).join('');
+      return `<div class="gallery-item"><div class="gallery-slides">${slides}</div></div>`;
+    }).join('');
+  }
+
+  function initGallerySlideshow() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+    document.querySelectorAll('.gallery-item').forEach((item, idx) => {
+      const slides = item.querySelectorAll('.gallery-slide');
+      if (slides.length < 2) return;
+      let current = 0;
+      const intervalTime = 3000 + Math.random() * 2000; // đổi ảnh ngẫu nhiên trong khoảng 3-5s mỗi ô
+      const startDelay = idx * 850; // khởi động lệch pha nhau
+      setTimeout(() => {
+        setInterval(() => {
+          slides[current].classList.remove('is-active');
+          current = (current + 1) % slides.length;
+          slides[current].classList.add('is-active');
+        }, intervalTime);
+      }, startDelay);
+    });
+  }
+
+  function initGalleryReveal() {
+    const items = document.querySelectorAll('.gallery-mosaic .gallery-item');
+    if (!items.length) return;
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(item => revealObserver.observe(item));
+  }
+
+  async function initGallery() {
+    const availablePhotos = await getAvailablePhotos();
+    renderGalleryMosaic(availablePhotos);
+    initGallerySlideshow();
+    initGalleryReveal();
+  }
+  initGallery();
 
   /* ---------- FAQ ACCORDION (chỉ mở 1 câu tại 1 thời điểm, toàn bộ 2 cột) ---------- */
   const allFaqItems = document.querySelectorAll('.faq-item');
