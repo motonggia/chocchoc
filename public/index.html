@@ -768,6 +768,85 @@
     letter-spacing: 0.4px;
   }
 
+  /* ---------- FLOATING CONTACT (Zalo / Facebook / Hotline) ---------- */
+  .contact-float {
+    position: fixed;
+    right: 22px;
+    bottom: 28px;
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .contact-float a {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--black);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(26,26,26,0.28);
+    border: 1.5px solid rgba(192,138,62,0.55);
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  }
+  .contact-float a svg { width: 24px; height: 24px; }
+  .contact-float a:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: translateY(-3px) scale(1.06);
+  }
+  .contact-float a.hotline {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .contact-float a.hotline:hover { background: var(--black); border-color: var(--black); }
+  .contact-float a.hotline-pulse::after {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    animation: contactPulse 2.2s ease-out infinite;
+  }
+  @keyframes contactPulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.55); opacity: 0; }
+  }
+  .contact-tip {
+    position: absolute;
+    right: 64px;
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .contact-float a:hover .contact-tip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+  @media (max-width: 620px) {
+    .contact-float { right: 14px; bottom: 18px; gap: 10px; }
+    .contact-float a { width: 46px; height: 46px; }
+    .contact-float a svg { width: 21px; height: 21px; }
+    .contact-tip { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .contact-float a.hotline-pulse::after { animation: none; }
+  }
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 1180px) {
     .course-grid { grid-template-columns: repeat(3, 1fr); }
@@ -872,7 +951,7 @@
         <div class="course-body">
           <h3>Bánh Mỳ Kẹp<br>Việt Nam</h3>
           <p>Học kỹ thuật làm vỏ bánh giòn xốp chuẩn vị, cách pha chế nhân và sốt đặc trưng của bánh mỳ truyền thống.</p>
-          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><a href="khoa-banh-mi-kep-viet-nam.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -912,7 +991,7 @@
         <div class="course-body">
           <h3>Đồ Ăn Vặt<br>Tổng Hợp</h3>
           <p>Tổng hợp món ăn vặt hot trend cùng bí quyết pha nước sốt, gia vị chuẩn khẩu vị giới trẻ.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-do-an-vat-tong-hop.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -922,7 +1001,7 @@
         <div class="course-body">
           <h3>Chuyên Đề<br>Tự Chọn</h3>
           <p>Thiết kế món ăn riêng theo yêu cầu kinh doanh, tư vấn linh hoạt theo vốn và mặt bằng thực tế.</p>
-          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><a href="khoa-chuyen-de-tu-chon.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -932,7 +1011,7 @@
         <div class="course-body">
           <h3>Nem Nướng<br>Nha Trang</h3>
           <p>Kỹ thuật quết nem chuẩn vị và bí quyết pha nước chấm đặc trưng của xứ biển Nha Trang.</p>
-          <div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><a href="khoa-nem-nuong-nha-trang.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -942,7 +1021,7 @@
         <div class="course-body">
           <h3>Lẩu &amp; Đồ Nướng</h3>
           <p>Đa dạng công thức nước lẩu — lẩu cay, hải sản, truyền thống — cùng định lượng chuẩn xác cho mô hình kinh doanh.</p>
-          <div class="course-foot"><span class="course-tag">Kinh doanh chuỗi</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Kinh doanh chuỗi</span><a href="khoa-lau-do-nuong.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -952,7 +1031,7 @@
         <div class="course-body">
           <h3>Cơm Tấm</h3>
           <p>Bí quyết cơm tơi mềm đúng chuẩn cùng kỹ thuật ướp sườn thấm vị, thơm ngon đặc trưng.</p>
-          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="khoa-com-tam.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -962,7 +1041,7 @@
         <div class="course-body">
           <h3>Bún Bò</h3>
           <p>Bí quyết nấu nước dùng bún bò đậm đà chuẩn vị, thuộc chuyên đề Món Ăn Sáng, dễ triển khai kinh doanh.</p>
-          <div class="course-foot"><span class="course-tag">Món ăn sáng</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Món ăn sáng</span><a href="khoa-mon-an-sang.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -972,7 +1051,7 @@
         <div class="course-body">
           <h3>Món Ăn Gia Đình</h3>
           <p>Công thức món ăn quen thuộc bữa cơm gia đình, định lượng chuẩn, dễ áp dụng cho mô hình cơm nhà, cơm văn phòng.</p>
-          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Món truyền thống</span><a href="khoa-mon-an-gia-dinh.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
       <div class="course-card">
@@ -982,7 +1061,7 @@
         <div class="course-body">
           <h3>Mỳ Cay</h3>
           <p>Bí quyết nấu nước dùng đậm đà, cay nồng đúng chuẩn và kỹ thuật cân chỉnh độ cay phù hợp.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="#" class="course-link">Chi tiết</a></div>
+          <div class="course-foot"><span class="course-tag">Hot Trend</span><a href="khoa-my-cay.html" class="course-link">Chi tiết</a></div>
         </div>
       </div>
     </div>
@@ -1246,6 +1325,21 @@
   </div>
   <div class="footer-bottom">© 2026 Chốc Chốc Cooking Center. All rights reserved.</div>
 </footer>
+
+<div class="contact-float" aria-label="Liên hệ nhanh">
+  <a href="https://zalo.me/0944080015" target="_blank" rel="noopener" aria-label="Chat Zalo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M7 15.5h4l-4 -5.5h4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.2 15.5v-5.5" stroke-linecap="round"/><path d="M16.5 10v5.5c1.2 0 2 -1 2 -2.75s-.8 -2.75 -2 -2.75z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="contact-tip">Chat Zalo</span>
+  </a>
+  <a href="https://facebook.com/chocchoccookingcenter" target="_blank" rel="noopener" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3h-2a5 5 0 0 0-5 5v2H6v4h2v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3z" stroke-linejoin="round"/></svg>
+    <span class="contact-tip">Facebook</span>
+  </a>
+  <a href="tel:0944080015" class="hotline hotline-pulse" aria-label="Gọi hotline 0944 080 015">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4.5 4h3.2l1.5 4.2-2 1.6a12 12 0 0 0 5.6 5.6l1.6-2 4.2 1.5v3.2a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 2.9 5.7 1.6 1.6 0 0 1 4.5 4z" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span class="contact-tip">0944 080 015</span>
+  </a>
+</div>
 
 <script>
   const burgerBtn = document.getElementById('burgerBtn');
