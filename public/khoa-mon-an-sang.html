@@ -381,7 +381,8 @@
   }
 
   /* ---------- FAQ (dùng lại) ---------- */
-  .faq-columns { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  .faq-columns { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .faq-col { display: flex; flex-direction: column; gap: 14px; }
   .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); overflow: hidden; transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   .faq-item:hover { transform: translateY(-3px); border-color: var(--gold-light); box-shadow: 0 4px 12px rgba(192,138,62,0.10); }
   .faq-item.open { border-color: var(--gold-light); box-shadow: var(--shadow); }
@@ -557,6 +558,7 @@
   @media (max-width: 620px) {
     .course-hero h1 { font-size: 32px; }
     .course-grid, .outcomes-grid, .quick-facts { grid-template-columns: 1fr; }
+    .faq-columns { grid-template-columns: 1fr; }
     .navbar { padding: 16px 20px; }
     .section { padding: 60px 0; }
     .instructor-strip { flex-direction: column; text-align: center; }
@@ -736,6 +738,7 @@
       <h2>Câu hỏi thường gặp về khóa học</h2>
     </div>
     <div class="faq-columns">
+      <div class="faq-col">
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span>Nội dung Bún bò nằm trong khóa học nào?</span>
@@ -758,6 +761,8 @@
           </div>
         </div>
       </div>
+      </div>
+      <div class="faq-col">
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span>Học phí khóa học là bao nhiêu?</span>
@@ -779,6 +784,7 @@
             <p>Có. Tiêu biểu như anh Nguyễn Đức Phát (chủ mô hình "Lẩu Nhà Mình") có lượng khách ổn định chỉ sau chưa đầy 2 tháng khai trương, và thương hiệu "Bún bò Cô Lan" tại Hà Nội.</p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
