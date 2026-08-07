@@ -370,6 +370,13 @@
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 20px;
     color: var(--gold);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .feature-box:hover .feature-icon {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+    transform: scale(1.08);
   }
   .feature-icon svg { width: 26px; height: 26px; }
   .feature-box h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
@@ -1069,7 +1076,7 @@
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         </div>
-        <h3>Giảng viên giàu kinh nghiệm</h3>
+        <h3>Giảng viên giầu kinh nghiệm</h3>
         <p>Đội ngũ giảng viên với hơn 15 năm thực chiến trong ngành ẩm thực và vận hành F&amp;B.</p>
       </div>
       <div class="feature-box">
