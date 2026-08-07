@@ -360,27 +360,23 @@
   .course-link:hover { color: var(--gold); }
   .course-link:hover::after { max-width: 20px; opacity: 1; margin-left: 6px; }
 
-  /* ---------- KHÓA HỌC LIÊN QUAN (thu gọn, 1 cột) ---------- */
+  /* ---------- KHÓA HỌC LIÊN QUAN (thu gọn, 4 cột 1 hàng) ---------- */
   #khoa-hoc-lien-quan { padding: 60px 0; }
   #khoa-hoc-lien-quan .section-head { margin-bottom: 30px; }
-  #khoa-hoc-lien-quan .course-grid { grid-template-columns: 1fr; gap: 12px; max-width: 620px; margin: 0 auto; }
-  #khoa-hoc-lien-quan .course-card { flex-direction: row; align-items: center; }
-  #khoa-hoc-lien-quan .course-card:hover { transform: translateY(-2px); }
-  #khoa-hoc-lien-quan .course-media { width: 92px; height: 92px; aspect-ratio: 1/1; flex-shrink: 0; border-width: 4px; }
-  #khoa-hoc-lien-quan .course-media::before { display: none; }
-  #khoa-hoc-lien-quan .course-badge { display: none; }
-  #khoa-hoc-lien-quan .course-body { padding: 8px 16px; }
-  #khoa-hoc-lien-quan .course-body h3 { font-size: 14.5px; text-align: left; margin-bottom: 2px; }
-  #khoa-hoc-lien-quan .course-body p { font-size: 12px; line-height: 1.5; -webkit-line-clamp: 2; margin-bottom: 4px; }
-  #khoa-hoc-lien-quan .course-foot { flex-direction: row; align-items: center; justify-content: space-between; margin-top: 2px; gap: 10px; }
-  #khoa-hoc-lien-quan .course-foot .course-link { align-self: center; }
-  #khoa-hoc-lien-quan .course-tag { font-size: 10.5px; }
-  #khoa-hoc-lien-quan .course-link { font-size: 10.5px; }
-  @media (max-width: 640px) {
-    #khoa-hoc-lien-quan .course-card { flex-direction: row; }
-    #khoa-hoc-lien-quan .course-media { width: 72px; height: 72px; }
-    #khoa-hoc-lien-quan .course-body h3 { font-size: 13px; }
-    #khoa-hoc-lien-quan .course-body p { display: none; }
+  #khoa-hoc-lien-quan .course-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
+  #khoa-hoc-lien-quan .course-media::before { font-size: 8px; padding: 4px 7px; right: 8px; bottom: 8px; }
+  #khoa-hoc-lien-quan .course-badge { font-size: 8.5px; padding: 4px 8px; top: 10px; left: 10px; }
+  #khoa-hoc-lien-quan .course-body { padding: 12px 12px 14px; }
+  #khoa-hoc-lien-quan .course-body h3 { font-size: 13px; margin-bottom: 1px; }
+  #khoa-hoc-lien-quan .course-body p { font-size: 11px; line-height: 1.5; -webkit-line-clamp: 2; margin-bottom: 2px; }
+  #khoa-hoc-lien-quan .course-foot { margin-top: 6px; gap: 3px; }
+  #khoa-hoc-lien-quan .course-tag { font-size: 9.5px; }
+  #khoa-hoc-lien-quan .course-link { font-size: 9.5px; }
+  @media (max-width: 900px) {
+    #khoa-hoc-lien-quan .course-grid { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
+  }
+  @media (max-width: 480px) {
+    #khoa-hoc-lien-quan .course-grid { grid-template-columns: 1fr; }
   }
 
   /* ---------- FAQ (dùng lại) ---------- */
