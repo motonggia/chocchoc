@@ -145,7 +145,10 @@
     font-size: 22px;
     letter-spacing: 1px;
     color: var(--black);
+    display: inline-flex;
+    align-items: center;
   }
+  .logo img { height: 40px; width: auto; display: block; }
   .logo span { color: var(--gold); }
 
   .nav-links {
@@ -885,7 +888,7 @@
 
 <header>
   <nav class="navbar">
-    <a href="#" class="logo">CHỐC <span>CHỐC</span></a>
+    <a href="#" class="logo"><img src="https://chocchoc.vercel.app/images/Hoc-Nau-An.svg" alt="Chốc Chốc"></a>
     <ul class="nav-links">
       <li class="active"><a href="#trang-chu">Trang chủ</a></li>
       <li class="sep" aria-hidden="true">|</li>
@@ -907,7 +910,7 @@
 <div class="drawer-overlay" id="drawerOverlay"></div>
 <nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <div class="drawer-head">
-    <span class="logo">CHỐC <span>CHỐC</span></span>
+    <span class="logo"><img src="https://chocchoc.vercel.app/images/Hoc-Nau-An.svg" alt="Chốc Chốc"></span>
     <button class="drawer-close" id="drawerCloseBtn" aria-label="Đóng menu">✕</button>
   </div>
   <ul class="drawer-links">
