@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cơm Tấm — Chốc Chốc Cooking Center</title>
-<meta name="description" content="Khóa học Chuyên đề Cơm Tấm tại Chốc Chốc Cooking Center: kỹ thuật nấu cơm tơi mềm, ướp sườn nướng, làm bì chả trứng và pha nước mắm cơm tấm đậm đà, phù hợp kinh doanh và nấu ăn gia đình.">
+<title>Cơm Tấm — www.hocnauan.online</title>
+<meta name="description" content="Khóa học Chuyên đề Cơm Tấm tại www.hocnauan.online: kỹ thuật nấu cơm tơi mềm, ướp sườn nướng, làm bì chả trứng và pha nước mắm cơm tấm đậm đà, phù hợp kinh doanh và nấu ăn gia đình.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -146,7 +146,10 @@
     font-size: 22px;
     letter-spacing: 1px;
     color: var(--black);
+    display: inline-flex;
+    align-items: center;
   }
+  .logo img { height: 60px; width: auto; display: block; }
   .logo span { color: var(--gold); }
 
   .nav-links {
@@ -322,19 +325,14 @@
     pointer-events: none;
   }
   .course-media::before {
-    content: "chocchoc.vn";
+    content: "";
     position: absolute;
     z-index: 3;
     right: 10px;
     bottom: 10px;
-    background: rgba(26,26,26,0.55);
-    color: var(--white);
-    font-family: var(--font-sans);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 5px 10px;
+    width: 64px;
+    height: 30px;
+    background: transparent url("https://chocchoc.vercel.app/images/favicon-fixed.png") center/100% no-repeat;
     border-radius: var(--radius-sm);
     pointer-events: none;
   }
@@ -473,11 +471,11 @@
   }
   .course-hero-visual svg { width: 100%; height: 100%; display: block; }
   .course-hero-visual::before {
-    content: "chocchoc.vn";
+    content: "";
     position: absolute; z-index: 3; right: 14px; bottom: 14px;
-    background: rgba(26,26,26,0.55); color: var(--white);
-    font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 5px 10px; border-radius: var(--radius-sm);
+    width: 70px; height: 32px;
+    background: transparent url("https://chocchoc.vercel.app/images/favicon-fixed.png") center/100% no-repeat;
+    border-radius: var(--radius-sm);
   }
 
   /* ---------- CURRICULUM ---------- */
@@ -573,7 +571,7 @@
 
 <header>
   <nav class="navbar">
-    <a href="index.html" class="logo">CHỐC <span>CHỐC</span></a>
+    <a href="index.html" class="logo"><img src="https://chocchoc.vercel.app/images/Hoc-Nau-An.svg" alt="www.hocnauan.online"></a>
     <ul class="nav-links">
       <li><a href="index.html#trang-chu">Trang chủ</a></li>
       <li class="sep" aria-hidden="true">|</li>
@@ -595,7 +593,7 @@
 <div class="drawer-overlay" id="drawerOverlay"></div>
 <nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <div class="drawer-head">
-    <span class="logo">CHỐC <span>CHỐC</span></span>
+    <span class="logo"><img src="https://chocchoc.vercel.app/images/Hoc-Nau-An.svg" alt="www.hocnauan.online"></span>
     <button class="drawer-close" id="drawerCloseBtn" aria-label="Đóng menu">✕</button>
   </div>
   <ul class="drawer-links">
@@ -640,7 +638,7 @@
       </div>
     </div>
     <div class="course-hero-visual">
-      <img src="https://chocchoc.vercel.app/images/com_tam_luxury_editorial.webp" alt="Cơm tấm tại Chốc Chốc Cooking Center" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <img src="https://chocchoc.vercel.app/images/com_tam_luxury_editorial.webp" alt="Cơm tấm tại www.hocnauan.online" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
   </div>
 </section>
@@ -690,7 +688,7 @@
     <div class="section-head">
       <span class="eyebrow">Program Highlights</span>
       <h2>Đặc điểm chương trình</h2>
-      <p>Tính thực chiến cao, dễ áp dụng, phù hợp cả kinh doanh và nấu ăn gia đình — bám sát triết lý đào tạo "Học làm chủ — Không học làm thuê" của Chốc Chốc.</p>
+      <p>Tính thực chiến cao, dễ áp dụng, phù hợp cả kinh doanh và nấu ăn gia đình — bám sát triết lý đào tạo "Học làm chủ — Không học làm thuê" của <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a>.</p>
     </div>
     <div class="outcomes-grid">
       <div class="outcome-item"><span class="outcome-check">✓</span><p>Nấu cơm tấm tơi mềm chuẩn vị, không bị khô hay nát.</p></div>
@@ -711,7 +709,7 @@
       <div class="instructor-info">
         <div class="label">Đội ngũ giảng viên</div>
         <h3>Trên 15 năm kinh nghiệm thực chiến</h3>
-        <p>Khóa học tập trung vào tính thực chiến và dễ áp dụng, giúp học viên có thể triển khai mô hình kinh doanh hoặc tự nấu tại nhà một cách chuyên nghiệp, với sự đồng hành từ đội ngũ giảng viên giàu kinh nghiệm của Chốc Chốc.</p>
+        <p>Khóa học tập trung vào tính thực chiến và dễ áp dụng, giúp học viên có thể triển khai mô hình kinh doanh hoặc tự nấu tại nhà một cách chuyên nghiệp, với sự đồng hành từ đội ngũ giảng viên giàu kinh nghiệm của <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a>.</p>
       </div>
     </div>
   </div>
@@ -721,7 +719,7 @@
   <div class="container">
     <span class="eyebrow">Get Started</span>
     <h2>Sẵn sàng bắt đầu với Cơm Tấm?</h2>
-    <p>Để lại thông tin hoặc gọi hotline, đội ngũ Chốc Chốc sẽ tư vấn lịch học và lộ trình phù hợp với bạn.</p>
+    <p>Để lại thông tin hoặc gọi hotline, đội ngũ <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> sẽ tư vấn lịch học và lộ trình phù hợp với bạn.</p>
     <div class="mid-cta-actions">
       <a href="index.html#lien-he" class="btn btn-primary">Đăng ký tư vấn</a>
       <a href="tel:0944080015" class="btn btn-outline on-dark">Gọi ngay: 0944 080 015</a>
@@ -779,7 +777,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            <p>Có. Đội ngũ cố vấn Chốc Chốc đồng hành cùng học viên trong việc setup, vận hành quán và cải tiến thực đơn trong quá trình kinh doanh thực tế.</p>
+            <p>Có. Đội ngũ cố vấn <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> đồng hành cùng học viên trong việc setup, vận hành quán và cải tiến thực đơn trong quá trình kinh doanh thực tế.</p>
           </div>
         </div>
       </div>
@@ -844,8 +842,8 @@
 <footer id="lien-he">
   <div class="container footer-grid">
     <div class="footer-col">
-      <div class="footer-logo">CHỐC <span>CHỐC</span></div>
-      <p>Chốc Chốc Cooking Center — nơi khởi nguồn sự nghiệp của bạn trong lĩnh vực ẩm thực Việt Nam.</p>
+      <div class="footer-logo">www.hocnauan.online</div>
+      <p><a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> — nơi khởi nguồn sự nghiệp của bạn trong lĩnh vực ẩm thực Việt Nam.</p>
     </div>
     <div class="footer-col">
       <h4>Liên hệ</h4>
@@ -866,7 +864,7 @@
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 Chốc Chốc Cooking Center. All rights reserved.</div>
+  <div class="footer-bottom">© 2026 www.hocnauan.online. All rights reserved.</div>
 </footer>
 
 <script>
