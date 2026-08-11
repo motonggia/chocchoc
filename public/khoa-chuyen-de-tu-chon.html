@@ -603,21 +603,9 @@
 <header>
 <nav class="navbar">
 <a class="logo" href="index.html"><img alt="www.hocnauan.online" src="logo-transparent.png"/></a>
-<ul class="nav-links">
-<li><a href="index.html#trang-chu">Trang chủ</a></li>
-<li aria-hidden="true" class="sep">|</li>
-<li><a href="thu-ngo.html">Thư ngỏ</a></li>
-<li aria-hidden="true" class="sep">|</li>
-<li class="active"><a href="index.html#khoa-hoc">Khoá học</a></li><li class="sep"></li><li><a href="cua-hang.html">Cửa hàng</a></li>
-<li aria-hidden="true" class="sep">|</li>
-<li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
-<li aria-hidden="true" class="sep">|</li>
-<li><a href="index.html#hoi-dap">Hỏi đáp</a></li>
-<li aria-hidden="true" class="sep">|</li>
-<li><a href="index.html#lien-he">Liên hệ</a></li>
-</ul>
+<ul class="nav-links"><li><a href="index.html#trang-chu">Trang chủ</a></li><li aria-hidden="true" class="sep">|</li><li><a href="thu-ngo.html">Thư ngỏ</a></li><li aria-hidden="true" class="sep">|</li><li class="active"><a href="index.html#khoa-hoc">Khoá học</a></li><li aria-hidden="true" class="sep">|</li><li><a href="cua-hang.html">Cửa hàng</a></li><li aria-hidden="true" class="sep">|</li><li><a href="index.html#gioi-thieu">Về chúng tôi</a></li><li aria-hidden="true" class="sep">|</li><li><a href="index.html#hinh-anh-trung-tam">Hình ảnh</a></li><li aria-hidden="true" class="sep">|</li><li><a href="index.html#hoi-dap">Hỏi đáp</a></li><li aria-hidden="true" class="sep">|</li><li><a href="thu-ngo.html#dang-ky-tu-van">Đăng ký</a></li></ul>
 <div class="nav-cta">
-<a class="btn btn-primary" href="thu-ngo.html#dang-ky-tu-van">Đăng ký tư vấn</a>
+
 <button aria-controls="mobileDrawer" aria-expanded="false" aria-label="Mở menu" class="burger" id="burgerBtn">☰</button>
 </div>
 </nav>
@@ -628,20 +616,8 @@
 <span class="logo"><img alt="www.hocnauan.online" src="logo-transparent.png"/></span>
 <button aria-label="Đóng menu" class="drawer-close" id="drawerCloseBtn">✕</button>
 </div>
-<ul class="drawer-links">
-<li><a href="index.html#trang-chu">Trang chủ</a></li>
-<li class="sep"></li>
-<li><a href="thu-ngo.html">Thư ngỏ</a></li>
-<li class="sep"></li>
-<li><a href="index.html#khoa-hoc">Khoá học</a></li><li class="sep"></li><li><a href="cua-hang.html">Cửa hàng</a></li>
-<li class="sep"></li>
-<li><a href="index.html#gioi-thieu">Về chúng tôi</a></li>
-<li class="sep"></li>
-<li><a href="index.html#hoi-dap">Hỏi đáp</a></li>
-<li class="sep"></li>
-<li><a href="index.html#lien-he">Liên hệ</a></li>
-</ul>
-<a class="btn btn-primary drawer-cta" href="thu-ngo.html#dang-ky-tu-van">Đăng ký tư vấn</a>
+<ul class="drawer-links"><li><a href="index.html#trang-chu">Trang chủ</a></li><li aria-hidden="true" class="sep">|</li><li><a href="thu-ngo.html">Thư ngỏ</a></li><li aria-hidden="true" class="sep">|</li><li class="active"><a href="index.html#khoa-hoc">Khoá học</a></li><li aria-hidden="true" class="sep">|</li><li><a href="cua-hang.html">Cửa hàng</a></li><li aria-hidden="true" class="sep">|</li><li><a href="index.html#gioi-thieu">Về chúng tôi</a></li><li aria-hidden="true" class="sep">|</li><li><a href="index.html#hinh-anh-trung-tam">Hình ảnh</a></li><li aria-hidden="true" class="sep">|</li><li><a href="index.html#hoi-dap">Hỏi đáp</a></li><li aria-hidden="true" class="sep">|</li><li><a href="thu-ngo.html#dang-ky-tu-van">Đăng ký</a></li></ul>
+
 </nav>
 <div class="breadcrumb">
 <div class="container">
@@ -937,6 +913,33 @@
       }
     });
   });
+</script>
+
+<script>
+(function () {
+  // Một nguồn sự thật duy nhất cho trạng thái gạch chân menu.
+  const links = document.querySelectorAll('header .nav-links > li > a, .mobile-drawer .drawer-links > li > a');
+
+  function pageTarget() {
+    const path = window.location.pathname.split('/').pop() || 'index.html';
+    const hash = window.location.hash;
+    if (path === 'index.html' || path === '') return 'index.html' + (hash || '#trang-chu');
+    if (path === 'thu-ngo.html') return hash === '#dang-ky-tu-van' ? 'thu-ngo.html#dang-ky-tu-van' : 'thu-ngo.html';
+    if (path === 'cua-hang.html') return 'cua-hang.html';
+    if (path.indexOf('khoa-') === 0) return 'index.html#khoa-hoc';
+    return 'index.html#trang-chu';
+  }
+
+  function setActive() {
+    const target = pageTarget();
+    links.forEach(function (link) {
+      link.closest('li').classList.toggle('active', link.getAttribute('href') === target);
+    });
+  }
+
+  setActive();
+  window.addEventListener('hashchange', setActive);
+})();
 </script>
 </body>
 </html>
