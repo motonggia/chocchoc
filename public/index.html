@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>www.hocnauan.online — Học làm chủ, không học làm thuê</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --gold: #C08A3E;
@@ -134,7 +135,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 32px;
+    padding: 14px 24px;
     max-width: var(--container-max);
     margin: 0 auto;
   }
@@ -148,23 +149,23 @@
     display: inline-flex;
     align-items: center;
   }
-  .logo img { height: 60px; width: auto; display: block; }
+  .logo img { height: 54px; width: auto; display: block; }
   .logo span { color: var(--gold); }
 
   .nav-links {
     display: flex;
-    gap: 14px;
+    gap: 9px;
     align-items: center;
   }
 
   .nav-links > li > a {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     color: var(--black);
     position: relative;
-    padding-bottom: 6px;
+    padding-bottom: 5px;
     transition: color 0.25s ease;
   }
   .nav-links > li > a:hover,
@@ -187,13 +188,13 @@
   }
   .nav-links li.sep {
     color: var(--border);
-    font-size: 13px;
+    font-size: 11px;
     line-height: 1;
     user-select: none;
   }
 
-  .nav-cta { display: flex; align-items: center; gap: 18px; }
-  .nav-cta .btn { padding: 11px 24px; }
+  .nav-cta { display: flex; align-items: center; gap: 10px; }
+  .nav-cta .btn { padding: 9px 14px; }
 
   .burger {
     display: none;
@@ -344,6 +345,9 @@
   .hero-badge span { display: block; font-family: var(--font-sans); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); margin-top: 4px; }
 
   /* ---------- SECTION HEADERS ---------- */
+  section[id] {
+    scroll-margin-top: 100px; /* chừa chỗ cho header sticky, tránh che dòng eyebrow (VD: "Faculty") khi nhảy tới bằng menu */
+  }
   .section {
     padding: var(--section-padding);
     background-color: var(--white);
@@ -589,6 +593,29 @@
   .faculty-role { font-size: 11.5px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 8px; }
   .faculty-sub { font-size: 13px; color: var(--gray); font-style: italic; line-height: 1.7; max-width: 240px; margin: 0 auto; }
   .faculty-sub a { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Thu gọn chiều cao khu vực VỀ CHÚNG TÔI (Faculty + Why Choose Us) */
+  #giang-vien,
+  #gioi-thieu {
+    padding: 56px 0;
+  }
+  #giang-vien .section-head,
+  #gioi-thieu .section-head {
+    margin-bottom: 34px;
+  }
+  #giang-vien .faculty-photo {
+    aspect-ratio: 3/3;
+    margin-bottom: 14px;
+  }
+  #giang-vien .faculty-card h3 { margin-bottom: 8px; }
+  #giang-vien .faculty-divider { margin-bottom: 10px; }
+  #gioi-thieu .feature-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 12px;
+  }
+  #gioi-thieu .feature-icon svg { width: 22px; height: 22px; }
+  #gioi-thieu .feature-box p { line-height: 1.6; }
 
   /* ---------- GALLERY (HÌNH ẢNH TRUNG TÂM) ---------- */
   .gallery-note {
@@ -1130,6 +1157,27 @@
   @media (max-width: 1180px) {
     .course-grid { grid-template-columns: repeat(3, 1fr); }
   }
+
+  @media (max-width: 1100px) and (min-width: 981px) {
+    .navbar { padding-left: 20px; padding-right: 20px; }
+    .nav-links { gap: 6px; }
+    .nav-links > li > a { font-size: 10px; letter-spacing: .7px; }
+    .nav-cta { gap: 8px; }
+    .nav-cta .btn { padding: 8px 11px; font-size: 10px; letter-spacing: .8px; white-space: nowrap; }
+  }
+
+
+  @media (min-width: 981px) {
+    .navbar { justify-content: flex-start; }
+    .logo { margin-right: 26px; }
+    .nav-cta { margin-left: 14px; }
+  }
+  @media (max-width: 980px) {
+    .navbar { justify-content: space-between; }
+    .logo { margin-right: 0; }
+    .nav-cta { margin-left: 0; }
+  }
+
   @media (max-width: 980px) {
     .nav-links, .nav-cta .btn-outline { display: none; }
     .burger { display: block; }
@@ -1165,499 +1213,509 @@
     * { transition: none !important; scroll-behavior: auto !important; }
   }
 </style>
-</head>
+<meta content="Trung tâm đào tạo nấu ăn thực chiến www.hocnauan.online — Học làm chủ, không học làm thuê. Đào tạo các chuyên đề cơm tấm, bánh mì, lẩu nướng, đồ ăn vặt và setup vận hành quán ăn thực tế tại Hà Nội." name="description"/><link href="https://www.hocnauan.online/" rel="canonical"/><meta content="Trang chủ — Học làm chủ, không học làm thuê" property="og:title"/><meta content="Trung tâm đào tạo nấu ăn thực chiến www.hocnauan.online — Học làm chủ, không học làm thuê. Đào tạo các chuyên đề cơm tấm, bánh mì, lẩu nướng, đồ ăn vặt và setup vận hành quán ăn thực tế tại Hà Nội." property="og:description"/><meta content="website" property="og:type"/><meta content="https://www.hocnauan.online/" property="og:url"/><meta content="https://www.hocnauan.online/logo-transparent.png" property="og:image"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Chốc Chốc Cooking Center",
+  "alternateName": "hocnauan.online",
+  "url": "https://www.hocnauan.online",
+  "logo": "https://www.hocnauan.online/logo-transparent.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Tầng 3, C10-16, Khu C, KĐT Geleximco, Đường Dương Nội",
+    "addressLocality": "Hà Đông",
+    "addressRegion": "Hà Nội",
+    "addressCountry": "VN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+84-944-080-015",
+    "contactType": "customer service"
+  }
+}</script></head>
 <body>
-
 <header>
-  <nav class="navbar">
-    <a href="#" class="logo"><img src="Hoc-Nau-An-vang.svg" alt="www.hocnauan.online"></a>
-    <ul class="nav-links">
-      <li class="active"><a href="#trang-chu">Trang chủ</a></li>
-      <li class="sep" aria-hidden="true">|</li>
-      <li><a href="#khoa-hoc">Khoá học</a></li>
-      <li class="sep" aria-hidden="true">|</li>
-      <li><a href="#gioi-thieu">Về chúng tôi</a></li>
-      <li class="sep" aria-hidden="true">|</li>
-      <li><a href="#hinh-anh-trung-tam">Hình ảnh</a></li>
-      <li class="sep" aria-hidden="true">|</li>
-      <li><a href="#hoi-dap">Hỏi đáp</a></li>
-      <li class="sep" aria-hidden="true">|</li>
-      <li><a href="#lien-he">Liên hệ</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="#lien-he" class="btn btn-primary">Đăng ký tư vấn</a>
-      <button class="burger" id="burgerBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileDrawer">☰</button>
-    </div>
-  </nav>
-</header>
-
-<div class="drawer-overlay" id="drawerOverlay"></div>
-<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-  <div class="drawer-head">
-    <span class="logo"><img src="Hoc-Nau-An.svg" alt="www.hocnauan.online"></span>
-    <button class="drawer-close" id="drawerCloseBtn" aria-label="Đóng menu">✕</button>
-  </div>
-  <ul class="drawer-links">
-    <li><a href="#trang-chu">Trang chủ</a></li>
-    <li class="sep"></li>
-    <li><a href="#khoa-hoc">Khoá học</a></li>
-    <li class="sep"></li>
-    <li><a href="#gioi-thieu">Về chúng tôi</a></li>
-    <li class="sep"></li>
-    <li><a href="#hinh-anh-trung-tam">Hình ảnh</a></li>
-    <li class="sep"></li>
-    <li><a href="#hoi-dap">Hỏi đáp</a></li>
-    <li class="sep"></li>
-    <li><a href="#lien-he">Liên hệ</a></li>
-  </ul>
-  <a href="#lien-he" class="btn btn-primary drawer-cta">Đăng ký tư vấn</a>
+<nav class="navbar">
+<a class="logo" href="#"><img alt="www.hocnauan.online" src="logo-transparent.png"/></a>
+<ul class="nav-links">
+<li class="active"><a href="#trang-chu">Trang chủ</a></li>
+<li aria-hidden="true" class="sep">|</li>
+<li><a href="thu-ngo.html">Thư ngỏ</a></li>
+<li aria-hidden="true" class="sep">|</li>
+<li><a href="#khoa-hoc">Khoá học</a></li><li class="sep"></li><li><a href="cua-hang.html">Cửa hàng</a></li>
+<li aria-hidden="true" class="sep">|</li>
+<li><a href="#giang-vien">Về chúng tôi</a></li>
+<li aria-hidden="true" class="sep">|</li>
+<li><a href="#hinh-anh-trung-tam">Hình ảnh</a></li>
+<li aria-hidden="true" class="sep">|</li>
+<li><a href="#hoi-dap">Hỏi đáp</a></li>
+<li aria-hidden="true" class="sep">|</li>
+<li><a href="#lien-he">Liên hệ</a></li>
+</ul>
+<div class="nav-cta">
+<a class="btn btn-primary" href="thu-ngo.html#dang-ky-tu-van">Đăng ký tư vấn</a>
+<button aria-controls="mobileDrawer" aria-expanded="false" aria-label="Mở menu" class="burger" id="burgerBtn">☰</button>
+</div>
 </nav>
-
+</header>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav aria-hidden="true" class="mobile-drawer" id="mobileDrawer">
+<div class="drawer-head">
+<span class="logo"><img alt="www.hocnauan.online" src="logo-transparent.png"/></span>
+<button aria-label="Đóng menu" class="drawer-close" id="drawerCloseBtn">✕</button>
+</div>
+<ul class="drawer-links">
+<li><a href="#trang-chu">Trang chủ</a></li>
+<li class="sep"></li>
+<li><a href="thu-ngo.html">Thư ngỏ</a></li>
+<li class="sep"></li>
+<li><a href="#khoa-hoc">Khoá học</a></li><li class="sep"></li><li><a href="cua-hang.html">Cửa hàng</a></li>
+<li class="sep"></li>
+<li><a href="#giang-vien">Về chúng tôi</a></li>
+<li class="sep"></li>
+<li><a href="#hinh-anh-trung-tam">Hình ảnh</a></li>
+<li class="sep"></li>
+<li><a href="#hoi-dap">Hỏi đáp</a></li>
+<li class="sep"></li>
+<li><a href="#lien-he">Liên hệ</a></li>
+</ul>
+<a class="btn btn-primary drawer-cta" href="thu-ngo.html#dang-ky-tu-van">Đăng ký tư vấn</a>
+</nav>
 <section class="hero" id="trang-chu">
-  <div class="container hero-inner">
-    <div>
-      <span class="eyebrow">Welcome to <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a></span>
-      <h1>NƠI KHỞI NGUỒN THÀNH CÔNG TRONG KINH DOANH ẨM THỰC CỦA BẠN</h1>
-      <p class="hero-tagline">"Học làm chủ — Không học làm thuê"</p>
-      <p class="lead">Chúng tôi không chỉ dạy nấu ăn ngon mà còn đồng hành cùng bạn trên hành trình trở thành người làm chủ trong lĩnh vực ẩm thực — từ công thức, kỹ thuật bếp đến vận hành và kinh doanh thực chiến.</p>
-      <div class="hero-actions">
-        <a href="#khoa-hoc" class="btn btn-primary">Khám phá khóa học</a>
-        <a href="#lien-he" class="btn btn-outline">Nhận tư vấn miễn phí</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <img src="https://chocchoc.vercel.app/images/hero_success_no_text.webp" alt="Đầu bếp đang chế biến món ăn tại www.hocnauan.online">
-      <div class="hero-badge">15+ năm kinh nghiệm thực chiến<span>Đội ngũ giảng viên</span></div>
-    </div>
-  </div>
+<div class="container hero-inner">
+<div>
+<span class="eyebrow">Welcome to <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a></span>
+<h1>NƠI KHỞI NGUỒN THÀNH CÔNG TRONG KINH DOANH ẨM THỰC CỦA BẠN</h1>
+<p class="hero-tagline">"Học làm chủ — Không học làm thuê"</p>
+<p class="lead">Chúng tôi không chỉ dạy nấu ăn ngon mà còn đồng hành cùng bạn trên hành trình trở thành người làm chủ trong lĩnh vực ẩm thực — từ công thức, kỹ thuật bếp đến vận hành và kinh doanh thực chiến.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="#khoa-hoc">Khám phá khóa học</a>
+<a class="btn btn-outline" href="#lien-he">Nhận tư vấn miễn phí</a>
+</div>
+</div>
+<div class="hero-visual">
+<img alt="Đầu bếp đang chế biến món ăn tại www.hocnauan.online" src="https://chocchoc.vercel.app/images/hero_success_no_text.webp"/>
+<div class="hero-badge">15+ năm kinh nghiệm thực chiến<span>Đội ngũ giảng viên</span></div>
+</div>
+</div>
 </section>
-
 <section class="section section-cream" id="khoa-hoc">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Course Catalog</span>
-      <h2>Danh mục khóa học</h2>
-      <p>Mỗi chuyên đề được xây dựng từ công thức gốc, định lượng chuẩn và bí quyết thực chiến của đội ngũ <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a>.</p>
-    </div>
-    <div class="course-grid">
-      <a class="course-card" href="khoa-banh-mi-kep-viet-nam.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/banh_mi_luxury_editorial.webp" alt="Minh họa Bánh mỳ kẹp Việt Nam" loading="lazy">
-          <span class="course-badge">Chef's Pick</span>
-        </div>
-        <div class="course-body">
-          <h3>Bánh Mỳ Kẹp<br>Việt Nam</h3>
-          <p>Học kỹ thuật làm vỏ bánh giòn xốp chuẩn vị, cách pha chế nhân và sốt đặc trưng của bánh mỳ truyền thống.</p>
-          <div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-banh-mi-kep-viet-nam.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/banh_mi_modern_luxury_editorial.webp" alt="Minh họa Bánh mỳ hiện đại" loading="lazy">
-          <span class="course-badge">Hot Trend</span>
-        </div>
-        <div class="course-body">
-          <h3>Bánh Mỳ<br>Hiện Đại</h3>
-          <p>Sáng tạo các phiên bản bánh mỳ biến tấu theo xu hướng, phù hợp mô hình kinh doanh trẻ trung, hiện đại.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-do-an-vat-tong-hop.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/snacks_luxury_editorial.webp" alt="Minh họa Đồ ăn vặt tổng hợp" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Đồ Ăn Vặt<br>Tổng Hợp</h3>
-          <p>Tổng hợp món ăn vặt hot trend cùng bí quyết pha nước sốt, gia vị chuẩn khẩu vị giới trẻ.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-chuyen-de-tu-chon.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/custom_thematic_luxury_editorial.webp" alt="Minh họa Chuyên đề tự chọn" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Chuyên Đề<br>Tự Chọn</h3>
-          <p>Thiết kế món ăn riêng theo yêu cầu kinh doanh, tư vấn linh hoạt theo vốn và mặt bằng thực tế.</p>
-          <div class="course-foot"><span class="course-tag">Cá nhân hóa</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-nem-nuong-nha-trang.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/nem_nuong_luxury_editorial.webp" alt="Minh họa Nem nướng Nha Trang" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Nem Nướng<br>Nha Trang</h3>
-          <p>Kỹ thuật quết nem chuẩn vị và bí quyết pha nước chấm đặc trưng của xứ biển Nha Trang.</p>
-          <div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-lau-do-nuong.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/seafood_hotpot_luxury_editorial.webp" alt="Minh họa Lẩu và đồ nướng" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Lẩu &amp; Đồ Nướng</h3>
-          <p>Đa dạng công thức nước lẩu — lẩu cay, hải sản, truyền thống — cùng định lượng chuẩn xác cho mô hình kinh doanh.</p>
-          <div class="course-foot"><span class="course-tag">Kinh doanh chuỗi</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-com-tam.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/com_tam_luxury_editorial.webp" alt="Minh họa Cơm tấm" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Cơm Tấm</h3>
-          <p>Bí quyết cơm tơi mềm đúng chuẩn cùng kỹ thuật ướp sườn thấm vị, thơm ngon đặc trưng.</p>
-          <div class="course-foot"><span class="course-tag">Món truyền thống</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-mon-an-sang.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/bun_bo_luxury_editorial.webp" alt="Minh họa Bún bò" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Bún Bò</h3>
-          <p>Bí quyết nấu nước dùng bún bò đậm đà chuẩn vị, thuộc chuyên đề Món Ăn Sáng, dễ triển khai kinh doanh.</p>
-          <div class="course-foot"><span class="course-tag">Món ăn sáng</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-mon-an-gia-dinh.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/family_meal_luxury_editorial.webp" alt="Minh họa Món ăn gia đình" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Món Ăn Gia Đình</h3>
-          <p>Công thức món ăn quen thuộc bữa cơm gia đình, định lượng chuẩn, dễ áp dụng cho mô hình cơm nhà, cơm văn phòng.</p>
-          <div class="course-foot"><span class="course-tag">Món truyền thống</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-      <a class="course-card" href="khoa-my-cay.html">
-        <div class="course-media">
-          <img src="https://chocchoc.vercel.app/images/spicy_noodles_luxury_editorial.webp" alt="Minh họa Mỳ cay" loading="lazy">
-        </div>
-        <div class="course-body">
-          <h3>Mỳ Cay</h3>
-          <p>Bí quyết nấu nước dùng đậm đà, cay nồng đúng chuẩn và kỹ thuật cân chỉnh độ cay phù hợp.</p>
-          <div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
-        </div>
-      </a>
-    </div>
-  </div>
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">Course Catalog</span>
+<h2>Danh mục khóa học</h2>
+<p>Mỗi chuyên đề được xây dựng từ công thức gốc, định lượng chuẩn và bí quyết thực chiến của đội ngũ <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a>.</p>
+</div>
+<div class="course-grid">
+<a class="course-card" href="khoa-banh-mi-kep-viet-nam.html">
+<div class="course-media">
+<img alt="Minh họa Bánh mỳ kẹp Việt Nam" loading="lazy" src="https://chocchoc.vercel.app/images/banh_mi_luxury_editorial.webp"/>
+<span class="course-badge">Chef's Pick</span>
+</div>
+<div class="course-body">
+<h3>Bánh Mỳ Kẹp<br/>Việt Nam</h3>
+<p>Học kỹ thuật làm vỏ bánh giòn xốp chuẩn vị, cách pha chế nhân và sốt đặc trưng của bánh mỳ truyền thống.</p>
+<div class="course-foot"><span class="course-tag">Khai giảng liên tục</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-banh-mi-kep-viet-nam.html">
+<div class="course-media">
+<img alt="Minh họa Bánh mỳ hiện đại" loading="lazy" src="https://chocchoc.vercel.app/images/banh_mi_modern_luxury_editorial.webp"/>
+<span class="course-badge">Hot Trend</span>
+</div>
+<div class="course-body">
+<h3>Bánh Mỳ<br/>Hiện Đại</h3>
+<p>Sáng tạo các phiên bản bánh mỳ biến tấu theo xu hướng, phù hợp mô hình kinh doanh trẻ trung, hiện đại.</p>
+<div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-do-an-vat-tong-hop.html">
+<div class="course-media">
+<img alt="Minh họa Đồ ăn vặt tổng hợp" loading="lazy" src="https://chocchoc.vercel.app/images/snacks_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Đồ Ăn Vặt<br/>Tổng Hợp</h3>
+<p>Tổng hợp món ăn vặt hot trend cùng bí quyết pha nước sốt, gia vị chuẩn khẩu vị giới trẻ.</p>
+<div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-chuyen-de-tu-chon.html">
+<div class="course-media">
+<img alt="Minh họa Chuyên đề tự chọn" loading="lazy" src="https://chocchoc.vercel.app/images/custom_thematic_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Chuyên Đề<br/>Tự Chọn</h3>
+<p>Thiết kế món ăn riêng theo yêu cầu kinh doanh, tư vấn linh hoạt theo vốn và mặt bằng thực tế.</p>
+<div class="course-foot"><span class="course-tag">Cá nhân hóa</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-nem-nuong-nha-trang.html">
+<div class="course-media">
+<img alt="Minh họa Nem nướng Nha Trang" loading="lazy" src="https://chocchoc.vercel.app/images/nem_nuong_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Nem Nướng<br/>Nha Trang</h3>
+<p>Kỹ thuật quết nem chuẩn vị và bí quyết pha nước chấm đặc trưng của xứ biển Nha Trang.</p>
+<div class="course-foot"><span class="course-tag">Đặc sản vùng miền</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-lau-do-nuong.html">
+<div class="course-media">
+<img alt="Minh họa Lẩu và đồ nướng" loading="lazy" src="https://chocchoc.vercel.app/images/seafood_hotpot_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Lẩu &amp; Đồ Nướng</h3>
+<p>Đa dạng công thức nước lẩu — lẩu cay, hải sản, truyền thống — cùng định lượng chuẩn xác cho mô hình kinh doanh.</p>
+<div class="course-foot"><span class="course-tag">Kinh doanh chuỗi</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-com-tam.html">
+<div class="course-media">
+<img alt="Minh họa Cơm tấm" loading="lazy" src="https://chocchoc.vercel.app/images/com_tam_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Cơm Tấm</h3>
+<p>Bí quyết cơm tơi mềm đúng chuẩn cùng kỹ thuật ướp sườn thấm vị, thơm ngon đặc trưng.</p>
+<div class="course-foot"><span class="course-tag">Món truyền thống</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-mon-an-sang.html">
+<div class="course-media">
+<img alt="Minh họa Bún bò" loading="lazy" src="https://chocchoc.vercel.app/images/bun_bo_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Bún Bò</h3>
+<p>Bí quyết nấu nước dùng bún bò đậm đà chuẩn vị, thuộc chuyên đề Món Ăn Sáng, dễ triển khai kinh doanh.</p>
+<div class="course-foot"><span class="course-tag">Món ăn sáng</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-mon-an-gia-dinh.html">
+<div class="course-media">
+<img alt="Minh họa Món ăn gia đình" loading="lazy" src="https://chocchoc.vercel.app/images/family_meal_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Món Ăn Gia Đình</h3>
+<p>Công thức món ăn quen thuộc bữa cơm gia đình, định lượng chuẩn, dễ áp dụng cho mô hình cơm nhà, cơm văn phòng.</p>
+<div class="course-foot"><span class="course-tag">Món truyền thống</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+<a class="course-card" href="khoa-my-cay.html">
+<div class="course-media">
+<img alt="Minh họa Mỳ cay" loading="lazy" src="https://chocchoc.vercel.app/images/spicy_noodles_luxury_editorial.webp"/>
+</div>
+<div class="course-body">
+<h3>Mỳ Cay</h3>
+<p>Bí quyết nấu nước dùng đậm đà, cay nồng đúng chuẩn và kỹ thuật cân chỉnh độ cay phù hợp.</p>
+<div class="course-foot"><span class="course-tag">Hot Trend</span><span class="course-link">Chi tiết</span></div>
+</div>
+</a>
+</div>
+</div>
 </section>
-
-<section class="section" id="gioi-thieu">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Why Choose Us</span>
-      <h2>Giá trị cốt lõi &amp; sứ mệnh</h2>
-      <p><a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> — nơi khởi nguồn sự nghiệp của bạn. Chúng tôi hỗ trợ các nhà khởi nghiệp thành công trong lĩnh vực ẩm thực Việt Nam bằng chương trình đào tạo thực chiến và sự đồng hành lâu dài.</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-box">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg>
-        </div>
-        <h3>Đào tạo thực chiến</h3>
-        <p>Chương trình phù hợp mọi mục tiêu, từ bán tại nhà đến vận hành nhà hàng chuyên nghiệp.</p>
-      </div>
-      <div class="feature-box">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-        </div>
-        <h3>Giảng viên giầu kinh nghiệm</h3>
-        <p>Đội ngũ giảng viên với hơn 15 năm thực chiến trong ngành ẩm thực và vận hành F&amp;B.</p>
-      </div>
-      <div class="feature-box">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg>
-        </div>
-        <h3>Đồng hành trọn đời</h3>
-        <p>Hỗ trợ setup, vận hành và cải tiến menu thực tế cùng học viên sau khi tốt nghiệp.</p>
-      </div>
-      <div class="feature-box">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3>Cộng đồng học viên</h3>
-        <p>Kết nối, chia sẻ kinh nghiệm cùng mạng lưới học viên và chủ quán đã tốt nghiệp trên khắp cả nước.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section" id="giang-vien">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Faculty</span>
-      <h2>Đội ngũ giảng viên</h2>
-      <p>Những gương mặt chủ chốt trực tiếp đồng hành cùng học viên trong suốt hành trình khởi nghiệp ẩm thực.</p>
-    </div>
-    <div class="faculty-grid">
-      <div class="faculty-card">
-        <div class="faculty-photo"><img src="https://chocchoc.vercel.app/images/chef_1_lineart.webp" alt="Thầy Đàm Văn Long"></div>
-        <h3>Thầy Đàm Văn Long</h3>
-        <span class="faculty-divider"></span>
-        <p class="faculty-role">Giảng viên nấu ăn</p>
-        <p class="faculty-sub">Cố vấn đào tạo &amp; chiến lược vận hành</p>
-      </div>
-      <div class="faculty-card">
-        <div class="faculty-photo"><img src="https://chocchoc.vercel.app/images/chef_2_lineart.webp" alt="Thầy Bùi Thanh Luân"></div>
-        <h3>Thầy Bùi Thanh Luân</h3>
-        <span class="faculty-divider"></span>
-        <p class="faculty-role">Giảng viên nấu ăn</p>
-        <p class="faculty-sub">Giám đốc điều hành, Sáng lập <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;">www.hocnauan.online</a></p>
-      </div>
-      <div class="faculty-card">
-        <div class="faculty-photo"><img src="https://chocchoc.vercel.app/images/manager_3_lineart.webp" alt="Cô Dương Thái Hà"></div>
-        <h3>Cô Dương Thái Hà</h3>
-        <span class="faculty-divider"></span>
-        <p class="faculty-role">Cố vấn chiến lược</p>
-        <p class="faculty-sub">Kinh doanh &amp; tài chính</p>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">Faculty</span>
+<h2>Đội ngũ giảng viên</h2>
+<p>Những gương mặt chủ chốt trực tiếp đồng hành cùng học viên trong suốt hành trình khởi nghiệp ẩm thực.</p>
+</div>
+<div class="faculty-grid">
+<div class="faculty-card">
+<div class="faculty-photo"><img alt="Thầy Đàm Văn Long" src="https://chocchoc.vercel.app/images/chef_1_lineart.webp"/></div>
+<h3>Thầy Đàm Văn Long</h3>
+<span class="faculty-divider"></span>
+<p class="faculty-role">Giảng viên nấu ăn</p>
+<p class="faculty-sub">Cố vấn đào tạo &amp; chiến lược vận hành</p>
+</div>
+<div class="faculty-card">
+<div class="faculty-photo"><img alt="Thầy Bùi Thanh Luân" src="https://chocchoc.vercel.app/images/chef_2_lineart.webp"/></div>
+<h3>Thầy Bùi Thanh Luân</h3>
+<span class="faculty-divider"></span>
+<p class="faculty-role">Giảng viên nấu ăn</p>
+<p class="faculty-sub">Giám đốc điều hành, Sáng lập <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;" target="_blank">www.hocnauan.online</a></p>
+</div>
+<div class="faculty-card">
+<div class="faculty-photo"><img alt="Cô Dương Thái Hà" src="https://chocchoc.vercel.app/images/manager_3_lineart.webp"/></div>
+<h3>Cô Dương Thái Hà</h3>
+<span class="faculty-divider"></span>
+<p class="faculty-role">Cố vấn chiến lược</p>
+<p class="faculty-sub">Kinh doanh &amp; tài chính</p>
+</div>
+</div>
+</div>
 </section>
-
+<section class="section" id="gioi-thieu">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">Why Choose Us</span>
+<h2>Giá trị cốt lõi &amp; sứ mệnh</h2>
+<p><a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a> — nơi khởi nguồn sự nghiệp của bạn. Chúng tôi hỗ trợ các nhà khởi nghiệp thành công trong lĩnh vực ẩm thực Việt Nam bằng chương trình đào tạo thực chiến và sự đồng hành lâu dài.</p>
+</div>
+<div class="feature-grid">
+<div class="feature-box">
+<div class="feature-icon">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12"></path><path d="M9 21v-6h6v6"></path></svg>
+</div>
+<h3>Đào tạo thực chiến</h3>
+<p>Chương trình phù hợp mọi mục tiêu, từ bán tại nhà đến vận hành nhà hàng chuyên nghiệp.</p>
+</div>
+<div class="feature-box">
+<div class="feature-icon">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg>
+</div>
+<h3>Giảng viên giầu kinh nghiệm</h3>
+<p>Đội ngũ giảng viên với hơn 15 năm thực chiến trong ngành ẩm thực và vận hành F&amp;B.</p>
+</div>
+<div class="feature-box">
+<div class="feature-icon">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg>
+</div>
+<h3>Đồng hành trọn đời</h3>
+<p>Hỗ trợ setup, vận hành và cải tiến menu thực tế cùng học viên sau khi tốt nghiệp.</p>
+</div>
+<div class="feature-box">
+<div class="feature-icon">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+</div>
+<h3>Cộng đồng học viên</h3>
+<p>Kết nối, chia sẻ kinh nghiệm cùng mạng lưới học viên và chủ quán đã tốt nghiệp trên khắp cả nước.</p>
+</div>
+</div>
+</div>
+</section>
 <section class="section section-cream" id="hinh-anh-trung-tam">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Gallery</span>
-      <h2>Hình ảnh thật tại trung tâm</h2>
-      <p>Không gian học tập và thực hành thực tế tại <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> — nơi học viên trực tiếp đứng bếp cùng giảng viên.</p>
-    </div>
-    <div class="gallery-frame">
-    <div class="gallery-mosaic" id="galleryMosaic">
-      <!-- Các ô ảnh được JS tự sinh từ danh sách CENTER_PHOTOS bên dưới, mỗi ô chạy slideshow độc lập -->
-    </div>
-    </div>
-  </div>
-</section>
-
-<div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
-  <button class="gallery-lightbox-close" id="galleryLightboxClose" aria-label="Đóng ảnh phóng to">&times;</button>
-  <button class="gallery-lightbox-nav gallery-lightbox-prev" id="galleryLightboxPrev" aria-label="Ảnh trước">&#8249;</button>
-  <div class="gallery-lightbox-media">
-    <img class="gallery-lightbox-img" id="galleryLightboxImg" src="" alt="Hình ảnh trung tâm www.hocnauan.online phóng to">
-    <div class="gallery-lightbox-watermark"></div>
-  </div>
-  <button class="gallery-lightbox-nav gallery-lightbox-next" id="galleryLightboxNext" aria-label="Ảnh tiếp theo">&#8250;</button>
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">Gallery</span>
+<h2>Hình ảnh thật tại trung tâm</h2>
+<p>Không gian học tập và thực hành thực tế tại <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a> — nơi học viên trực tiếp đứng bếp cùng giảng viên.</p>
 </div>
-
+<div class="gallery-frame">
+<div class="gallery-mosaic" id="galleryMosaic">
+<!-- Các ô ảnh được JS tự sinh từ danh sách CENTER_PHOTOS bên dưới, mỗi ô chạy slideshow độc lập -->
+</div>
+</div>
+</div>
+</section>
+<div aria-hidden="true" class="gallery-lightbox" id="galleryLightbox">
+<button aria-label="Đóng ảnh phóng to" class="gallery-lightbox-close" id="galleryLightboxClose">×</button>
+<button aria-label="Ảnh trước" class="gallery-lightbox-nav gallery-lightbox-prev" id="galleryLightboxPrev">‹</button>
+<div class="gallery-lightbox-media">
+<img alt="Hình ảnh trung tâm www.hocnauan.online phóng to" class="gallery-lightbox-img" id="galleryLightboxImg" src=""/>
+<div class="gallery-lightbox-watermark"></div>
+</div>
+<button aria-label="Ảnh tiếp theo" class="gallery-lightbox-nav gallery-lightbox-next" id="galleryLightboxNext">›</button>
+</div>
 <section class="section" id="hoc-vien">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Testimonials</span>
-      <h2>Câu chuyện học viên</h2>
-      <p>Những học viên đã biến kiến thức tại <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> thành mô hình kinh doanh ẩm thực của riêng mình.</p>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <span class="testi-quote">"</span>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Nhờ khóa học Lẩu &amp; Đồ Nướng tại <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a>, tôi tự tin xây dựng công thức nước lẩu riêng và mở quán thành công ngay sau khi tốt nghiệp.</p>
-        <div class="testi-person">
-          <div class="testi-avatar">P</div>
-          <div><div class="name">Nguyễn Đức Phát</div><div class="biz">Lẩu Nhà Mình</div></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <span class="testi-quote">"</span>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Đội ngũ giảng viên tận tâm, chỉ dạy từng chi tiết nhỏ trong công thức nước dùng — điều mà tôi không tìm thấy ở bất kỳ đâu khác.</p>
-        <div class="testi-person">
-          <div class="testi-avatar">L</div>
-          <div><div class="name">Nguyễn Thị Lan</div><div class="biz">Bún Bò Cô Lan</div></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <span class="testi-quote">"</span>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Không chỉ dạy nấu ăn, <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> còn tư vấn setup và vận hành giúp tôi rút ngắn rất nhiều thời gian mở bếp thực tế.</p>
-        <div class="testi-person">
-          <div class="testi-avatar">T</div>
-          <div><div class="name">Nguyễn Thị Trâm</div><div class="biz">Nhung's Kitchen</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-cream" id="hoi-dap">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">FAQ</span>
-      <h2>Câu hỏi thường gặp</h2>
-      <p>Giải đáp những thắc mắc phổ biến nhất trước khi bạn bắt đầu hành trình khởi nghiệp ẩm thực cùng <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a>.</p>
-    </div>
-    <div class="faq-columns">
-      <div class="faq-col">
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Khóa học tại <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> kéo dài bao lâu?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Thời gian học tùy theo từng chuyên đề, thường từ 5–15 buổi. Mỗi buổi học đều tập trung vào một kỹ thuật hoặc công thức cụ thể để học viên nắm chắc trước khi chuyển sang bài mới.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Tôi chưa có kinh nghiệm nấu ăn, có thể theo học được không?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Hoàn toàn được. Giáo trình được thiết kế từ cơ bản đến nâng cao, giảng viên hướng dẫn cầm tay chỉ việc từng bước nên phù hợp với cả người mới bắt đầu.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Học phí các khóa học dao động như thế nào?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Học phí thay đổi theo từng chuyên đề và thời lượng khóa học. Vui lòng liên hệ hotline 0944 080 015 để được tư vấn chi tiết và nhận báo giá phù hợp với mục tiêu của bạn.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Sau khi hoàn thành khóa học có được cấp chứng chỉ không?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Có. Học viên hoàn thành đầy đủ nội dung và bài kiểm tra thực hành sẽ được cấp chứng nhận hoàn thành khóa học của <a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a>.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span><a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> có hỗ trợ tư vấn mở quán sau khi học xong không?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Có. Đội ngũ cố vấn sẽ đồng hành cùng học viên trong việc setup bếp, xây dựng menu và tối ưu vận hành thực tế sau khi tốt nghiệp, hoàn toàn miễn phí trong thời gian đầu.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="faq-col">
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Lớp học có giới hạn số lượng học viên không?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Mỗi lớp được giới hạn số lượng nhỏ để giảng viên có thể theo sát và hướng dẫn trực tiếp từng học viên, đảm bảo chất lượng thực hành tốt nhất.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Học viên cần chuẩn bị gì trước khi tham gia khóa học?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Học viên không cần chuẩn bị dụng cụ hay nguyên liệu. Trung tâm cung cấp đầy đủ bếp, thiết bị và nguyên liệu thực hành trong suốt khóa học.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Có thể học thử trước khi đăng ký khóa học đầy đủ không?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Bạn có thể liên hệ hotline để đặt lịch tham quan cơ sở vật chất và trao đổi trực tiếp với giảng viên trước khi quyết định đăng ký khóa học chính thức.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Địa điểm học tại đâu, có tổ chức học online không?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Các khóa học được tổ chức trực tiếp tại cơ sở Tầng 3, KĐT Geleximco, Hà Đông để đảm bảo chất lượng thực hành. Hiện trung tâm chưa triển khai hình thức học online.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Làm sao để đăng ký khóa học?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              <p>Bạn có thể gọi trực tiếp hotline 0944 080 015 hoặc bấm nút "Đăng ký tư vấn" trên website để được nhân viên tư vấn hỗ trợ chọn khóa học và lịch học phù hợp.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer id="lien-he">
-  <div class="container footer-cta">
-    <span class="eyebrow">Get Started</span>
-    <h2>Nhận tư vấn lộ trình kinh doanh ngay hôm nay</h2>
-    <a href="tel:0944080015" class="btn btn-primary">Gọi ngay: 0944 080 015</a>
-  </div>
-  <div class="container footer-grid">
-    <div class="footer-col">
-      <div class="footer-logo">www.hocnauan.online</div>
-      <p><a href="https://www.hocnauan.online" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">www.hocnauan.online</a> — nơi khởi nguồn sự nghiệp của bạn trong lĩnh vực ẩm thực Việt Nam.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Liên hệ</h4>
-      <ul>
-        <li>Tầng 3, KĐT Geleximco, Hà Đông</li>
-        <li>Hotline: 0944 080 015</li>
-        <li>Email: chocchoccookingcenter@gmail.com</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Liên kết</h4>
-      <ul>
-        <li><a href="#gioi-thieu">Giới thiệu</a></li>
-        <li><a href="#khoa-hoc">Khóa học nấu ăn</a></li>
-        <li><a href="#giang-vien">Giảng viên</a></li>
-        <li><a href="#hinh-anh-trung-tam">Hình ảnh trung tâm</a></li>
-        <li><a href="#hoc-vien">Câu chuyện học viên</a></li>
-        <li><a href="#hoi-dap">Hỏi đáp</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 www.hocnauan.online. All rights reserved.</div>
-</footer>
-
-<div class="contact-float" aria-label="Liên hệ nhanh">
-  <a href="https://zalo.me/0944080015" target="_blank" rel="noopener" aria-label="Chat Zalo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M7 15.5h4l-4 -5.5h4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.2 15.5v-5.5" stroke-linecap="round"/><path d="M16.5 10v5.5c1.2 0 2 -1 2 -2.75s-.8 -2.75 -2 -2.75z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="contact-tip">Chat Zalo</span>
-  </a>
-  <a href="https://facebook.com/chocchoccookingcenter" target="_blank" rel="noopener" aria-label="Facebook">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3h-2a5 5 0 0 0-5 5v2H6v4h2v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3z" stroke-linejoin="round"/></svg>
-    <span class="contact-tip">Facebook</span>
-  </a>
-  <a href="tel:0944080015" class="hotline hotline-pulse" aria-label="Gọi hotline 0944 080 015">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4.5 4h3.2l1.5 4.2-2 1.6a12 12 0 0 0 5.6 5.6l1.6-2 4.2 1.5v3.2a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 2.9 5.7 1.6 1.6 0 0 1 4.5 4z" stroke-linejoin="round" stroke-linecap="round"/></svg>
-    <span class="contact-tip">0944 080 015</span>
-  </a>
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">Testimonials</span>
+<h2>Câu chuyện học viên</h2>
+<p>Những học viên đã biến kiến thức tại <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a> thành mô hình kinh doanh ẩm thực của riêng mình.</p>
 </div>
-
+<div class="testi-grid">
+<div class="testi-card">
+<span class="testi-quote">"</span>
+<div class="testi-stars">★★★★★</div>
+<p class="testi-text">Nhờ khóa học Lẩu &amp; Đồ Nướng tại <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a>, tôi tự tin xây dựng công thức nước lẩu riêng và mở quán thành công ngay sau khi tốt nghiệp.</p>
+<div class="testi-person">
+<div class="testi-avatar">P</div>
+<div><div class="name">Nguyễn Đức Phát</div><div class="biz">Lẩu Nhà Mình</div></div>
+</div>
+</div>
+<div class="testi-card">
+<span class="testi-quote">"</span>
+<div class="testi-stars">★★★★★</div>
+<p class="testi-text">Đội ngũ giảng viên tận tâm, chỉ dạy từng chi tiết nhỏ trong công thức nước dùng — điều mà tôi không tìm thấy ở bất kỳ đâu khác.</p>
+<div class="testi-person">
+<div class="testi-avatar">L</div>
+<div><div class="name">Nguyễn Thị Lan</div><div class="biz">Bún Bò Cô Lan</div></div>
+</div>
+</div>
+<div class="testi-card">
+<span class="testi-quote">"</span>
+<div class="testi-stars">★★★★★</div>
+<p class="testi-text">Không chỉ dạy nấu ăn, <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a> còn tư vấn setup và vận hành giúp tôi rút ngắn rất nhiều thời gian mở bếp thực tế.</p>
+<div class="testi-person">
+<div class="testi-avatar">T</div>
+<div><div class="name">Nguyễn Thị Trâm</div><div class="biz">Nhung's Kitchen</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section section-cream" id="hoi-dap">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">FAQ</span>
+<h2>Câu hỏi thường gặp</h2>
+<p>Giải đáp những thắc mắc phổ biến nhất trước khi bạn bắt đầu hành trình khởi nghiệp ẩm thực cùng <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a>.</p>
+</div>
+<div class="faq-columns">
+<div class="faq-col">
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Khóa học tại <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a> kéo dài bao lâu?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Thời gian học tùy theo từng chuyên đề, thường từ 5–15 buổi. Mỗi buổi học đều tập trung vào một kỹ thuật hoặc công thức cụ thể để học viên nắm chắc trước khi chuyển sang bài mới.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Tôi chưa có kinh nghiệm nấu ăn, có thể theo học được không?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Hoàn toàn được. Giáo trình được thiết kế từ cơ bản đến nâng cao, giảng viên hướng dẫn cầm tay chỉ việc từng bước nên phù hợp với cả người mới bắt đầu.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Học phí các khóa học dao động như thế nào?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Học phí thay đổi theo từng chuyên đề và thời lượng khóa học. Vui lòng liên hệ hotline 0944 080 015 để được tư vấn chi tiết và nhận báo giá phù hợp với mục tiêu của bạn.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Sau khi hoàn thành khóa học có được cấp chứng chỉ không?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Có. Học viên hoàn thành đầy đủ nội dung và bài kiểm tra thực hành sẽ được cấp chứng nhận hoàn thành khóa học của <a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a>.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span><a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a> có hỗ trợ tư vấn mở quán sau khi học xong không?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Có. Đội ngũ cố vấn sẽ đồng hành cùng học viên trong việc setup bếp, xây dựng menu và tối ưu vận hành thực tế sau khi tốt nghiệp, hoàn toàn miễn phí trong thời gian đầu.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="faq-col">
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Lớp học có giới hạn số lượng học viên không?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Mỗi lớp được giới hạn số lượng nhỏ để giảng viên có thể theo sát và hướng dẫn trực tiếp từng học viên, đảm bảo chất lượng thực hành tốt nhất.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Học viên cần chuẩn bị gì trước khi tham gia khóa học?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Học viên không cần chuẩn bị dụng cụ hay nguyên liệu. Trung tâm cung cấp đầy đủ bếp, thiết bị và nguyên liệu thực hành trong suốt khóa học.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Có thể học thử trước khi đăng ký khóa học đầy đủ không?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Bạn có thể liên hệ hotline để đặt lịch tham quan cơ sở vật chất và trao đổi trực tiếp với giảng viên trước khi quyết định đăng ký khóa học chính thức.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Địa điểm học tại đâu, có tổ chức học online không?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Các khóa học được tổ chức trực tiếp tại cơ sở Tầng 3, KĐT Geleximco, Hà Đông để đảm bảo chất lượng thực hành. Hiện trung tâm chưa triển khai hình thức học online.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question">
+<span>Làm sao để đăng ký khóa học?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">
+<div class="faq-answer-inner">
+<p>Bạn có thể gọi trực tiếp hotline 0944 080 015 hoặc bấm nút "Đăng ký tư vấn" trên website để được nhân viên tư vấn hỗ trợ chọn khóa học và lịch học phù hợp.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer id="lien-he">
+<div class="container footer-cta">
+<span class="eyebrow">Get Started</span>
+<h2>Nhận tư vấn lộ trình kinh doanh ngay hôm nay</h2>
+<a class="btn btn-primary" href="tel:0944080015">Gọi ngay: 0944 080 015</a>
+</div>
+<div class="container footer-grid">
+<div class="footer-col">
+<div class="footer-logo">www.hocnauan.online</div>
+<p><a href="https://www.hocnauan.online" rel="noopener" style="color:inherit;text-decoration:underline;" target="_blank">www.hocnauan.online</a> — nơi khởi nguồn sự nghiệp của bạn trong lĩnh vực ẩm thực Việt Nam.</p>
+</div>
+<div class="footer-col">
+<h4>Liên hệ</h4>
+<ul>
+<li>Tầng 3, KĐT Geleximco, Hà Đông</li>
+<li>Hotline: 0944 080 015</li>
+<li>Email: chocchoccookingcenter@gmail.com</li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Liên kết</h4>
+<ul>
+<li><a href="cua-hang.html">Cửa hàng</a></li><li><a href="#gioi-thieu">Giới thiệu</a></li>
+<li><a href="#khoa-hoc">Khóa học nấu ăn</a></li>
+<li><a href="#giang-vien">Giảng viên</a></li>
+<li><a href="#hinh-anh-trung-tam">Hình ảnh trung tâm</a></li>
+<li><a href="#hoc-vien">Câu chuyện học viên</a></li>
+<li><a href="#hoi-dap">Hỏi đáp</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">© 2026 www.hocnauan.online. All rights reserved.</div>
+</footer>
+<div aria-label="Liên hệ nhanh" class="contact-float">
+<a aria-label="Chat Zalo" href="https://zalo.me/0944080015" rel="noopener" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24"><rect height="18" rx="5" width="18" x="3" y="3"></rect><path d="M7 15.5h4l-4 -5.5h4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13.2 15.5v-5.5" stroke-linecap="round"></path><path d="M16.5 10v5.5c1.2 0 2 -1 2 -2.75s-.8 -2.75 -2 -2.75z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span class="contact-tip">Chat Zalo</span>
+</a>
+<a aria-label="Facebook" href="https://facebook.com/chocchoccookingcenter" rel="noopener" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24"><path d="M15 3h-2a5 5 0 0 0-5 5v2H6v4h2v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3z" stroke-linejoin="round"></path></svg>
+<span class="contact-tip">Facebook</span>
+</a>
+<a aria-label="Gọi hotline 0944 080 015" class="hotline hotline-pulse" href="tel:0944080015">
+<svg fill="none" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24"><path d="M4.5 4h3.2l1.5 4.2-2 1.6a12 12 0 0 0 5.6 5.6l1.6-2 4.2 1.5v3.2a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 2.9 5.7 1.6 1.6 0 0 1 4.5 4z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span class="contact-tip">0944 080 015</span>
+</a>
+</div>
 <script>
   const burgerBtn = document.getElementById('burgerBtn');
   const drawerCloseBtn = document.getElementById('drawerCloseBtn');
@@ -1998,6 +2056,5 @@
     });
   });
 </script>
-
 </body>
 </html>
